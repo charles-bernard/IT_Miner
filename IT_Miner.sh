@@ -1,5 +1,6 @@
 #!/bin/bash
 SCRIPT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )";
+TMP_TOOL_STDERR=$(mktemp);
 
 ###########################################################
 # WELCOME MESSAGE
@@ -31,8 +32,9 @@ function check_tool_stderr {
 	local TOOL_NAME="$2"; local LOG="$3";
 
 	if [ -s "$TOOL_EXEC_STDERR_FILE" ]; then
-		local TOOL_STDERR="The tool"\""$TOOL_NAME"\""exited with the following error:\n" 
+		local TOOL_STDERR="The tool "\""$TOOL_NAME"\"" exited with the following error:\n" 
 		TOOL_STDERR="$TOOL_STDERR"`cat "$TOOL_EXEC_STDERR_FILE"`
+		rm "$TOOL_EXEC_STDERR_FILE";
 		error_exit "$TOOL_STDERR" 4 "$LOG";
 	fi
 }
@@ -41,14 +43,9 @@ function check_tool_stderr {
 ###### I.2 Get nb of terminators ##########################
 ###########################################################
 function get_nb_term {
-	local FILE="$1";
-	N_IT=`awk 'END { printf("%s", NR-1); }' "$FILE"`;
+	local FILE="$1"; local DECREMENT="${2:-1}";
+	N_IT=`awk -v d=$DECREMENT 'END { printf("%s", NR-d); }' "$FILE"`;
 	printf $N_IT;
-}
-
-function print_nb_term {
-	local FILE="$1";
-	printf "   **""$(get_nb_term "$FILE")"" ITs detected!\n";
 }
 
 ###########################################################
@@ -139,9 +136,11 @@ function check_gff {
 ###########################################################
 function run_rnie {
 	# Run RNIE
-	local RNIE_PATH="$1";	local MODE="$2";
-	local GENOME="$3";		local BIT_SCORE_THRESH="$4";
-	local PREFIX="$5";		local LOG="$6";
+
+	# Args
+	local RNIE_PATH="$1"; local MODE="$2";
+	local GENOME="$3"; local BIT_SCORE_THRESH="$4";
+	local PREFIX="$5"; local LOG="$6";
 
 	# Print Command into Log
 	printf "RNIE COMMAND:\n" >> "$LOG";
@@ -151,30 +150,119 @@ function run_rnie {
 	printf "\n\t--thresh "$BIT_SCORE_THRESH" \\" >> "$LOG";
 	printf "\n\t--prefix \"""$PREFIX""\"\n\n" >> "$LOG";
 
+	# Exe
 	# perl "$RNIE_PATH" \
 	# --fastafile "$GENOME" \
 	# --"$MODE" \
 	# --thresh "$BIT_SCORE_THRESH" \
-	# --prefix "$PREFIX";
+	# --prefix "$PREFIX" 2>"$TMP_TOOL_STDERR";
+
+	# Exit if stderr_file not empty
+	check_tool_stderr "$TMP_TOOL_STDERR" "RNIE/rnie.pl" "$LOG";
 }
 
 ###########################################################
 ###### I.5 Concatenate ####################################
 ###########################################################
 function concatenate {
-	# Run RNIE
-	local CONC_PATH="$1";	
-	local GENOME_GFF="$2";	local GENE_GFF="$3";	
-	local CONC_OUT="$4";	local LOG="$5";
+	# Concatenate the two output lists of RNIE
+
+	# Args
+	local CONC_SCRIPT_PATH="$1";	
+	local GENOME_GFF="$2"; local GENE_GFF="$3";	
+	local OUT_LIST="$4"; local LOG="$5";
 
 	# Print Command into Log
 	printf "CONCATENATE COMMAND:\n" >> "$LOG";
-	printf "awk -f \"""$CONC_PATH""\" \\" >> "$LOG";
+	printf "awk -f \"""$CONC_SCRIPT_PATH""\" \\" >> "$LOG";
 	printf "\n\t\"""$GENOME_GFF""\" \\" >> "$LOG";
 	printf "\n\t\"""$GENE_GFF""\" \\" >> "$LOG";
-	printf "\n\t> \"""$CONC_OUT""\"\n\n" >> "$LOG";
+	printf "\n\t> \"""$OUT_LIST""\"\n\n" >> "$LOG";
 
-	#awk -f "$CONC_PATH" "$GENOME_GFF" "$GENE_GFF" > "$CONC_LIST";
+	# Exe
+	awk -f "$CONC_SCRIPT_PATH" "$GENOME_GFF" "$GENE_GFF" \
+	> "$OUT_LIST" 2>"$TMP_TOOL_STDERR";
+
+	# Exit if stderr_file not empty
+	check_tool_stderr "$TMP_TOOL_STDERR" "1-concatenate.awk" "$LOG";
+}
+
+###########################################################
+###### I.6 Get Genomic Attributes #########################
+###########################################################
+function get_genomic_attributes {
+	# Get Sequence of each IT, 
+	# & up/down stream genes landscape
+
+	# Args
+	local GENO_SCRIPT_PATH="$1"; local GENOME="$2";
+	local ANNOTATION="$3"; local INPUT_LIST="$4";
+	local OUT_LIST="$5"; local LOG="$6";
+
+	# Print Command into Log
+	printf "GET GENOMIC ATTRIBUTES COMMAND:\n" >> "$LOG";
+	printf "awk -f \"""$GENO_SCRIPT_PATH""\" \\" >> "$LOG";
+	printf "\n\t\"""$GENOME""\" \\" >> "$LOG";
+	printf "\n\t\"""$ANNOTATION""\" \\" >> "$LOG";
+	printf "\n\t\"""$INPUT_LIST""\" \\" >> "$LOG";
+	printf "\n\t> \"""$OUT_LIST""\"\n\n" >> "$LOG";
+
+	# Exe
+	awk -f "$GENO_SCRIPT_PATH" "$GENOME" "$ANNOTATION" \
+	"$INPUT_LIST" > "$OUT_LIST" 2>"$TMP_TOOL_STDERR";
+
+	# Exit if stderr_file not empty
+	check_tool_stderr "$TMP_TOOL_STDERR" "2-get_genomic_attributes.awk" "$LOG";
+}
+
+###########################################################
+###### I.7 Deduplicate ####################################
+###########################################################
+function deduplicate {
+	# Deduplicate list
+
+	# Args
+	local DEDUP_SCRIPT_PATH="$1";
+	local NT_DEV="$2"; local INPUT_LIST="$3";
+	local OUT_LIST="$4"; local LOG="$5";
+
+	# Print Command into Log
+	printf "DEDUPLICATE COMMAND:\n" >> "$LOG";
+	printf "awk -v dev=$NT_DEV \\" >> "$LOG";
+	printf "\n\t-f \"""$DEDUP_SCRIPT_PATH""\" \\" >> "$LOG";
+	printf "\n\t\"""$INPUT_LIST""\" \\" >> "$LOG";
+	printf "\n\t> \"""$OUT_LIST""\"\n\n" >> "$LOG";
+
+	# Exe
+	awk -v dev=$NT_DEV -f "$DEDUP_SCRIPT_PATH" \
+	"$INPUT_LIST" > "$OUT_LIST" 2>"$TMP_TOOL_STDERR";
+
+	# Exit if stderr_file not empty
+	check_tool_stderr "$TMP_TOOL_STDERR" "3-deduplicate.awk" "$LOG";
+}
+
+###########################################################
+###### I.8 Discard ITs within CDS #########################
+###########################################################
+function discard_intra_cds {
+	# Discard 
+
+	# Args
+	local DISCARD_INTRA_SCRIPT_PATH="$1";
+	local INPUT_LIST="$3"; OUT_LIST="$4"; local LOG="$5";
+
+	# Print Command into Log
+	printf "DISCARD ITs INTRA CDS COMMAND:\n" >> "$LOG";
+	printf "awk -f \"""$DISCARD_INTRA_SCRIPT_PATH""\" \\" >> "$LOG";
+	printf "\n\t\"""$INPUT_LIST""\" \\" >> "$LOG";
+	printf "\n\t> \"""$OUT_LIST""\"\n\n" >> "$LOG";
+
+	# Exe
+	awk -f "$DISCARD_INTRA_SCRIPT_PATH" "$INPUT_LIST" \
+	> "$OUT_LIST" 2>"$TMP_TOOL_STDERR";
+
+	# Exit if stderr_file not empty
+	check_tool_stderr "$TMP_TOOL_STDERR" "4-discard_intra_cds.awk" "$LOG";
 }
 
 ###########################################################
@@ -197,22 +285,22 @@ while true ; do
 	case "$1" in
 		-o | --output-dir )
 			case "$2" in
-				"")	error_exit "No output dir has not been provided!" 1; shift 2 ;;
-				*)	OUTPUT_DIR="$2"; shift 2 ;;
+				"") error_exit "No output dir has not been provided!" 1; shift 2 ;;
+				*) OUTPUT_DIR="$2"; shift 2 ;;
 			esac ;;
 		-g | --genome )
 			case "$2" in
-				"")	error_exit "No genome (fasta) has been provided!" 1; shift 2 ;;
-				*)	GENOME="$2"; shift 2 ;;
+				"") error_exit "No genome (fasta) has been provided!" 1; shift 2 ;;
+				*) GENOME="$2"; shift 2 ;;
 			esac ;;
 		-a | --annotation )
 			case "$2" in
-				"")	error_exit "No annotation file (gff) has been provided!" 1; shift 2 ;;
-				*)	ANNOTATION="$2"; shift 2 ;;
+				"") error_exit "No annotation file (gff) has been provided!" 1; shift 2 ;;
+				*) ANNOTATION="$2"; shift 2 ;;
 			esac ;;
 		-l | --log )
 			case "$2" in
-				*)	LOG="$2"; shift 2 ;;
+				*) LOG="$2"; shift 2 ;;
 			esac ;;
 		-- ) shift; break ;;
 		*) error_exit "Internal error!" 1; 
@@ -233,14 +321,14 @@ for (( i=0; i<${#RECQ_PARAMS[@]}; i++ )); do
 	check_param "${RECQ_PARAMS[$i]}" "${PARAM_NAMES[$i]}" "${OPTIONS[$i]}";
 done
 
-check_outdir 	"$OUTPUT_DIR";
-check_log 		"$LOG"; > "$LOG";
+check_outdir "$OUTPUT_DIR";
+check_log "$LOG"; > "$LOG";
 
 INPUT_FILES=("$RNIE_PATH" "$GENOME" "$ANNOTATION" "$LOG");
 for FILE in ${INPUT_FILES[@]}; do check_file "$FILE"; done
 
-check_fasta 	"$GENOME";
-check_gff 		"$ANNOTATION";
+check_fasta "$GENOME";
+check_gff "$ANNOTATION";
 
 printf "Parameters Check was successful!\n\n";
 
@@ -251,7 +339,6 @@ printf "###########################################################\n" | tee -a 
 printf "PARAMETERS LIST)\n" | tee -a "$LOG";
 printf " * OUTPUT DIRECTORY:"\ \""$OUTPUT_DIR"\""\n" | tee -a "$LOG";
 printf " * LOG FILE:        "\ \""$LOG"\""\n" | tee -a "$LOG";
-printf " * RNIE PATH:       "\ \""$RNIE_PATH"\""\n" | tee -a "$LOG";
 printf " * GENOME:          "\ \""$GENOME"\""\n" | tee -a "$LOG";
 printf " * ANNOTATION:      "\ \""$ANNOTATION"\""\n\n" | tee -a "$LOG";
 
@@ -271,31 +358,81 @@ BIT_SCORE_THRESH=14;
 ###########################################################
 printf "###########################################################\n" | tee -a "$LOG"
 printf "STEP 0) Run RNIE\n" | tee -a "$LOG";
-RNIE_PATH="$SCRIPT_PATH""/Subscripts/RNIE/rnie.pl";
-export RNIE=`dirname "$RNIE_PATH"`
 
+RNIE_PATH="$SCRIPT_PATH""/Subscripts/RNIE/rnie.pl";
+export RNIE=`dirname "$RNIE_PATH"`;
+
+# Run genome mode
 printf " * Genome (Specific) Mode\n" | tee -a "$LOG";
 run_rnie 	"$RNIE_PATH" "genome" \
-			"$GENOME" "$BIT_SCORE_THRESH" \
-			"$RNIE_GENOME_DIR"/"$PREFIX" "$LOG";
+	"$GENOME" "$BIT_SCORE_THRESH" \
+	"$RNIE_GENOME_DIR"/"$PREFIX" "$LOG";
 RNIE_GENOME_OUT_GFF="$RNIE_GENOME_DIR"/"$PREFIX""-genomeMode-rnie.gff";
-printf "   **"$(get_nb_term "$RNIE_GENOME_OUT_GFF")" ITs predicted!\n";
 
+N_TERM=$(get_nb_term "$RNIE_GENOME_OUT_GFF" 0);
+printf "   ** ""$N_TERM"" ITs predicted!\n" | tee -a "$LOG";
+
+# Run gene mode
 printf " * Gene (Sensitive) Mode\n" | tee -a "$LOG";
 run_rnie 	"$RNIE_PATH" "gene" \
-			"$GENOME" "$BIT_SCORE_THRESH" \
-			"$RNIE_GENE_DIR"/"$PREFIX" "$LOG";
+	"$GENOME" "$BIT_SCORE_THRESH" \
+	"$RNIE_GENE_DIR"/"$PREFIX" "$LOG";
 RNIE_GENE_OUT_GFF="$RNIE_GENE_DIR"/"$PREFIX""-geneMode-rnie.gff";
-printf "   **"$(get_nb_term "$RNIE_GENE_OUT_GFF")" ITs predicted!\n";
+
+N_TERM=$(get_nb_term "$RNIE_GENE_OUT_GFF" 0);
+printf "   ** ""$N_TERM"" ITs predicted!\n" | tee -a "$LOG";
 
 ###########################################################
 # IV. Concatenate two RNIE mode outputs
 ###########################################################
 printf "###########################################################\n" | tee -a "$LOG"
 printf "STEP 1) Concatenate RNIE outputs\n" | tee -a "$LOG";
-CONC_PATH="$SCRIPT_PATH""/Subscripts/1-concatenate.awk";
-CONC_OUT="$OUTPUT_DIR"/"1-Concatenated_list_of_ITs.csv";
 
-concatenate "$CONC_PATH" \
-			"$RNIE_GENOME_OUT_GFF" "$RNIE_GENE_OUT_GFF" \
-			"$CONC_OUT" "$LOG";
+CONC_SCRIPT_PATH="$SCRIPT_PATH""/Subscripts/1-concatenate.awk";
+CONC_OUT="$OUTPUT_DIR"/"Step01-Concatenated_list.csv";
+
+concatenate "$CONC_SCRIPT_PATH" \
+	"$RNIE_GENOME_OUT_GFF" "$RNIE_GENE_OUT_GFF" \
+	"$CONC_OUT" "$LOG";
+printf "   ** "$(get_nb_term "$CONC_OUT")" ITs retained!\n" | tee -a "$LOG";
+
+###########################################################
+# V. Get Genomic Attributes
+###########################################################
+printf "###########################################################\n" | tee -a "$LOG"
+printf "STEP 2) Get Genomic Attributes of ITs\n" | tee -a "$LOG";
+GENO_SCRIPT_PATH="$SCRIPT_PATH""/Subscripts/2-get_genomic_attributes.awk";
+GENOMIC_OUT="$OUTPUT_DIR"/"Step02-Genomic_attributes_list.csv";
+
+get_genomic_attributes "$GENO_SCRIPT_PATH" \
+	"$GENOME" "$ANNOTATION" \
+	"$CONC_OUT" "$GENOMIC_OUT" "$LOG";
+
+###########################################################
+# VI. Deduplicate
+###########################################################
+printf "###########################################################\n" | tee -a "$LOG"
+printf "STEP 3) Deduplicate ITs\n" | tee -a "$LOG";
+
+NT_DEV=3;
+DEDUP_SCRIPT_PATH="$SCRIPT_PATH""/Subscripts/3-deduplicate.awk";
+DEDUP_OUT="$OUTPUT_DIR"/"Step03-Deduplicated_list.csv";
+
+deduplicate "$DEDUP_SCRIPT_PATH" $NT_DEV \
+	"$GENOMIC_OUT" "$DEDUP_OUT" "$LOG";
+
+printf "   ** "$(get_nb_term "$DEDUP_OUT")" ITs retained!\n" | tee -a "$LOG";
+
+###########################################################
+# VII. Discard ITs within CDS
+###########################################################
+printf "###########################################################\n" | tee -a "$LOG"
+printf "STEP 4) Discard ITs within CDS\n" | tee -a "$LOG";
+
+DISCARD_INTRA_SCRIPT_PATH="$SCRIPT_PATH""/Subscripts/4-discard_intra_cds.awk";
+DISCARD_INTRA_OUT="$OUTPUT_DIR"/"Step04-Without_ITs_intra_cds_list.csv";
+
+discard_intra_cds "$DISCARD_INTRA_SCRIPT_PATH" $NT_DEV \
+	"$DEDUP_OUT" "$DISCARD_INTRA_OUT" "$LOG";
+
+printf "   ** "$(get_nb_term "$DISCARD_INTRA_OUT")" ITs retained!\n" | tee -a "$LOG";
