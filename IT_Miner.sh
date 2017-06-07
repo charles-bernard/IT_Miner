@@ -168,19 +168,19 @@ function concatenate {
 	# Concatenate the two output lists of RNIE
 
 	# Args
-	local CONC_SCRIPT_PATH="$1";	
+	local SCRIPT_PATH="$1";	
 	local GENOME_GFF="$2"; local GENE_GFF="$3";	
 	local OUT_LIST="$4"; local LOG="$5";
 
 	# Print Command into Log
 	printf "CONCATENATE COMMAND:\n" >> "$LOG";
-	printf "awk -f \"""$CONC_SCRIPT_PATH""\" \\" >> "$LOG";
+	printf "awk -f \"""$SCRIPT_PATH""\" \\" >> "$LOG";
 	printf "\n\t\"""$GENOME_GFF""\" \\" >> "$LOG";
 	printf "\n\t\"""$GENE_GFF""\" \\" >> "$LOG";
 	printf "\n\t> \"""$OUT_LIST""\"\n\n" >> "$LOG";
 
 	# Exe
-	awk -f "$CONC_SCRIPT_PATH" "$GENOME_GFF" "$GENE_GFF" \
+	awk -f "$SCRIPT_PATH" "$GENOME_GFF" "$GENE_GFF" \
 	> "$OUT_LIST" 2>"$TMP_TOOL_STDERR";
 
 	# Exit if stderr_file not empty
@@ -195,20 +195,20 @@ function get_genomic_attributes {
 	# & up/down stream genes landscape
 
 	# Args
-	local GENO_SCRIPT_PATH="$1"; local GENOME="$2";
+	local SCRIPT_PATH="$1"; local GENOME="$2";
 	local ANNOTATION="$3"; local INPUT_LIST="$4";
 	local OUT_LIST="$5"; local LOG="$6";
 
 	# Print Command into Log
 	printf "GET GENOMIC ATTRIBUTES COMMAND:\n" >> "$LOG";
-	printf "awk -f \"""$GENO_SCRIPT_PATH""\" \\" >> "$LOG";
+	printf "awk -f \"""$SCRIPT_PATH""\" \\" >> "$LOG";
 	printf "\n\t\"""$GENOME""\" \\" >> "$LOG";
 	printf "\n\t\"""$ANNOTATION""\" \\" >> "$LOG";
 	printf "\n\t\"""$INPUT_LIST""\" \\" >> "$LOG";
 	printf "\n\t> \"""$OUT_LIST""\"\n\n" >> "$LOG";
 
 	# Exe
-	awk -f "$GENO_SCRIPT_PATH" "$GENOME" "$ANNOTATION" \
+	awk -f "$SCRIPT_PATH" "$GENOME" "$ANNOTATION" \
 	"$INPUT_LIST" > "$OUT_LIST" 2>"$TMP_TOOL_STDERR";
 
 	# Exit if stderr_file not empty
@@ -222,19 +222,19 @@ function deduplicate {
 	# Deduplicate list
 
 	# Args
-	local DEDUP_SCRIPT_PATH="$1";
+	local SCRIPT_PATH="$1";
 	local NT_DEV="$2"; local INPUT_LIST="$3";
 	local OUT_LIST="$4"; local LOG="$5";
 
 	# Print Command into Log
 	printf "DEDUPLICATE COMMAND:\n" >> "$LOG";
 	printf "awk -v dev=$NT_DEV \\" >> "$LOG";
-	printf "\n\t-f \"""$DEDUP_SCRIPT_PATH""\" \\" >> "$LOG";
+	printf "\n\t-f \"""$SCRIPT_PATH""\" \\" >> "$LOG";
 	printf "\n\t\"""$INPUT_LIST""\" \\" >> "$LOG";
 	printf "\n\t> \"""$OUT_LIST""\"\n\n" >> "$LOG";
 
 	# Exe
-	awk -v dev=$NT_DEV -f "$DEDUP_SCRIPT_PATH" \
+	awk -v dev=$NT_DEV -f "$SCRIPT_PATH" \
 	"$INPUT_LIST" > "$OUT_LIST" 2>"$TMP_TOOL_STDERR";
 
 	# Exit if stderr_file not empty
@@ -245,24 +245,98 @@ function deduplicate {
 ###### I.8 Discard ITs within CDS #########################
 ###########################################################
 function discard_intra_cds {
-	# Discard 
+	# Discard intra cds ITs
 
 	# Args
-	local DISCARD_INTRA_SCRIPT_PATH="$1";
+	local SCRIPT_PATH="$1";
 	local INPUT_LIST="$3"; OUT_LIST="$4"; local LOG="$5";
 
 	# Print Command into Log
 	printf "DISCARD ITs INTRA CDS COMMAND:\n" >> "$LOG";
-	printf "awk -f \"""$DISCARD_INTRA_SCRIPT_PATH""\" \\" >> "$LOG";
+	printf "awk -f \"""$SCRIPT_PATH""\" \\" >> "$LOG";
 	printf "\n\t\"""$INPUT_LIST""\" \\" >> "$LOG";
 	printf "\n\t> \"""$OUT_LIST""\"\n\n" >> "$LOG";
 
 	# Exe
-	awk -f "$DISCARD_INTRA_SCRIPT_PATH" "$INPUT_LIST" \
+	awk -f "$SCRIPT_PATH" "$INPUT_LIST" \
 	> "$OUT_LIST" 2>"$TMP_TOOL_STDERR";
 
 	# Exit if stderr_file not empty
 	check_tool_stderr "$TMP_TOOL_STDERR" "4-discard_intra_cds.awk" "$LOG";
+}
+
+###########################################################
+###### I.9 Find Reverse Complementary ITs #################
+###########################################################
+function find_complements {
+	# Find reverse complementary ITs 
+
+	# Args
+	local SCRIPT_PATH="$1";
+	local INPUT_LIST="$2"; OUT_LIST="$3"; local LOG="$4";
+
+	# Print Command into Log
+	printf "FIND REVERSE COMPLEMENTART ITS:\n" >> "$LOG";
+	printf "awk -f \"""$SCRIPT_PATH""\" \\" >> "$LOG";
+	printf "\n\t\"""$INPUT_LIST""\" \\" >> "$LOG";
+	printf "\n\t> \"""$OUT_LIST""\"\n\n" >> "$LOG";
+
+	# Exe
+	awk -f "$SCRIPT_PATH" "$INPUT_LIST" \
+	> "$OUT_LIST" 2>"$TMP_TOOL_STDERR";
+
+	# Exit if stderr_file not empty
+	check_tool_stderr "$TMP_TOOL_STDERR" "5-find_complements.awk" "$LOG";
+}
+
+function stats_complements {
+	# Get Nb of complements per class..
+
+	# Args
+	local LIST="$1"; LOG="$2";
+	AWK_TMP_OUT=$(mktemp);
+
+	awk 'BEGIN { 
+		FS="\t"; old_id = n = con = div = cod = 0; 
+	}
+	NR > 1 {
+		if($15 != "") {
+			id = $15; n++;
+			if(id > old_id) {
+				if($17 == "convergence") {
+					con++;
+				} else if($17 == "divergence") {
+					div++;
+				} else {
+					cod++;
+				}
+			}
+			old_id = id;
+		}
+	}
+	END {
+		printf("%d %d %d %d %d", n, id, con, div, cod);
+
+	}' "$LIST" > "$AWK_TMP_OUT"
+
+	read -a STATS < "$AWK_TMP_OUT";
+	printf "\n" | tee -a "$LOG";
+	printf "   ** ";
+	printf "${STATS[0]}"" reverse complementary ITs detected!\n" | tee -a "$LOG";
+	printf "           " | tee -a "$LOG";
+	printf "(belonging to ""${STATS[1]}"" groups/couples):\n\n" | tee -a "$LOG"; 
+	printf "      *** " | tee -a "$LOG";
+	printf "${STATS[2]}"" groups are in gene convergence context\n\n" | tee -a "$LOG";
+	printf "                    " | tee -a "$LOG";
+	printf " --->_||_<--- \n\n" | tee -a "$LOG";
+	printf "      *** " | tee -a "$LOG";
+	printf "${STATS[3]}"" in divergence\n\n" | tee -a "$LOG";
+	printf "                    " | tee -a "$LOG";
+	printf " <---_||_---> \n\n" | tee -a "$LOG";
+	printf "      *** " | tee -a "$LOG";
+	printf "${STATS[4]}"" in co-directionality\n\n" | tee -a "$LOG";
+	printf "                    " | tee -a "$LOG";
+	printf " --->_||_---> \n\n" | tee -a "$LOG";
 }
 
 ###########################################################
@@ -359,7 +433,7 @@ BIT_SCORE_THRESH=14;
 printf "###########################################################\n" | tee -a "$LOG"
 printf "STEP 0) Run RNIE\n" | tee -a "$LOG";
 
-RNIE_PATH="$SCRIPT_PATH""/Subscripts/RNIE/rnie.pl";
+RNIE_PATH="$SCRIPT_PATH"/"Subscripts"/"RNIE"/"rnie.pl";
 export RNIE=`dirname "$RNIE_PATH"`;
 
 # Run genome mode
@@ -388,7 +462,7 @@ printf "   ** ""$N_TERM"" ITs predicted!\n" | tee -a "$LOG";
 printf "###########################################################\n" | tee -a "$LOG"
 printf "STEP 1) Concatenate RNIE outputs\n" | tee -a "$LOG";
 
-CONC_SCRIPT_PATH="$SCRIPT_PATH""/Subscripts/1-concatenate.awk";
+CONC_SCRIPT_PATH="$SCRIPT_PATH"/"Subscripts"/"1-concatenate.awk";
 CONC_OUT="$OUTPUT_DIR"/"Step01-Concatenated_list.csv";
 
 concatenate "$CONC_SCRIPT_PATH" \
@@ -401,7 +475,7 @@ printf "   ** "$(get_nb_term "$CONC_OUT")" ITs retained!\n" | tee -a "$LOG";
 ###########################################################
 printf "###########################################################\n" | tee -a "$LOG"
 printf "STEP 2) Get Genomic Attributes of ITs\n" | tee -a "$LOG";
-GENO_SCRIPT_PATH="$SCRIPT_PATH""/Subscripts/2-get_genomic_attributes.awk";
+GENO_SCRIPT_PATH="$SCRIPT_PATH"/"Subscripts"/"2-get_genomic_attributes.awk";
 GENOMIC_OUT="$OUTPUT_DIR"/"Step02-Genomic_attributes_list.csv";
 
 get_genomic_attributes "$GENO_SCRIPT_PATH" \
@@ -412,10 +486,10 @@ get_genomic_attributes "$GENO_SCRIPT_PATH" \
 # VI. Deduplicate
 ###########################################################
 printf "###########################################################\n" | tee -a "$LOG"
-printf "STEP 3) Deduplicate ITs\n" | tee -a "$LOG";
+printf "STEP 3) Deduplicate identical ITs\n" | tee -a "$LOG";
 
 NT_DEV=3;
-DEDUP_SCRIPT_PATH="$SCRIPT_PATH""/Subscripts/3-deduplicate.awk";
+DEDUP_SCRIPT_PATH="$SCRIPT_PATH"/"Subscripts"/"3-deduplicate.awk";
 DEDUP_OUT="$OUTPUT_DIR"/"Step03-Deduplicated_list.csv";
 
 deduplicate "$DEDUP_SCRIPT_PATH" $NT_DEV \
@@ -427,12 +501,32 @@ printf "   ** "$(get_nb_term "$DEDUP_OUT")" ITs retained!\n" | tee -a "$LOG";
 # VII. Discard ITs within CDS
 ###########################################################
 printf "###########################################################\n" | tee -a "$LOG"
-printf "STEP 4) Discard ITs within CDS\n" | tee -a "$LOG";
+printf "STEP 4) Discard ITs intra CDS\n" | tee -a "$LOG";
 
-DISCARD_INTRA_SCRIPT_PATH="$SCRIPT_PATH""/Subscripts/4-discard_intra_cds.awk";
-DISCARD_INTRA_OUT="$OUTPUT_DIR"/"Step04-Without_ITs_intra_cds_list.csv";
+DISCARD_INTRA_SCRIPT_PATH="$SCRIPT_PATH"/"Subscripts"/"4-discard_intra_cds.awk";
+DISCARD_INTRA_OUT="$OUTPUT_DIR"/"Step04-Without_intra_cds_list.csv";
 
 discard_intra_cds "$DISCARD_INTRA_SCRIPT_PATH" $NT_DEV \
 	"$DEDUP_OUT" "$DISCARD_INTRA_OUT" "$LOG";
 
 printf "   ** "$(get_nb_term "$DISCARD_INTRA_OUT")" ITs retained!\n" | tee -a "$LOG";
+
+###########################################################
+# VIII. Find reverse complements
+###########################################################
+printf "###########################################################\n" | tee -a "$LOG"
+printf "STEP 5) Find reverse complementary ITs\n" | tee -a "$LOG";
+
+FIND_COMPL_SCRIPT_PATH="$SCRIPT_PATH"/"Subscripts"/"5-find_complements.awk";
+FIND_COMPL_OUT="$OUTPUT_DIR"/"Step05-With_complements_list.csv";
+
+find_complements "$FIND_COMPL_SCRIPT_PATH" \
+	"$DISCARD_INTRA_OUT" "$FIND_COMPL_OUT" "$LOG";
+
+stats_complements "$FIND_COMPL_OUT" "$LOG";
+
+###########################################################
+# IX. 
+###########################################################
+printf "###########################################################\n" | tee -a "$LOG"
+printf "STEP 6) To be continued...\n" | tee -a "$LOG";
