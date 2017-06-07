@@ -56,12 +56,20 @@ function get_genomic_landscape(strand, start, end,  g) {
 		dw_gene_start = for_gene_start[g];
 		dw_gene_end = for_gene_end[g];
 		dw_gene_name = for_gene_name[g];
-		dw_dist = dw_gene_start - end;
+		if(dw_gene_start != "") { 
+			dw_dist = dw_gene_start - end;
+		} else { 
+			dw_dist = ""; 
+		}
 
 		up_gene_start = for_gene_start[g-1];
 		up_gene_end = for_gene_end[g-1];
 		up_gene_name = for_gene_name[g-1];
-		up_dist = start - up_gene_end;
+		if(up_gene_start != "") { 
+			up_dist = start - up_gene_end;
+		} else {
+			up_dist = "";
+		}
 
 		old_for_idx = g;
 	} else {
@@ -76,15 +84,22 @@ function get_genomic_landscape(strand, start, end,  g) {
 		up_gene_start = rev_gene_start[g];
 		up_gene_end = rev_gene_end[g];
 		up_gene_name = rev_gene_name[g];
-		up_dist = up_gene_start - end;
+		if(up_gene_start != "") { 
+			up_dist = up_gene_start - end;
+		} else {
+			up_dist = "";
+		}
 
 		dw_gene_start = rev_gene_start[g-1];
 		dw_gene_end = rev_gene_end[g-1];
 		dw_gene_name = rev_gene_name[g-1];
-		dw_dist = start - dw_gene_start;
+		if(dw_gene_start != "") {
+			dw_dist = start - dw_gene_start;
+		} else {
+			dw_dist = "";
+		}
 
 		old_rev_idx = g;
-		#print reverse_gene_name[42]
 	}
 	genomic_landscape = up_gene_name "\t" up_gene_start "\t" up_gene_end "\t" up_dist \
 		"\t" dw_gene_name "\t" dw_gene_start "\t" dw_gene_end "\t" dw_dist;

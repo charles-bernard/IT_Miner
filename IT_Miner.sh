@@ -22,8 +22,8 @@ WELCOME_MESSAGE
 function error_exit {
 	# exit with error message and error code sent as args
 	local ERR_MSG="$1"; local ERR_CODE="$2"; local LOG="${3:-$(mktemp)}";
-    printf "ERROR:\n""$ERR_MSG""\n" | tee "$LOG" >&2; 
-    exit "${ERR_CODE:-1}";				
+	printf "ERROR:\n""$ERR_MSG""\n" | tee "$LOG" >&2; 
+	exit "${ERR_CODE:-1}";				
 }
 
 function check_tool_stderr {
@@ -315,7 +315,7 @@ printf "PRE-PROCESSING)\n";
 printf " * Checking the validity of the pipeline parameters\n\n";
 
 RECQ_PARAMS=("$OUTPUT_DIR" "$GENOME" "$ANNOTATION");
-PARAM_NAMES=("Output Directory" "Genome" "$ANNOTATION");
+PARAM_NAMES=("Output Directory" "Genome" "Annotation");
 OPTIONS=("-o/--output-dir" "-g/--genome" "-a/--annotation");
 for (( i=0; i<${#RECQ_PARAMS[@]}; i++ )); do 
 	check_param "${RECQ_PARAMS[$i]}" "${PARAM_NAMES[$i]}" "${OPTIONS[$i]}";
@@ -364,7 +364,7 @@ export RNIE=`dirname "$RNIE_PATH"`;
 
 # Run genome mode
 printf " * Genome (Specific) Mode\n" | tee -a "$LOG";
-run_rnie 	"$RNIE_PATH" "genome" \
+run_rnie "$RNIE_PATH" "genome" \
 	"$GENOME" "$BIT_SCORE_THRESH" \
 	"$RNIE_GENOME_DIR"/"$PREFIX" "$LOG";
 RNIE_GENOME_OUT_GFF="$RNIE_GENOME_DIR"/"$PREFIX""-genomeMode-rnie.gff";
@@ -374,7 +374,7 @@ printf "   ** ""$N_TERM"" ITs predicted!\n" | tee -a "$LOG";
 
 # Run gene mode
 printf " * Gene (Sensitive) Mode\n" | tee -a "$LOG";
-run_rnie 	"$RNIE_PATH" "gene" \
+run_rnie "$RNIE_PATH" "gene" \
 	"$GENOME" "$BIT_SCORE_THRESH" \
 	"$RNIE_GENE_DIR"/"$PREFIX" "$LOG";
 RNIE_GENE_OUT_GFF="$RNIE_GENE_DIR"/"$PREFIX""-geneMode-rnie.gff";

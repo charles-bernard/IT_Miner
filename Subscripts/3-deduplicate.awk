@@ -12,7 +12,7 @@ BEGIN {
 	# These variables will be needed for further comparisons
 	old_strand = "";
 	old_gene = old_start = 0;
-	best_bit = 0
+	best_bit = 0;
 }
 
 NR == 1 {
@@ -55,7 +55,7 @@ NR > 1 {
 END {
 	printf("%s", header);
 	# We don't retrieve line[-1] since it stores the first terminator,
-	# which might not be the best one of the duplicates
+	# which might not be the best duplicate
 	for(i = 0; i < t; i ++) {
 		printf("\n%s", line[i]);
 	}
