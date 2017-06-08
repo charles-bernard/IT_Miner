@@ -166,13 +166,17 @@ file_idx == 2 && !/^#.*$/ {
 
 # The input file 3 is the list of terminators
 file_idx == 3 && FNR == 1 {
-	header_prefix = $0;
-	header_suffix = "IT Seq\t" \
-		"UpGene Name\tUpGene Start\tUpGene Stop\ttermStart-UpGeneEnd\t" \
-		"DwGene Name\tDwGene Start\tDwGene Stop\tDwGeneStart-termEnd";
+	if(NF == 5) {
+		header = $0 "\tIT Seq\t" \
+			"UpGene Name\tUpGene Start\tUpGene Stop\ttermStart-UpGeneEnd\t" \
+			"DwGene Name\tDwGene Start\tDwGene Stop\tDwGeneStart-termEnd";
+	} else {
+		header = $0;
+	}
 }
 
-file_idx == 3 && FNR > 1 {
+# Only term that with no genomic attribute (nb fields < 14) will be annotated
+file_idx == 3 && FNR > 1 && NF == 5 {
 	# Genomic landscape of each terminator will be searched
 	# In the Gene Dictionaries.
 	# As the terminator list is already sorted, the two
@@ -192,13 +196,17 @@ file_idx == 3 && FNR > 1 {
 
 	# The fct get_genomic_landscape will increment the dictionary index
 	line_suffix = get_genomic_landscape(strand, start, end);
-
+		
 	line[t] = line_prefix "\t" term_seq "\t" line_suffix;
 	t++;
 }
 
+file_idx == 3 && FNR > 1 && NF >= 14 {
+	line[t] = $0; t++;
+}
+
 END {
-	printf("%s\t%s", header_prefix, header_suffix);
+	printf("%s", header);
 
 	for(i = 0; i < t; i++) {
 		printf("\n%s", line[i]);

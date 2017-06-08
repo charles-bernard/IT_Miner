@@ -142,20 +142,18 @@ function run_rnie {
 	local GENOME="$3"; local BIT_SCORE_THRESH="$4";
 	local PREFIX="$5"; local LOG="$6";
 
-	# Print Command into Log
+	# Execute command while printing it into log
+	printf "___________________________________________________________\n" >> "$LOG"
 	printf "RNIE COMMAND:\n" >> "$LOG";
-	printf "perl \"""$RNIE_PATH""\""" \\" >> "$LOG";
-	printf "\n\t--fastafile \"""$GENOME""\""" \\" >> "$LOG";
-	printf "\n\t--""$MODE"" \\" >> "$LOG";
-	printf "\n\t--thresh "$BIT_SCORE_THRESH" \\" >> "$LOG";
-	printf "\n\t--prefix \"""$PREFIX""\"\n\n" >> "$LOG";
-
-	# Exe
-	# perl "$RNIE_PATH" \
-	# --fastafile "$GENOME" \
-	# --"$MODE" \
-	# --thresh "$BIT_SCORE_THRESH" \
-	# --prefix "$PREFIX" 2>"$TMP_TOOL_STDERR";
+	(set -x;
+		# perl "$RNIE_PATH" \
+		# --fastafile "$GENOME" \
+		# --"$MODE" \
+		# --thresh "$BIT_SCORE_THRESH" \
+		# --prefix "$PREFIX" \
+		# 2>"$TMP_TOOL_STDERR"
+	) 2>> "$LOG";
+	printf "\n" >> "$LOG";
 
 	# Exit if stderr_file not empty
 	check_tool_stderr "$TMP_TOOL_STDERR" "RNIE/rnie.pl" "$LOG";
@@ -172,16 +170,15 @@ function concatenate {
 	local GENOME_GFF="$2"; local GENE_GFF="$3";	
 	local OUT_LIST="$4"; local LOG="$5";
 
-	# Print Command into Log
+	# Execute command while printing it into log
+	printf "___________________________________________________________\n" >> "$LOG"
 	printf "CONCATENATE COMMAND:\n" >> "$LOG";
-	printf "awk -f \"""$SCRIPT_PATH""\" \\" >> "$LOG";
-	printf "\n\t\"""$GENOME_GFF""\" \\" >> "$LOG";
-	printf "\n\t\"""$GENE_GFF""\" \\" >> "$LOG";
-	printf "\n\t> \"""$OUT_LIST""\"\n\n" >> "$LOG";
+	(set -x; 
+		awk -f "$SCRIPT_PATH" "$GENOME_GFF" "$GENE_GFF" \
+		> "$OUT_LIST" 2>"$TMP_TOOL_STDERR";
+	) 2>> "$LOG";
+	printf "\n" >> "$LOG";
 
-	# Exe
-	awk -f "$SCRIPT_PATH" "$GENOME_GFF" "$GENE_GFF" \
-	> "$OUT_LIST" 2>"$TMP_TOOL_STDERR";
 
 	# Exit if stderr_file not empty
 	check_tool_stderr "$TMP_TOOL_STDERR" "1-concatenate.awk" "$LOG";
@@ -199,17 +196,14 @@ function get_genomic_attributes {
 	local ANNOTATION="$3"; local INPUT_LIST="$4";
 	local OUT_LIST="$5"; local LOG="$6";
 
-	# Print Command into Log
+	# Execute command while printing it into log
+	printf "___________________________________________________________\n" >> "$LOG"
 	printf "GET GENOMIC ATTRIBUTES COMMAND:\n" >> "$LOG";
-	printf "awk -f \"""$SCRIPT_PATH""\" \\" >> "$LOG";
-	printf "\n\t\"""$GENOME""\" \\" >> "$LOG";
-	printf "\n\t\"""$ANNOTATION""\" \\" >> "$LOG";
-	printf "\n\t\"""$INPUT_LIST""\" \\" >> "$LOG";
-	printf "\n\t> \"""$OUT_LIST""\"\n\n" >> "$LOG";
-
-	# Exe
-	awk -f "$SCRIPT_PATH" "$GENOME" "$ANNOTATION" \
-	"$INPUT_LIST" > "$OUT_LIST" 2>"$TMP_TOOL_STDERR";
+	(set -x; 
+		awk -f "$SCRIPT_PATH" "$GENOME" "$ANNOTATION" \
+		"$INPUT_LIST" > "$OUT_LIST" 2>"$TMP_TOOL_STDERR";
+	) 2>> "$LOG"
+	printf "\n" >> "$LOG";
 
 	# Exit if stderr_file not empty
 	check_tool_stderr "$TMP_TOOL_STDERR" "2-get_genomic_attributes.awk" "$LOG";
@@ -226,16 +220,15 @@ function deduplicate {
 	local NT_DEV="$2"; local INPUT_LIST="$3";
 	local OUT_LIST="$4"; local LOG="$5";
 
-	# Print Command into Log
-	printf "DEDUPLICATE COMMAND:\n" >> "$LOG";
-	printf "awk -v dev=$NT_DEV \\" >> "$LOG";
-	printf "\n\t-f \"""$SCRIPT_PATH""\" \\" >> "$LOG";
-	printf "\n\t\"""$INPUT_LIST""\" \\" >> "$LOG";
-	printf "\n\t> \"""$OUT_LIST""\"\n\n" >> "$LOG";
 
-	# Exe
-	awk -v dev=$NT_DEV -f "$SCRIPT_PATH" \
-	"$INPUT_LIST" > "$OUT_LIST" 2>"$TMP_TOOL_STDERR";
+	# Execute command while printing it into log
+	printf "___________________________________________________________\n" >> "$LOG"
+	printf "DEDUPLICATE COMMAND:\n" >> "$LOG";
+	(set -x;
+		awk -v dev=$NT_DEV -f "$SCRIPT_PATH" \
+		"$INPUT_LIST" > "$OUT_LIST" 2>"$TMP_TOOL_STDERR";
+	) 2>> "$LOG";
+	printf "\n" >> "$LOG";
 
 	# Exit if stderr_file not empty
 	check_tool_stderr "$TMP_TOOL_STDERR" "3-deduplicate.awk" "$LOG";
@@ -249,18 +242,16 @@ function discard_intra_cds {
 
 	# Args
 	local SCRIPT_PATH="$1"; local INPUT_LIST="$2"; 
-	OUT_LIST="$3"; local INTRA_LIST="$4"; local LOG="$5";
+	local OUT_LIST="$3"; local INTRA_LIST="$4"; local LOG="$5";
 
-	# Print Command into Log
+	# Execute command while printing it into log
+	printf "___________________________________________________________\n" >> "$LOG"
 	printf "DISCARD ITs INTRA CDS COMMAND:\n" >> "$LOG";
-	printf "awk -v INTRA_FILE=\"""$INTRA_LIST""\" \\" >> "$LOG";
-	printf "\n\t-f \"""$SCRIPT_PATH""\" \\" >> "$LOG";
-	printf "\n\t\"""$INPUT_LIST""\" \\" >> "$LOG";
-	printf "\n\t> \"""$OUT_LIST""\"\n\n" >> "$LOG";
-
-	# Exe
-	awk -v INTRA_FILE="$INTRA_LIST" -f "$SCRIPT_PATH" \
-	"$INPUT_LIST" > "$OUT_LIST" 2>"$TMP_TOOL_STDERR";
+	(set -x;
+		awk -v INTRA_FILE="$INTRA_LIST" -f "$SCRIPT_PATH" \
+		"$INPUT_LIST" > "$OUT_LIST" 2>"$TMP_TOOL_STDERR";
+	) 2>> "$LOG";
+	printf "\n" >> "$LOG";
 
 	# Exit if stderr_file not empty
 	check_tool_stderr "$TMP_TOOL_STDERR" "4-discard_intra_cds.awk" "$LOG";
@@ -273,18 +264,17 @@ function find_complements {
 	# Find reverse complementary ITs 
 
 	# Args
-	local SCRIPT_PATH="$1";
-	local INPUT_LIST="$2"; OUT_LIST="$3"; local LOG="$4";
+	local SCRIPT_PATH="$1"; local INPUT_LIST="$2"; 
+	local OUT_LIST="$3"; local LOG="$4"; local ID_PREFIX="${5:-""}";
 
-	# Print Command into Log
-	printf "FIND REVERSE COMPLEMENTART ITS:\n" >> "$LOG";
-	printf "awk -f \"""$SCRIPT_PATH""\" \\" >> "$LOG";
-	printf "\n\t\"""$INPUT_LIST""\" \\" >> "$LOG";
-	printf "\n\t> \"""$OUT_LIST""\"\n\n" >> "$LOG";
-
-	# Exe
-	awk -f "$SCRIPT_PATH" "$INPUT_LIST" \
-	> "$OUT_LIST" 2>"$TMP_TOOL_STDERR";
+	# Execute command while printing it into log
+	printf "___________________________________________________________\n" >> "$LOG"
+	printf "FIND REVERSE COMPLEMENTARY ITS:\n" >> "$LOG";
+	(set -x;
+		awk -v id_prefix="$ID_PREFIX" -f "$SCRIPT_PATH" \
+		"$INPUT_LIST" > "$OUT_LIST" 2>"$TMP_TOOL_STDERR";
+	) 2>> "$LOG";
+	printf "\n" >> "$LOG";
 
 	# Exit if stderr_file not empty
 	check_tool_stderr "$TMP_TOOL_STDERR" "5-find_complements.awk" "$LOG";
@@ -318,26 +308,76 @@ function stats_complements {
 	END {
 		printf("%d %d %d %d %d", n, id, con, div, cod);
 
-	}' "$LIST" > "$AWK_TMP_OUT"
+	}' "$LIST" > "$AWK_TMP_OUT";
 
 	read -a STATS < "$AWK_TMP_OUT";
-	printf "\n" | tee -a "$LOG";
-	printf "   ** ";
-	printf "${STATS[0]}"" reverse complementary ITs detected!\n" | tee -a "$LOG";
-	printf "           " | tee -a "$LOG";
-	printf "(belonging to ""${STATS[1]}"" groups/couples):\n\n" | tee -a "$LOG"; 
-	printf "      *** " | tee -a "$LOG";
-	printf "${STATS[2]}"" groups are in gene convergence context\n\n" | tee -a "$LOG";
-	printf "                    " | tee -a "$LOG";
-	printf " --->_||_<--- \n\n" | tee -a "$LOG";
-	printf "      *** " | tee -a "$LOG";
-	printf "${STATS[3]}"" in divergence\n\n" | tee -a "$LOG";
-	printf "                    " | tee -a "$LOG";
-	printf " <---_||_---> \n\n" | tee -a "$LOG";
-	printf "      *** " | tee -a "$LOG";
-	printf "${STATS[4]}"" in co-directionality\n\n" | tee -a "$LOG";
-	printf "                    " | tee -a "$LOG";
-	printf " --->_||_---> \n\n" | tee -a "$LOG";
+	rm "$AWK_TMP_OUT";
+
+cat $(mktemp) | tee -a "$LOG" <<COMPLEMENTS_MESSAGE
+
+   ** ${STATS[0]} reverse complementary ITs detected!\n
+           (belonging to ${STATS[1]} groups/couples):
+
+      *** ${STATS[2]} groups are in gene convergence context
+
+                     --->_||_<---
+
+      *** ${STATS[3]} in divergence
+
+                     <---_||_--->
+
+      *** ${STATS[4]} in co-directionality
+
+                     --->_||_--->
+
+COMPLEMENTS_MESSAGE
+
+}
+
+###########################################################
+###### I.10 Fake complements ##############################
+###########################################################
+function fake_complements {
+	# Fake complement to ITs with no predicted complement
+
+	# Args
+	local FAKE_SCRIPT_PATH="$1"; local GENO_SCRIPT_PATH="$2";
+	local FIND_COMPL_SCRIPT_PATH="$3"; local GENOME="$4";
+	local ANNOTATION="$5"; local INPUT_LIST="$6";
+	local OUT_LIST="$7"; local LOG="$8";
+	
+	#######################################################
+	# Step 1: Fake complement coordinates
+	#######################################################
+	TMP_FAKE_OUT_LIST=$(mktemp);
+	# Execute command while printing it into log
+	printf "___________________________________________________________\n" >> "$LOG"
+	printf "FAKE COMPLEMENTS:\n" >> "$LOG";
+	(set -x;
+		awk -f "$FAKE_SCRIPT_PATH" "$INPUT_LIST" \
+		> "$TMP_FAKE_OUT_LIST" 2>"$TMP_TOOL_STDERR";
+	) 2>> "$LOG";
+	printf "\n" >> "$LOG";
+
+	# Exit if stderr_file not empty
+	check_tool_stderr "$TMP_TOOL_STDERR" "6-fake_complements.awk" "$LOG";
+
+	#######################################################
+	# Step 2: Get genomic attributes of the faked complements
+	#######################################################
+
+	TMP_GENO_OUT_LIST=$(mktemp);
+	get_genomic_attributes "$GENO_SCRIPT_PATH" \
+		"$GENOME" "$ANNOTATION" \
+		"$TMP_FAKE_OUT_LIST" "$TMP_GENO_OUT_LIST" "$LOG";
+
+	#######################################################
+	# Step 3: Get info on the couples formed by the fake complements
+	#######################################################
+	find_complements "$FIND_COMPL_SCRIPT_PATH" \
+	"$TMP_GENO_OUT_LIST" "$OUT_LIST" "$LOG" "FakeCouple-";
+
+	#rm "$TMP_FAKE_OUT_LIST" "$TMP_GENO_OUT_LIST";
 }
 
 ###########################################################
@@ -530,7 +570,15 @@ find_complements "$FIND_COMPL_SCRIPT_PATH" \
 stats_complements "$FIND_COMPL_OUT" "$LOG";
 
 ###########################################################
-# IX. 
+# IX. Fake complement for ITs with no predicted complement
 ###########################################################
 printf "###########################################################\n" | tee -a "$LOG"
 printf "STEP 6) Fake complement for ITs with no predicted complement\n" | tee -a "$LOG";
+
+FAKE_SCRIPT_PATH="$SCRIPT_PATH"/"Subscripts"/"6-fake_complements.awk";
+FAKE_OUT="$STEPS_DIR"/"Step06-With_fake_complements_list.csv";
+
+fake_complements "$FAKE_SCRIPT_PATH" \
+	"$GENO_SCRIPT_PATH" "$FIND_COMPL_SCRIPT_PATH" \
+	"$GENOME" "$ANNOTATION" \
+	"$FIND_COMPL_OUT" "$FAKE_OUT" "$LOG";

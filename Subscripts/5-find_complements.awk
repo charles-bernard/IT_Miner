@@ -52,6 +52,7 @@ function get_best_complement(grp_id, idx) {
 	# Visit dictionary of reverse complements, searching for best overlap
 	k = 0;
 	while(complement[grp_id][rev[ref_strand]][k] != "") {
+		
 		# Get info on the current reverse complement
 		compl_idx = complement[grp_id][rev[ref_strand]][k];
 		compl_prefix = prefix[compl_idx];
@@ -158,7 +159,7 @@ BEGIN {
 	FS = "\t";
 
 	# Counter for terminators
-	t = 0; 
+	t = 0;
 
 	# These variables will be used for furthered comparisons
 	old_start = old_end = -1;
@@ -170,19 +171,30 @@ BEGIN {
 
 	rev["+"] = "-";
 	rev["-"] = "+";
+
+	# 'id_prefix' is sent to this script. 
+	# If not sent, then the 'id_grp' will be basically the current 'grp_count'.
 }
 
 NR == 1 {
-	prefix_header = $0;
-	suffix_header = "ID complementary couple\tCompl. Dist. Class\tCompl. Genomic Class\tInfo on the rev. compl.";
+	# If input file has no line that has been searched before, the new header is stored 
+	if(NF == 14) {
+		header = $0 "\tID complementary couple\tCompl. Dist. Class\tCompl. Genomic Class\tInfo on the rev. compl.";
+	} else {
+		header = $0;
+	}
 }
 
-NR > 1 {
+# Only records with no complements fields (NF < 18 or no id) will be searched.
+NR > 1 && (NF == 14 || $15 == "") {
 
 	start = $1;
 	end = $2;
 	strand = $3;
-	prefix[t] = $0;
+
+	# prefix is built from fields ranging from 1 to 14
+	prefix[t] = $1; for(i = 2; i <= 14; i++) { prefix[t] = prefix[t] "\t" $i; }
+
 
 	# If the current terminator overlaps the previous
 	if((start >= old_start && start < old_end) || (end > old_start && end <= old_end)) {
@@ -251,13 +263,28 @@ NR > 1 {
 	t++;
 }
 
+# If the current IT is a real complement:
+NR > 1 && NF >= 18 && $15 != "" {
+	# if previous line was also a real complement
+	# concatenate the current line to the previous
+	if(already_line[t]) {
+		already_line[t] = already_line[t] "\n" $0;
+	} else {
+		already_line[t] = $0;
+	}
+} 
+
 END {
-	printf("%s\t%s", prefix_header, suffix_header);
+	printf("%s", header);
 
 	for(i = 0; i < t; i++) {
 
+		if(already_line[i]) {
+			printf("\n%s", already_line[i]);
+		}
+
 		# Each time a complement is encountered
-		if(id_grp[i] != "") {
+		if(id_grp[i]) {
 
 			# Find idx of the best reverse complement
 			best_compl_output = get_best_complement(id_grp[i], i);
@@ -267,11 +294,15 @@ END {
 
 
 			suffix = get_suffix(i, compl_i);
-			line = prefix[i] "\t" id_grp[i] "\t" suffix "\t" compl_info;
+			line = prefix[i] "\t" id_prefix id_grp[i] "\t" suffix "\t" compl_info;
 		} else {
 			line = prefix[i] "\t\t\t\t";
 		}
 
 		printf("\n%s", line);
+	}
+	# last line might be an already line
+	if(already_line[i]) {
+		printf("\n%s", already_line[i]);
 	}
 }
