@@ -22,7 +22,7 @@ WELCOME_MESSAGE
 function error_exit {
 	# exit with error message and error code sent as args
 	local ERR_MSG="$1"; local ERR_CODE="$2"; local LOG="${3:-$(mktemp)}";
-	printf "ERROR:\n""$ERR_MSG""\n" | tee "$LOG" >&2; 
+	printf "ERROR:\n""$ERR_MSG""\n" | tee -a "$LOG" >&2; 
 	exit "${ERR_CODE:-1}";				
 }
 
@@ -248,18 +248,19 @@ function discard_intra_cds {
 	# Discard intra cds ITs
 
 	# Args
-	local SCRIPT_PATH="$1";
-	local INPUT_LIST="$3"; OUT_LIST="$4"; local LOG="$5";
+	local SCRIPT_PATH="$1"; local INPUT_LIST="$2"; 
+	OUT_LIST="$3"; local INTRA_LIST="$4"; local LOG="$5";
 
 	# Print Command into Log
 	printf "DISCARD ITs INTRA CDS COMMAND:\n" >> "$LOG";
-	printf "awk -f \"""$SCRIPT_PATH""\" \\" >> "$LOG";
+	printf "awk -v INTRA_FILE=\"""$INTRA_LIST""\" \\" >> "$LOG";
+	printf "\n\t-f \"""$SCRIPT_PATH""\" \\" >> "$LOG";
 	printf "\n\t\"""$INPUT_LIST""\" \\" >> "$LOG";
 	printf "\n\t> \"""$OUT_LIST""\"\n\n" >> "$LOG";
 
 	# Exe
-	awk -f "$SCRIPT_PATH" "$INPUT_LIST" \
-	> "$OUT_LIST" 2>"$TMP_TOOL_STDERR";
+	awk -v INTRA_FILE="$INTRA_LIST" -f "$SCRIPT_PATH" \
+	"$INPUT_LIST" > "$OUT_LIST" 2>"$TMP_TOOL_STDERR";
 
 	# Exit if stderr_file not empty
 	check_tool_stderr "$TMP_TOOL_STDERR" "4-discard_intra_cds.awk" "$LOG";
@@ -303,9 +304,9 @@ function stats_complements {
 		if($15 != "") {
 			id = $15; n++;
 			if(id > old_id) {
-				if($17 == "convergence") {
+				if($17 == "Convergence") {
 					con++;
-				} else if($17 == "divergence") {
+				} else if($17 == "Divergence") {
 					div++;
 				} else {
 					cod++;
@@ -395,7 +396,9 @@ for (( i=0; i<${#RECQ_PARAMS[@]}; i++ )); do
 	check_param "${RECQ_PARAMS[$i]}" "${PARAM_NAMES[$i]}" "${OPTIONS[$i]}";
 done
 
-check_outdir "$OUTPUT_DIR";
+check_outdir "$OUTPUT_DIR"; 
+STEPS_DIR="$OUTPUT_DIR"/"Output_of_each_step"; mkdir -p "$STEPS_DIR";
+
 check_log "$LOG"; > "$LOG";
 
 INPUT_FILES=("$RNIE_PATH" "$GENOME" "$ANNOTATION" "$LOG");
@@ -421,8 +424,8 @@ printf " * ANNOTATION:      "\ \""$ANNOTATION"\""\n\n" | tee -a "$LOG";
 ###########################################################
 ###### III.1 Define output parameters #####################
 ###########################################################
-RNIE_GENOME_DIR="$OUTPUT_DIR"/"00-RNIE_Genome_Mode_Specific";
-RNIE_GENE_DIR="$OUTPUT_DIR"/"00-RNIE_Gene_Mode_Sensitive";
+RNIE_GENOME_DIR="$STEPS_DIR"/"00-RNIE_Genome_Mode_Specific";
+RNIE_GENE_DIR="$STEPS_DIR"/"00-RNIE_Gene_Mode_Sensitive";
 mkdir -p "$RNIE_GENOME_DIR" "$RNIE_GENE_DIR";
 PREFIX="IT_Miner";
 BIT_SCORE_THRESH=14;
@@ -463,7 +466,7 @@ printf "###########################################################\n" | tee -a 
 printf "STEP 1) Concatenate RNIE outputs\n" | tee -a "$LOG";
 
 CONC_SCRIPT_PATH="$SCRIPT_PATH"/"Subscripts"/"1-concatenate.awk";
-CONC_OUT="$OUTPUT_DIR"/"Step01-Concatenated_list.csv";
+CONC_OUT="$STEPS_DIR"/"Step01-Concatenated_list.csv";
 
 concatenate "$CONC_SCRIPT_PATH" \
 	"$RNIE_GENOME_OUT_GFF" "$RNIE_GENE_OUT_GFF" \
@@ -476,7 +479,7 @@ printf "   ** "$(get_nb_term "$CONC_OUT")" ITs retained!\n" | tee -a "$LOG";
 printf "###########################################################\n" | tee -a "$LOG"
 printf "STEP 2) Get Genomic Attributes of ITs\n" | tee -a "$LOG";
 GENO_SCRIPT_PATH="$SCRIPT_PATH"/"Subscripts"/"2-get_genomic_attributes.awk";
-GENOMIC_OUT="$OUTPUT_DIR"/"Step02-Genomic_attributes_list.csv";
+GENOMIC_OUT="$STEPS_DIR"/"Step02-Genomic_attributes_list.csv";
 
 get_genomic_attributes "$GENO_SCRIPT_PATH" \
 	"$GENOME" "$ANNOTATION" \
@@ -490,7 +493,7 @@ printf "STEP 3) Deduplicate identical ITs\n" | tee -a "$LOG";
 
 NT_DEV=3;
 DEDUP_SCRIPT_PATH="$SCRIPT_PATH"/"Subscripts"/"3-deduplicate.awk";
-DEDUP_OUT="$OUTPUT_DIR"/"Step03-Deduplicated_list.csv";
+DEDUP_OUT="$STEPS_DIR"/"Step03-Deduplicated_list.csv";
 
 deduplicate "$DEDUP_SCRIPT_PATH" $NT_DEV \
 	"$GENOMIC_OUT" "$DEDUP_OUT" "$LOG";
@@ -504,10 +507,11 @@ printf "###########################################################\n" | tee -a 
 printf "STEP 4) Discard ITs intra CDS\n" | tee -a "$LOG";
 
 DISCARD_INTRA_SCRIPT_PATH="$SCRIPT_PATH"/"Subscripts"/"4-discard_intra_cds.awk";
-DISCARD_INTRA_OUT="$OUTPUT_DIR"/"Step04-Without_intra_cds_list.csv";
+DISCARD_INTRA_OUT="$STEPS_DIR"/"Step04-Without_intra_cds_list.csv";
+LIST_INTRA="$STEPS_DIR"/"Step04-Only_intra_cds_list.csv";
 
-discard_intra_cds "$DISCARD_INTRA_SCRIPT_PATH" $NT_DEV \
-	"$DEDUP_OUT" "$DISCARD_INTRA_OUT" "$LOG";
+discard_intra_cds "$DISCARD_INTRA_SCRIPT_PATH" \
+	"$DEDUP_OUT" "$DISCARD_INTRA_OUT" "$LIST_INTRA" "$LOG";
 
 printf "   ** "$(get_nb_term "$DISCARD_INTRA_OUT")" ITs retained!\n" | tee -a "$LOG";
 
@@ -518,7 +522,7 @@ printf "###########################################################\n" | tee -a 
 printf "STEP 5) Find reverse complementary ITs\n" | tee -a "$LOG";
 
 FIND_COMPL_SCRIPT_PATH="$SCRIPT_PATH"/"Subscripts"/"5-find_complements.awk";
-FIND_COMPL_OUT="$OUTPUT_DIR"/"Step05-With_complements_list.csv";
+FIND_COMPL_OUT="$STEPS_DIR"/"Step05-With_complements_list.csv";
 
 find_complements "$FIND_COMPL_SCRIPT_PATH" \
 	"$DISCARD_INTRA_OUT" "$FIND_COMPL_OUT" "$LOG";
@@ -529,4 +533,4 @@ stats_complements "$FIND_COMPL_OUT" "$LOG";
 # IX. 
 ###########################################################
 printf "###########################################################\n" | tee -a "$LOG"
-printf "STEP 6) To be continued...\n" | tee -a "$LOG";
+printf "STEP 6) Fake complement for ITs with no predicted complement\n" | tee -a "$LOG";
