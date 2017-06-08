@@ -168,7 +168,7 @@ file_idx == 2 && !/^#.*$/ {
 file_idx == 3 && FNR == 1 {
 	header_prefix = $0;
 	header_suffix = "IT Seq\t" \
-		"UpGene Name\tUpGene Start\tUpGene Stop\tUpGeneEnd-termStart\t" \
+		"UpGene Name\tUpGene Start\tUpGene Stop\ttermStart-UpGeneEnd\t" \
 		"DwGene Name\tDwGene Start\tDwGene Stop\tDwGeneStart-termEnd";
 }
 

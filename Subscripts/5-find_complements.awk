@@ -134,19 +134,19 @@ function get_suffix(ref_i, compl_i) {
 
 	if(ref_strand == "+") {
 		if(ref_upEnd >= compl_dwEnd && ref_dwStart >= compl_upStart) {
-			geno_class = "convergence";
+			geno_class = "Convergence";
 		} else if(ref_upEnd < compl_dwEnd && ref_dwStart < compl_upStart) {
-			geno_class = "divergence";
+			geno_class = "Divergence";
 		} else {
-			geno_class = "co-directionality";
+			geno_class = "Co-directionality";
 		}
 	} else {
 		if(ref_upStart <= compl_dwStart && ref_dwEnd <= compl_upEnd) {
-			geno_class = "convergence";
+			geno_class = "Convergence";
 		} else if(ref_upStart > compl_dwStart && ref_dwEnd > compl_upEnd) {
-			geno_class = "divergence";
+			geno_class = "Divergence";
 		} else {
-			geno_class = "co-directionality";
+			geno_class = "Co-directionality";
 		}
 	}
 
