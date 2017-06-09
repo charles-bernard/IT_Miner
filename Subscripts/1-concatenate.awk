@@ -2,8 +2,12 @@
 
 BEGIN {
 	FS = "\t";
+
+	# file counter
 	file_idx = 0;
-	t = 0; # terminator counter
+
+	# terminator counter
+	t = 0; 
 }
 
 FNR == 1 {
@@ -25,7 +29,6 @@ FNR == 1 {
 	bit_score = $6;
 	strand = $7;
 
-	# Build line according to important fields
 	line[t] = start[t] "\t" end "\t" strand "\t" mode "\t" bit_score;
 
 	t++;
@@ -35,8 +38,8 @@ END {
 	header = "Start\tEnd\tStrand\tRNIE Mode\tBit Score";
 	printf("%s", header);
 
-	# Sort Terminators based on Start
-	# Store new order in sorted_order variable
+	# Sort Terminators based on 'Start'
+	# 'sorted_order' stores the new order
 	n = asorti(start, sorted_order, "@val_num_asc");
 
 	# Print each line in the sorted order

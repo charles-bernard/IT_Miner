@@ -4,7 +4,7 @@ function free_dictionary(id,  s,  k,  strand) {
 	for(s = 0; s < 2; s++) {
 		k = 0;
 		if(s == 0) { strand = "+"; } else { strand = "-"; }
-		while(complement[id][strand][k] != "") {
+		while(complement[id][strand][k]) {
 			delete complement[id][strand][k];
 			k++;
 		}
@@ -18,12 +18,14 @@ function remove_grp(end_idx, n,  i) {
 }
 
 function get_overlap_perc(ref_start, ref_end, compl_start, compl_end) {
+	# The overlap start is defined as max('ref_start', 'compl_start')
 	if(ref_start >= compl_start) {
 		overlap_start = ref_start;
 	} else {
 		overlap_start = compl_start;
 	}
 
+	# The overlap end is defined as min('ref_end', 'compl_end')
 	if(ref_end > compl_end) {
 		overlap_end = compl_end;
 	} else {
@@ -41,11 +43,12 @@ function get_best_complement(grp_id, idx) {
 	ref_prefix = prefix[idx];
 	split(ref_prefix, ref_fields, "\t");
 
-	# Get info on the current terminator
+	# Get info on the current IT
 	ref_start = ref_fields[1];
 	ref_end = ref_fields[2];
 	ref_strand = ref_fields[3];
 
+	# These variables are needed for further comparisons
 	best_compl_idx = "";
 	best_overlap = -1;
 
@@ -60,7 +63,7 @@ function get_best_complement(grp_id, idx) {
 		compl_start = compl_fields[1];
 		compl_end = compl_fields[2];
 
-		# best complement is the one which has the best overlap
+		# best complement is the one which offers the best overlap
 		overlap = get_overlap_perc(ref_start, ref_end, compl_start, compl_end);
 		if(overlap > best_overlap) {
 			best_compl_idx = compl_idx;
@@ -106,13 +109,6 @@ function get_suffix(ref_i, compl_i) {
 	# Details:
 	# + ___----->__||_____----->_
 	# - _<-----____||__<-----____
-	# 
-	# CO-DIRECTIONAL
-	# Scheme:
-	# ----->_||_----->
-	# Details:
-	# + ___----->__||__----->____
-	# - _<-----____||____<-----__
 	#
 	# DIVERGENCE
 	# Scheme: 
@@ -120,6 +116,13 @@ function get_suffix(ref_i, compl_i) {
 	# Details:
 	# + _----->____||__----->____
 	# - ___<-----__||_____<-----_
+	#
+	# CO-DIRECTIONAL
+	# Scheme:
+	# ----->_||_----->
+	# Details:
+	# + ___----->__||__----->____
+	# - _<-----____||____<-----__
 
 	ref_strand = ref_fields[3];
 
@@ -186,7 +189,8 @@ NR == 1 {
 }
 
 # Only records with no complements fields (NF < 18 or no id) will be searched.
-NR > 1 && (NF == 14 || $15 == "") {
+# NR > 1 && (NF == 14 || $15 == "")
+NR > 1 && !$15 {
 
 	start = $1;
 	end = $2;
@@ -195,9 +199,9 @@ NR > 1 && (NF == 14 || $15 == "") {
 	# prefix is built from fields ranging from 1 to 14
 	prefix[t] = $1; for(i = 2; i <= 14; i++) { prefix[t] = prefix[t] "\t" $i; }
 
-
 	# If the current terminator overlaps the previous
 	if((start >= old_start && start < old_end) || (end > old_start && end <= old_end)) {
+		
 		# cur_c == -1 means that it is the first time the condition
 		# is satisfied in the current group of reverse complements.
 		if(cur_c == -1) {
@@ -227,6 +231,7 @@ NR > 1 && (NF == 14 || $15 == "") {
 			}
 		}
 
+		# The process below concerns any IT which is not the first of the group (cur_c > -1)
 		id_grp[t] = grp_count;
 
 		if(strand == "+") {
@@ -264,7 +269,7 @@ NR > 1 && (NF == 14 || $15 == "") {
 }
 
 # If the current IT is a real complement:
-NR > 1 && NF >= 18 && $15 != "" {
+NR > 1 && $15 {
 	# if previous line was also a real complement
 	# concatenate the current line to the previous
 	if(already_line[t]) {
@@ -283,7 +288,7 @@ END {
 			printf("\n%s", already_line[i]);
 		}
 
-		# Each time a complement is encountered
+		# Each time a complement is encountered
 		if(id_grp[i]) {
 
 			# Find idx of the best reverse complement
