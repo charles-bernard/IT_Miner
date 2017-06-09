@@ -438,6 +438,7 @@ done
 
 check_outdir "$OUTPUT_DIR"; 
 STEPS_DIR="$OUTPUT_DIR"/"Output_of_each_step"; mkdir -p "$STEPS_DIR";
+FIG_DIR="$OUTPUT_DIR"/"Figures"; mkdir -p "$FIG_DIR";
 
 check_log "$LOG"; > "$LOG";
 
@@ -582,3 +583,9 @@ fake_complements "$FAKE_SCRIPT_PATH" \
 	"$GENO_SCRIPT_PATH" "$FIND_COMPL_SCRIPT_PATH" \
 	"$GENOME" "$ANNOTATION" \
 	"$FIND_COMPL_OUT" "$FAKE_OUT" "$LOG";
+
+###########################################################
+# X. Find cut off distance to discard unlikely complements
+###########################################################
+printf "###########################################################\n" | tee -a "$LOG"
+printf "STEP 7) Find cut-off distance from upstream gene\n" | tee -a "$LOG"; 
