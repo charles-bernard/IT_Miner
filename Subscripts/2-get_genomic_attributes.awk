@@ -1,14 +1,21 @@
 #!/usr/bin/awk
 
 function get_gene_name(attribute) {
-	# Extract gene tag matching Regex within attribute string
-	match(attribute, /;gene=[a-zA-Z0-9.+:_-]+;/, gene_tag);
+	# The Gene tag is the match of the Regex against the 'attribute' string
+	match(attribute, /;Name=[a-zA-Z0-9.+:_-]+;/, gene_tag);
 
-	# Get char indexes corresponding to gene name in the attribute string
-	string_start = gene_tag[0, "start"] + length(";gene=");
-	string_len = gene_tag[0, "length"] - length(";gene=" ";");
+	if(gene_tag[0]) {
+		# Get indexes of the char corresponding to gene name in the attribute string
+		string_start = gene_tag[0, "start"] + length(";Name=");
+		string_len = gene_tag[0, "length"] - length(";Name=" ";");
+	} else {
+		# If gene has no name, get its ID
+		match(attribute, /;gene_id=[a-zA-Z0-9.+:_-]+;/, gene_tag);
+		string_start = gene_tag[0, "start"] + length(";gene_id=");
+		string_len = gene_tag[0, "length"] - length(";gene_id=" ";");
+	}
 
-	# Get gene name
+	# Get substring 'gene_name' of string 'attribute' thanks to these indexes
 	gene_name = substr(attribute, string_start, string_len);
 	return gene_name;
 }
@@ -26,29 +33,32 @@ function write_seq(strand, start, end) {
 
 		# The sequence is read from the end to the start
 		for(i = length(seq); i > 0; i--) {
-			# Then each nt will be furthered reversed
+			# Then each nt will be reversed
 			# and concatenated to the previous
 			nt = substr(seq, i, 1);
 
-			# Simple Check to see if a nt can be reversed
+			# Check if nt is A,C,T or G 
 			if(nt ~ /[ATCG]/) {
 				rev_seq = rev_seq rev[nt];
 			# A gap character "-" will be use if not
 			} else {
 				rev_seq = rev_seq "-";
 			}
-
 		}
 		return rev_seq;
 	}
 }
 
 function get_genomic_landscape(strand, start, end,  g) {
+	# The env variables 'old_for_idx' and 'old_rev_idx',
+	# tell the function where to begin to read the gene dictionary
+
 	if(strand == "+") {
 		g = old_for_idx;
+
 		# As long as the terminator is downstream of a CDS
 		# Get the next CDS
-		while(start > for_gene_start[g]) {
+		while(start > for_gene_start[g] && for_gene_start[g]) {
 			g++; 
 		}
 
@@ -74,9 +84,8 @@ function get_genomic_landscape(strand, start, end,  g) {
 		old_for_idx = g;
 	} else {
 		g = old_rev_idx;
-		# For reverse terminators
-		# functional start corresponds to annotation end
-		while(end >= rev_gene_end[g]) {
+		# For reverse IT, functional start corresponds to annotation end
+		while(end >= rev_gene_end[g] && rev_gene_end[g]) {
 			g++;
 		}
 
@@ -101,6 +110,9 @@ function get_genomic_landscape(strand, start, end,  g) {
 
 		old_rev_idx = g;
 	}
+
+	# The genomic_landscape is a summary of all the information 
+	# on the direct upstream and downstream genes of the IT
 	genomic_landscape = up_gene_name "\t" up_gene_start "\t" up_gene_end "\t" up_dist \
 		"\t" dw_gene_name "\t" dw_gene_start "\t" dw_gene_end "\t" dw_dist;
 
@@ -113,6 +125,7 @@ BEGIN {
 	
 	genome_seq = "";
 
+	# Counter for gene/CDS (one per strand)
 	for_count = 0;
 	rev_count = 0;
 
@@ -121,7 +134,8 @@ BEGIN {
 	rev["C"] = "G";
 	rev["G"] = "C";
 
-	t = 0; # terminator counter
+	 # terminator counter
+	t = 0;
 }
 
 FNR == 1 {
@@ -139,8 +153,9 @@ file_idx == 1 && FNR > 1 {
 # Lines starting with a comment are ignored
 file_idx == 2 && !/^#.*$/ {
 	region = $3;
-	if(region == "CDS") {
-		# Only the Coding Sequences matter for us
+	# Only the Genes/Coding Sequences matter for us
+	if(region == "gene") {
+		
 
 		# Important Fields
 		start = $4;
@@ -166,6 +181,9 @@ file_idx == 2 && !/^#.*$/ {
 
 # The input file 3 is the list of terminators
 file_idx == 3 && FNR == 1 {
+	# N.B: If some lines of the current list have already been annotated
+	# in the past, then the number of fields of the header should be >= 14.
+
 	if(NF == 5) {
 		header = $0 "\tIT Seq\t" \
 			"UpGene Name\tUpGene Start\tUpGene Stop\ttermStart-UpGeneEnd\t" \
@@ -173,10 +191,7 @@ file_idx == 3 && FNR == 1 {
 	} else {
 		header = $0;
 	}
-}
-
-# Only term that with no genomic attribute (nb fields < 14) will be annotated
-file_idx == 3 && FNR > 1 && NF == 5 {
+	
 	# Genomic landscape of each terminator will be searched
 	# In the Gene Dictionaries.
 	# As the terminator list is already sorted, the two
@@ -184,6 +199,10 @@ file_idx == 3 && FNR > 1 && NF == 5 {
 	# of the dictionaries which have been already read 
 	old_for_idx = 0;
 	old_rev_idx = 0;
+}
+
+# Only term with no genomic attribute (nb fields < 14) will be annotated
+file_idx == 3 && FNR > 1 && NF == 5 {
 
 	line_prefix = $0;
 
