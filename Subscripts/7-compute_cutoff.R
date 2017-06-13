@@ -143,17 +143,15 @@ get_cutoff <- function(tab, idxs, cutoff_method)
     return(list(exit_code = 'A', cutoff = NULL));
   }
 
-  if(cutoff_method != 'inclusive') {
-    for(i in 1:2) { likely_idxs[list_likely_idxs[[i]]] <- TRUE; }
-    for(j in 1:2) { unlikely_idxs[list_unlikely_idxs[[j]]] <- TRUE; }
-    conservative_cutoff <- compute_cutoff(distance[likely_idxs], distance[unlikely_idxs]);
+  for(i in 1:2) { likely_idxs[list_likely_idxs[[i]]] <- TRUE; }
+  for(j in 1:2) { unlikely_idxs[list_unlikely_idxs[[j]]] <- TRUE; }
+  conservative_cutoff <- compute_cutoff(distance[likely_idxs], distance[unlikely_idxs]);
+  likely_idxs[] <- unlikely_idxs[] <- FALSE;
     
-    if(cutoff_method == 'conservative') {
-      return(list(exit_code = 0, cutoff = conservative_cutoff));
-    }
+  if(cutoff_method == 'conservative') {
+    return(list(exit_code = 0, cutoff = conservative_cutoff));
   }
   
-  likely_idxs[] <- unlikely_idxs[] <- FALSE;
   if(cutoff_method != 'conservative') {
     # Requirement B: least in convergence & co-directionality must have both lower upDistance than least in divergence
     for(i in 3:4) {
