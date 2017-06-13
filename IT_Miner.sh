@@ -190,7 +190,7 @@ function concatenate {
 
 
 	# Exit if stderr_file not empty
-	check_tool_stderr "$TMP_TOOL_STDERR" "1-concatenate.awk" "$LOG";
+	check_tool_stderr "$TMP_TOOL_STDERR" "01-concatenate.awk" "$LOG";
 }
 
 ###########################################################
@@ -215,7 +215,7 @@ function get_genomic_attributes {
 	printf "\n" >> "$LOG";
 
 	# Exit if stderr_file not empty
-	check_tool_stderr "$TMP_TOOL_STDERR" "2-get_genomic_attributes.awk" "$LOG";
+	check_tool_stderr "$TMP_TOOL_STDERR" "02-get_genomic_attributes.awk" "$LOG";
 }
 
 ###########################################################
@@ -240,7 +240,7 @@ function deduplicate {
 	printf "\n" >> "$LOG";
 
 	# Exit if stderr_file not empty
-	check_tool_stderr "$TMP_TOOL_STDERR" "3-deduplicate.awk" "$LOG";
+	check_tool_stderr "$TMP_TOOL_STDERR" "03-deduplicate.awk" "$LOG";
 }
 
 ###########################################################
@@ -263,7 +263,7 @@ function discard_intra_cds {
 	printf "\n" >> "$LOG";
 
 	# Exit if stderr_file not empty
-	check_tool_stderr "$TMP_TOOL_STDERR" "4-discard_intra_cds.awk" "$LOG";
+	check_tool_stderr "$TMP_TOOL_STDERR" "04-discard_intra_cds.awk" "$LOG";
 }
 
 ###########################################################
@@ -286,7 +286,7 @@ function find_complements {
 	printf "\n" >> "$LOG";
 
 	# Exit if stderr_file not empty
-	check_tool_stderr "$TMP_TOOL_STDERR" "5-find_complements.awk" "$LOG";
+	check_tool_stderr "$TMP_TOOL_STDERR" "05-find_complements.awk" "$LOG";
 }
 
 function stats_complements {
@@ -369,7 +369,7 @@ function fake_complements {
 	printf "\n" >> "$LOG";
 
 	# Exit if stderr_file not empty
-	check_tool_stderr "$TMP_TOOL_STDERR" "6-fake_complements.awk" "$LOG";
+	check_tool_stderr "$TMP_TOOL_STDERR" "06-fake_complements.awk" "$LOG";
 
 	#######################################################
 	# Step 2: Get genomic attributes of the faked complements
@@ -396,7 +396,7 @@ function compute_cutoff {
 	# Compute cutoff distance from upstream stop codon
 
 	# Args
-	local SCRIPT_PATH="$1"; local LIST="$2";
+	local SCRIPT_PATH="$1"; local INPUT_LIST="$2";
 	local CUTOFF="$3"; local OUTDIR="$4"; 
 	local OUTFILE="$5"; local LOG="$6";
 
@@ -404,13 +404,35 @@ function compute_cutoff {
 	printf "COMPUTE CUTOFF:\n" >> "$LOG";
 
 	(set -x;
-		Rscript "$SCRIPT_PATH" --table "$LIST" \
+		Rscript "$SCRIPT_PATH" --table "$INPUT_LIST" \
 		--cutoff "$CUTOFF" --fig_dir "$OUTDIR" --out_file "$OUTFILE" \
 		| tee -a "$LOG" 2>"$TMP_TOOL_STDERR";
 	) 2>> "$LOG";
 
 	# Exit if stderr_file not empty
-	check_tool_stderr "$TMP_TOOL_STDERR" "7-compute_cutoff.awk" "$LOG";
+	check_tool_stderr "$TMP_TOOL_STDERR" "07-compute_cutoff.R" "$LOG";
+}
+
+###########################################################
+###### I.12 Filter ########################################
+###########################################################
+function filter {
+	# Compute cutoff distance from upstream stop codon
+
+	# Args
+	local SCRIPT_PATH="$1"; local INPUT_LIST="$2";
+	local OUT_LIST="$3"; local CUTOFF="$4"; local LOG="$5";
+
+	printf "___________________________________________________________\n" >> "$LOG"
+	printf "FILTER:\n" >> "$LOG";
+
+	(set -x;
+		awk -v cutoff=$CUTOFF -f "$SCRIPT_PATH" \
+		"$INPUT_LIST" > "$OUT_LIST" 2>"$TMP_TOOL_STDERR";
+	) 2>> "$LOG";
+
+	# Exit if stderr_file not empty
+	check_tool_stderr "$TMP_TOOL_STDERR" "08-filter.awk" "$LOG";
 }
 
 ###########################################################
@@ -482,7 +504,6 @@ STEPS_DIR="$OUTPUT_DIR"/"Output_of_each_step"; mkdir -p "$STEPS_DIR";
 FIG_DIR="$OUTPUT_DIR"/"Figures"; mkdir -p "$FIG_DIR";
 
 check_cutoff "$CUTOFF";
-echo "cutoff: " $CUTOFF;
 check_log "$LOG"; > "$LOG";
 
 INPUT_FILES=("$RNIE_PATH" "$GENOME" "$ANNOTATION" "$LOG");
@@ -501,7 +522,8 @@ printf "PARAMETERS LIST)\n" | tee -a "$LOG";
 printf " * OUTPUT DIRECTORY:"\ \""$OUTPUT_DIR"\""\n" | tee -a "$LOG";
 printf " * LOG FILE:        "\ \""$LOG"\""\n" | tee -a "$LOG";
 printf " * GENOME:          "\ \""$GENOME"\""\n" | tee -a "$LOG";
-printf " * ANNOTATION:      "\ \""$ANNOTATION"\""\n\n" | tee -a "$LOG";
+printf " * ANNOTATION:      "\ \""$ANNOTATION"\""\n" | tee -a "$LOG";
+printf " * CUTOFF:          "\ "$CUTOFF\n\n" | tee -a "$LOG";
 
 ###########################################################
 # III. RUN RNIE
@@ -549,7 +571,7 @@ printf "   ** ""$N_TERM"" ITs predicted!\n" | tee -a "$LOG";
 printf "###########################################################\n" | tee -a "$LOG"
 printf "STEP 1) Concatenate RNIE outputs\n" | tee -a "$LOG";
 
-CONC_SCRIPT_PATH="$SCRIPT_PATH"/"Subscripts"/"1-concatenate.awk";
+CONC_SCRIPT_PATH="$SCRIPT_PATH"/"Subscripts"/"01-concatenate.awk";
 CONC_OUT="$STEPS_DIR"/"Step01-Concatenated_list.csv";
 
 concatenate "$CONC_SCRIPT_PATH" \
@@ -562,7 +584,7 @@ printf "   ** "$(get_nb_term "$CONC_OUT")" ITs retained!\n" | tee -a "$LOG";
 ###########################################################
 printf "###########################################################\n" | tee -a "$LOG"
 printf "STEP 2) Get Genomic Attributes of ITs\n" | tee -a "$LOG";
-GENO_SCRIPT_PATH="$SCRIPT_PATH"/"Subscripts"/"2-get_genomic_attributes.awk";
+GENO_SCRIPT_PATH="$SCRIPT_PATH"/"Subscripts"/"02-get_genomic_attributes.awk";
 GENOMIC_OUT="$STEPS_DIR"/"Step02-Genomic_attributes_list.csv";
 
 get_genomic_attributes "$GENO_SCRIPT_PATH" \
@@ -576,7 +598,7 @@ printf "###########################################################\n" | tee -a 
 printf "STEP 3) Deduplicate identical ITs\n" | tee -a "$LOG";
 
 NT_DEV=3;
-DEDUP_SCRIPT_PATH="$SCRIPT_PATH"/"Subscripts"/"3-deduplicate.awk";
+DEDUP_SCRIPT_PATH="$SCRIPT_PATH"/"Subscripts"/"03-deduplicate.awk";
 DEDUP_OUT="$STEPS_DIR"/"Step03-Deduplicated_list.csv";
 
 deduplicate "$DEDUP_SCRIPT_PATH" $NT_DEV \
@@ -590,7 +612,7 @@ printf "   ** "$(get_nb_term "$DEDUP_OUT")" ITs retained!\n" | tee -a "$LOG";
 printf "###########################################################\n" | tee -a "$LOG"
 printf "STEP 4) Discard ITs intra CDS\n" | tee -a "$LOG";
 
-DISCARD_INTRA_SCRIPT_PATH="$SCRIPT_PATH"/"Subscripts"/"4-discard_intra_cds.awk";
+DISCARD_INTRA_SCRIPT_PATH="$SCRIPT_PATH"/"Subscripts"/"04-discard_intra_cds.awk";
 DISCARD_INTRA_OUT="$STEPS_DIR"/"Step04-Without_intra_cds_list.csv";
 LIST_INTRA="$STEPS_DIR"/"Step04-Only_intra_cds_list.csv";
 
@@ -605,7 +627,7 @@ printf "   ** "$(get_nb_term "$DISCARD_INTRA_OUT")" ITs retained!\n" | tee -a "$
 printf "###########################################################\n" | tee -a "$LOG"
 printf "STEP 5) Find reverse complementary ITs\n" | tee -a "$LOG";
 
-FIND_COMPL_SCRIPT_PATH="$SCRIPT_PATH"/"Subscripts"/"5-find_complements.awk";
+FIND_COMPL_SCRIPT_PATH="$SCRIPT_PATH"/"Subscripts"/"05-find_complements.awk";
 FIND_COMPL_OUT="$STEPS_DIR"/"Step05-With_complements_list.csv";
 
 find_complements "$FIND_COMPL_SCRIPT_PATH" \
@@ -619,7 +641,7 @@ stats_complements "$FIND_COMPL_OUT" "$LOG";
 printf "###########################################################\n" | tee -a "$LOG"
 printf "STEP 6) Fake complement for ITs with no predicted complement\n" | tee -a "$LOG";
 
-FAKE_SCRIPT_PATH="$SCRIPT_PATH"/"Subscripts"/"6-fake_complements.awk";
+FAKE_SCRIPT_PATH="$SCRIPT_PATH"/"Subscripts"/"06-fake_complements.awk";
 FAKE_OUT="$STEPS_DIR"/"Step06-With_fake_complements_list.csv";
 
 fake_complements "$FAKE_SCRIPT_PATH" \
@@ -631,10 +653,34 @@ fake_complements "$FAKE_SCRIPT_PATH" \
 # X. Find cut off distance to discard unlikely complements
 ###########################################################
 printf "###########################################################\n" | tee -a "$LOG"
-printf "STEP 7) Find cut-off distance from upstream gene\n" | tee -a "$LOG"; 
+printf "STEP 7) Compute cut-off distance from upstream gene\n" | tee -a "$LOG"; 
 
-CUTOFF_SCRIPT_PATH="$SCRIPT_PATH"/"Subscripts"/"7-compute_cutoff.R";
+CUTOFF_SCRIPT_PATH="$SCRIPT_PATH"/"Subscripts"/"07-compute_cutoff.R";
 CUTOFF_OUT="$STEPS_DIR"/"Step07-Cutoff.txt"
 
 compute_cutoff "$CUTOFF_SCRIPT_PATH" "$FAKE_OUT" \
 	"$CUTOFF" "$FIG_DIR" "$CUTOFF_OUT" "$LOG";
+
+read -r CUTOFF_DISTANCE < "$CUTOFF_OUT";
+
+###########################################################
+# XI. Filter
+###########################################################
+printf "###########################################################\n" | tee -a "$LOG"
+printf "STEP 8) Filter ITs above cutoff\n" | tee -a "$LOG"; 
+
+FILTER_SCRIPT_PATH="$SCRIPT_PATH"/"Subscripts"/"08-filter.awk";
+TMP_FILTER_OUT=$(mktemp);
+FILTER_OUT="$STEPS_DIR"/"Step08-Filtered_list.csv";
+
+filter "$FILTER_SCRIPT_PATH" "$DISCARD_INTRA_OUT" \
+	"$TMP_FILTER_OUT" "$CUTOFF_DISTANCE" "$LOG";
+
+printf "   ** "$(get_nb_term "$TMP_FILTER_OUT")" ITs retained!\n" | tee -a "$LOG";
+
+printf "\n .... ) Reinitializing stats on reverse complementary ITs\n"
+
+find_complements "$FIND_COMPL_SCRIPT_PATH" \
+	"$TMP_FILTER_OUT" "$FILTER_OUT" "$LOG";
+
+stats_complements "$FILTER_OUT" "$LOG";
