@@ -79,6 +79,15 @@ function check_outdir {
 	fi
 }
 
+function check_cutoff {
+	CUTOFF="$1";
+	if [ ! "$CUTOFF" ]; then
+		CUTOFF="conservative";
+		printf "You did not mention a cutoff method.\n";
+		printf "\tA conservative method will be used by default.\n";
+	fi
+}
+
 function check_log {
 	# Create log file if necessary
 	local LOCAL_LOG="$1";
@@ -377,7 +386,31 @@ function fake_complements {
 	find_complements "$FIND_COMPL_SCRIPT_PATH" \
 	"$TMP_GENO_OUT_LIST" "$OUT_LIST" "$LOG" "FakeCouple-";
 
-	#rm "$TMP_FAKE_OUT_LIST" "$TMP_GENO_OUT_LIST";
+	rm "$TMP_FAKE_OUT_LIST" "$TMP_GENO_OUT_LIST";
+}
+
+###########################################################
+###### I.11 Compute cutoff ################################
+###########################################################
+function compute_cutoff {
+	# Compute cutoff distance from upstream stop codon
+
+	# Args
+	local SCRIPT_PATH="$1"; local LIST="$2";
+	local CUTOFF="$3"; local OUTDIR="$4"; 
+	local OUTFILE="$5"; local LOG="$6";
+
+	printf "___________________________________________________________\n" >> "$LOG"
+	printf "COMPUTE CUTOFF:\n" >> "$LOG";
+
+	(set -x;
+		Rscript "$SCRIPT_PATH" --table "$LIST" \
+		--cutoff "$CUTOFF" --fig_dir "$OUTDIR" --out_file "$OUTFILE" \
+		| tee -a "$LOG" 2>"$TMP_TOOL_STDERR";
+	) 2>> "$LOG";
+
+	# Exit if stderr_file not empty
+	check_tool_stderr "$TMP_TOOL_STDERR" "7-compute_cutoff.awk" "$LOG";
 }
 
 ###########################################################
@@ -387,9 +420,9 @@ function fake_complements {
 ###########################################################
 TEMP=`getopt \
 	-o \
-		o:g:a:l:: \
+		o:g:a:c:l:: \
 	--long \
-		output-dir:,rnie-path:,genome:,annotation:,log:: \
+		output-dir:,rnie-path:,genome:,annotation:,cutoff:log:: \
 	-n 'report' -- "$@"`;
 eval set -- "$TEMP";
 
@@ -412,6 +445,14 @@ while true ; do
 			case "$2" in
 				"") error_exit "No annotation file (gff) has been provided!" 1; shift 2 ;;
 				*) ANNOTATION="$2"; shift 2 ;;
+			esac ;;
+		-c | --cutoff )
+			case "$2" in
+				"") CUTOFF="conservative"; shift 2 ;;
+				"conservative") CUTOFF="$2"; shift 2 ;;
+				"inclusive") CUTOFF="$2"; shift 2;;
+				"average") CUTOFF="$2"; shift 2;;
+				*) error_exit "$2 is not an appropriate cutoff method!" 1: shift 2 ;;
 			esac ;;
 		-l | --log )
 			case "$2" in
@@ -440,6 +481,8 @@ check_outdir "$OUTPUT_DIR";
 STEPS_DIR="$OUTPUT_DIR"/"Output_of_each_step"; mkdir -p "$STEPS_DIR";
 FIG_DIR="$OUTPUT_DIR"/"Figures"; mkdir -p "$FIG_DIR";
 
+check_cutoff "$CUTOFF";
+echo "cutoff: " $CUTOFF;
 check_log "$LOG"; > "$LOG";
 
 INPUT_FILES=("$RNIE_PATH" "$GENOME" "$ANNOTATION" "$LOG");
@@ -589,3 +632,9 @@ fake_complements "$FAKE_SCRIPT_PATH" \
 ###########################################################
 printf "###########################################################\n" | tee -a "$LOG"
 printf "STEP 7) Find cut-off distance from upstream gene\n" | tee -a "$LOG"; 
+
+CUTOFF_SCRIPT_PATH="$SCRIPT_PATH"/"Subscripts"/"7-compute_cutoff.R";
+CUTOFF_OUT="$STEPS_DIR"/"Step07-Cutoff.txt"
+
+compute_cutoff "$CUTOFF_SCRIPT_PATH" "$FAKE_OUT" \
+	"$CUTOFF" "$FIG_DIR" "$CUTOFF_OUT" "$LOG";

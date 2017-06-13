@@ -13,9 +13,9 @@ get_args <- function()
 {
   option_list <- list(
     make_option('--table', dest = 'table', action = 'store'),
-    make_option('--output_dir', dest = 'output_dir', action = 'store'),
+    make_option('--fig_dir', dest = 'fig_dir', action = 'store'),
     make_option('--cutoff', dest = 'cutoff_method', action = 'store'),
-    make_option('--log', dest = 'log', action = 'store')
+    make_option('--out_file', dest = 'out_file', action = 'store')
   );
   
   return(parse_args(OptionParser(option_list = option_list)));
@@ -25,15 +25,16 @@ get_args <- function()
 load_test_args <- function()
 {
   # args$table <- '/home/charles/clones/IT_Miner/Out/Bacillus_subtilis/ASM904v1/Output_of_each_step/Step06-With_fake_complements_list.csv';
-  # args$output_dir <- '/home/charles/clones/IT_Miner/Out/Bacillus_subtilis/ASM904v1/Figures';
+  # args$fig_dir <- '/home/charles/clones/IT_Miner/Out/Bacillus_subtilis/ASM904v1/Figures';
   
   # args$table <- '/home/charles/clones/IT_Miner/Out/Escherichia_coli/U00096.2/Output_of_each_step/Step06-With_fake_complements_list.csv';
-  # args$output_dir <- '/home/charles/clones/IT_Miner/Out/Escherichia_coli/U00096.2/Figures';
+  # args$fig_dir <- '/home/charles/clones/IT_Miner/Out/Escherichia_coli/U00096.2/Figures';
   
   args$table <- '/home/charles/clones/IT_Miner/Out/Salmonella_enterica/Output_of_each_step/Step06-With_fake_complements_list.csv';
-  args$output_dir <- '/home/charles/clones/IT_Miner/Out/Salmonella_enterica/Figures';
+  args$fig_dir <- '/home/charles/clones/IT_Miner/Out/Salmonella_enterica/Figures';
   
   args$cutoff <- 'conservative';
+  args$out_file <- '/home/charles/cutoff.txt'
   
   return(args);
 }
@@ -193,7 +194,8 @@ get_cutoff <- function(tab, idxs, cutoff_method)
 print_cutoff_results <- function(cutoff_out)
 {
   if(cutoff_out$exit_code == 0) {
-    cat(sprintf('\tCutoff distance from upstream gene: %d nt\n', cutoff_out$cutoff));
+    cat(sprintf('   ** Cutoff distance from upstream gene: %d nt\n', cutoff_out$cutoff));
+    cat(cutoff_out$cutoff, file = out_file);
   } else if(cutoff_out$exit_code == 'A') {
     print_keywords();
     cat('\nThe first condition of application of a cutoff distance is not satisfied:\n');
@@ -202,12 +204,14 @@ print_cutoff_results <- function(cutoff_out)
     print_keywords();
     cat('\nThe second condition of application of an inclusive cutoff distance is not satisfied:\n');
     cat(' - \"least\" in convergence & co-directionality do not seem to have both\n   lower distance from upstream gene than \"least\" in divergence\n');
-    cat(sprintf('A conservative cutoff will be therefore applied: %d nt\n', cutoff_out$cutoff));
+    cat(sprintf('   ** A conservative cutoff will be therefore applied: %d nt\n', cutoff_out$cutoff));
+    cat(cutoff_out$cutoff, file = out_file);
   } else {
     print_keywords();
     cat('\nThe third condition of application of an inclusive cutoff distance is not satisfied:\n');
     cat(' - \"most\" in convergence does not seem to have lower distance from\n   upstream gene than both \"most\" in co-directionality & divergence\n');
-    cat(sprintf('A conservative cutoff will be therefore applied: %d nt\n', cutoff_out$cutoff));
+    cat(sprintf('   ** A conservative cutoff will be therefore applied: %d nt\n', cutoff_out$cutoff));
+    cat(cutoff_out$cutoff, file = out_file);
   }
 }
 
@@ -229,6 +233,7 @@ add_class_column <- function(tab, idxs)
 # MAIN
 #############################################################################
 args <- get_args(); if(is.null(args$table)) { args <- load_test_args(); }
+out_file <<- args$out_file;
 
 tab <- fread(args$table, sep = '\t', header = TRUE); 
 tab <- tab[`termStart-UpGeneEnd` > 0]; 
@@ -243,7 +248,7 @@ tab <- add_class_column(tab, idxs);
 ##############################################################################
 # Boxplot 1
 ##############################################################################
-filename <- file.path(args$output_dir, "1-Boxplot_distance_from_upgene_by_complement.svg")
+filename <- file.path(args$fig_dir, "1-Boxplot_distance_from_upgene_by_complement.svg")
 svg(filename, width = 16, height = 10);
 
 bp_tab <- data.table(class = tab$class, 

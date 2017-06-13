@@ -189,7 +189,6 @@ NR == 1 {
 }
 
 # Only records with no complements fields (NF < 18 or no id) will be searched.
-# NR > 1 && (NF == 14 || $15 == "")
 NR > 1 && !$15 {
 
 	start = $1;
@@ -202,7 +201,7 @@ NR > 1 && !$15 {
 	# If the current terminator overlaps the previous
 	if((start >= old_start && start < old_end) || (end > old_start && end <= old_end)) {
 		
-		# cur_c == -1 means that it is the first time the condition
+		# cur_c == -1 means that it is the first time the above condition
 		# is satisfied in the current group of reverse complements.
 		if(cur_c == -1) {
 			# Then the group counter needs to be incremented.
