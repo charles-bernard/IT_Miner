@@ -62,6 +62,7 @@ function get_best_complement(grp_id, idx) {
 		split(compl_prefix, compl_fields, "\t");
 		compl_start = compl_fields[1];
 		compl_end = compl_fields[2];
+		compl_bit = compl_fields[5];
 
 		# best complement is the one which offers the best overlap
 		overlap = get_overlap_perc(ref_start, ref_end, compl_start, compl_end);
@@ -69,6 +70,7 @@ function get_best_complement(grp_id, idx) {
 			best_compl_idx = compl_idx;
 			best_compl_start = compl_start;
 			best_compl_end = compl_end;
+			best_compl_bit = compl_bit;
 			best_overlap = overlap;
 		}
 		k++;
@@ -76,7 +78,7 @@ function get_best_complement(grp_id, idx) {
 
 	# Write down some basic info on the reverse complement
 	compl_info = "Start=" best_compl_start ";End=" best_compl_end \
-		";Strand=" rev[ref_strand] ";% Overlapping=" best_overlap;
+		";Strand=" rev[ref_strand] ";% Overlapping=" best_overlap ";Bit Score=" best_compl_bit;
 
 	# N.B: Keep in mind that the notion of best reverse compl is 
 	# not necessarily reciprocal btw two complements
@@ -188,7 +190,7 @@ NR == 1 {
 	}
 }
 
-# Only records with no complements fields (NF < 18 or no id) will be searched.
+# Only records with no complements fields (NF < 19 or no id) will be searched.
 NR > 1 && !$15 {
 
 	start = $1;
@@ -300,7 +302,7 @@ END {
 			suffix = get_suffix(i, compl_i);
 			line = prefix[i] "\t" id_prefix id_grp[i] "\t" suffix "\t" compl_info;
 		} else {
-			line = prefix[i] "\t\t\t\t";
+			line = prefix[i] "\t\t\t\t\t";
 		}
 
 		printf("\n%s", line);
