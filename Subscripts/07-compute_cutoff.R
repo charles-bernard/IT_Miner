@@ -132,8 +132,7 @@ get_cutoff <- function(tab, idxs, cutoff_method)
   k = 1;
   for(i in 1:2) {
     for(j in 1:2) {
-      current_outcome <- compare_distrib(distance[list_likely_idxs[[i]]], distance[list_unlikely_idxs[[j]]], alternative = 'less');
-      outcome[k] <- current_outcome;
+      outcome[k] <- compare_distrib(distance[list_likely_idxs[[i]]], distance[list_unlikely_idxs[[j]]], alternative = 'less');
       k <- k + 1;
     }
   }
@@ -154,8 +153,7 @@ get_cutoff <- function(tab, idxs, cutoff_method)
     # Requirement B: least in convergence & co-directionality must have both lower upDistance than least in divergence
     for(i in 3:4) {
       if(!is.null(list_unlikely_idxs[[3]])) {
-        current_outcome <- compare_distrib(distance[list_likely_idxs[[i]]], distance[list_unlikely_idxs[[3]]], alternative = 'less');
-        outcome[k] <- current_outcome;
+        outcome[k] <- compare_distrib(distance[list_likely_idxs[[i]]], distance[list_unlikely_idxs[[3]]], alternative = 'less');
       }
       k <- k + 1;
     }
@@ -166,8 +164,7 @@ get_cutoff <- function(tab, idxs, cutoff_method)
     # Requirement C: most in convergence must have lower upDistance than both most in co-directionality & divergence
     for(j in 4:5) {
       if(!is.null(list_unlikely_idxs[[j]])) {
-        current_outcome <- compare_distrib(distance[list_likely_idxs[[5]]], distance[list_unlikely_idxs[[j]]], alternative = 'less');
-        outcome[k] <- current_outcome;
+        outcome[k] <- compare_distrib(distance[list_likely_idxs[[5]]], distance[list_unlikely_idxs[[j]]], alternative = 'less');
       }
       k <- k + 1;
     }
@@ -282,7 +279,7 @@ ggplot(bp_tab, aes(x = class, y = distance)) +
   theme(axis.text.x = element_text(size = 15, margin = unit(c(5, 0, 0, 0), 'mm'))) +
   theme(axis.text.y = element_text(size = 13)) +
   theme(axis.title.y = element_text(size = rel(1.8), margin = unit(c(0, 5, 0, 0), 'mm'))) +
-  theme(plot.title = element_text(hjust = 0.55, size = rel(2), margin = unit(c(0,0,7,0), 'mm'))) +
+  theme(plot.title = element_text(hjust = 0.55, size = rel(2), margin = unit(c(0, 0, 7, 0), 'mm'))) +
   theme(plot.margin = unit(c(1, 1, 1, 1), 'cm'));
 
 junk <- dev.off();
