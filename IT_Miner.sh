@@ -149,11 +149,11 @@ function run_rnie {
 	# Args
 	local RNIE_PATH="$1"; local MODE="$2";
 	local GENOME="$3"; local BIT_SCORE_THRESH="$4";
-	local PREFIX="$5"; local LOG="$6";
+	local PREFIX="$5"; local COMMAND="$6";
 
 	# Execute command while printing it into log
-	printf "___________________________________________________________\n" >> "$LOG"
-	printf "RNIE COMMAND:\n" >> "$LOG";
+	printf "___________________________________________________________\n" >> "$COMMAND"
+	printf "RNIE COMMAND:\n" >> "$COMMAND";
 	(set -x;
 		# perl "$RNIE_PATH" \
 		# --fastafile "$GENOME" \
@@ -161,8 +161,8 @@ function run_rnie {
 		# --thresh "$BIT_SCORE_THRESH" \
 		# --prefix "$PREFIX" \
 		# 2>"$TMP_TOOL_STDERR"
-	) 2>> "$LOG";
-	printf "\n" >> "$LOG";
+	) 2>> "$COMMAND";
+	printf "\n" >> "$COMMAND";
 
 	# Exit if stderr_file not empty
 	check_tool_stderr "$TMP_TOOL_STDERR" "RNIE/rnie.pl" "$LOG";
@@ -177,16 +177,16 @@ function concatenate {
 	# Args
 	local SCRIPT_PATH="$1";	
 	local GENOME_GFF="$2"; local GENE_GFF="$3";	
-	local OUT_LIST="$4"; local LOG="$5";
+	local OUT_LIST="$4"; local COMMAND="$5";
 
 	# Execute command while printing it into log
-	printf "___________________________________________________________\n" >> "$LOG"
-	printf "CONCATENATE COMMAND:\n" >> "$LOG";
+	printf "___________________________________________________________\n" >> "$COMMAND"
+	printf "CONCATENATE COMMAND:\n" >> "$COMMAND";
 	(set -x; 
 		awk -f "$SCRIPT_PATH" "$GENOME_GFF" "$GENE_GFF" \
 		> "$OUT_LIST" 2>"$TMP_TOOL_STDERR";
-	) 2>> "$LOG";
-	printf "\n" >> "$LOG";
+	) 2>> "$COMMAND";
+	printf "\n" >> "$COMMAND";
 
 
 	# Exit if stderr_file not empty
@@ -203,16 +203,16 @@ function get_genomic_attributes {
 	# Args
 	local SCRIPT_PATH="$1"; local GENOME="$2";
 	local ANNOTATION="$3"; local INPUT_LIST="$4";
-	local OUT_LIST="$5"; local LOG="$6";
+	local OUT_LIST="$5"; local COMMAND="$6";
 
 	# Execute command while printing it into log
-	printf "___________________________________________________________\n" >> "$LOG"
-	printf "GET GENOMIC ATTRIBUTES COMMAND:\n" >> "$LOG";
+	printf "___________________________________________________________\n" >> "$COMMAND"
+	printf "GET GENOMIC ATTRIBUTES COMMAND:\n" >> "$COMMAND";
 	(set -x; 
 		awk -f "$SCRIPT_PATH" "$GENOME" "$ANNOTATION" \
 		"$INPUT_LIST" > "$OUT_LIST" 2>"$TMP_TOOL_STDERR";
-	) 2>> "$LOG"
-	printf "\n" >> "$LOG";
+	) 2>> "$COMMAND"
+	printf "\n" >> "$COMMAND";
 
 	# Exit if stderr_file not empty
 	check_tool_stderr "$TMP_TOOL_STDERR" "02-get_genomic_attributes.awk" "$LOG";
@@ -227,17 +227,17 @@ function deduplicate {
 	# Args
 	local SCRIPT_PATH="$1";
 	local NT_DEV="$2"; local INPUT_LIST="$3";
-	local OUT_LIST="$4"; local LOG="$5";
+	local OUT_LIST="$4"; local COMMAND="$5";
 
 
 	# Execute command while printing it into log
-	printf "___________________________________________________________\n" >> "$LOG"
-	printf "DEDUPLICATE COMMAND:\n" >> "$LOG";
+	printf "___________________________________________________________\n" >> "$COMMAND"
+	printf "DEDUPLICATE COMMAND:\n" >> "$COMMAND";
 	(set -x;
 		awk -v dev=$NT_DEV -f "$SCRIPT_PATH" \
 		"$INPUT_LIST" > "$OUT_LIST" 2>"$TMP_TOOL_STDERR";
-	) 2>> "$LOG";
-	printf "\n" >> "$LOG";
+	) 2>> "$COMMAND";
+	printf "\n" >> "$COMMAND";
 
 	# Exit if stderr_file not empty
 	check_tool_stderr "$TMP_TOOL_STDERR" "03-deduplicate.awk" "$LOG";
@@ -251,16 +251,16 @@ function discard_intra_cds {
 
 	# Args
 	local SCRIPT_PATH="$1"; local INPUT_LIST="$2"; 
-	local OUT_LIST="$3"; local INTRA_LIST="$4"; local LOG="$5";
+	local OUT_LIST="$3"; local INTRA_LIST="$4"; local COMMAND="$5";
 
 	# Execute command while printing it into log
-	printf "___________________________________________________________\n" >> "$LOG"
-	printf "DISCARD ITs INTRA CDS COMMAND:\n" >> "$LOG";
+	printf "___________________________________________________________\n" >> "$COMMAND"
+	printf "DISCARD ITs INTRA CDS COMMAND:\n" >> "$COMMAND";
 	(set -x;
 		awk -v INTRA_FILE="$INTRA_LIST" -f "$SCRIPT_PATH" \
 		"$INPUT_LIST" > "$OUT_LIST" 2>"$TMP_TOOL_STDERR";
-	) 2>> "$LOG";
-	printf "\n" >> "$LOG";
+	) 2>> "$COMMAND";
+	printf "\n" >> "$COMMAND";
 
 	# Exit if stderr_file not empty
 	check_tool_stderr "$TMP_TOOL_STDERR" "04-discard_intra_cds.awk" "$LOG";
@@ -274,16 +274,16 @@ function find_complements {
 
 	# Args
 	local SCRIPT_PATH="$1"; local INPUT_LIST="$2"; 
-	local OUT_LIST="$3"; local LOG="$4"; local ID_PREFIX="${5:-""}";
+	local OUT_LIST="$3"; local COMMAND="$4"; local ID_PREFIX="${5:-""}";
 
 	# Execute command while printing it into log
-	printf "___________________________________________________________\n" >> "$LOG"
-	printf "FIND REVERSE COMPLEMENTARY ITS:\n" >> "$LOG";
+	printf "___________________________________________________________\n" >> "$COMMAND"
+	printf "FIND REVERSE COMPLEMENTARY ITS:\n" >> "$COMMAND";
 	(set -x;
 		awk -v id_prefix="$ID_PREFIX" -f "$SCRIPT_PATH" \
 		"$INPUT_LIST" > "$OUT_LIST" 2>"$TMP_TOOL_STDERR";
-	) 2>> "$LOG";
-	printf "\n" >> "$LOG";
+	) 2>> "$COMMAND";
+	printf "\n" >> "$COMMAND";
 
 	# Exit if stderr_file not empty
 	check_tool_stderr "$TMP_TOOL_STDERR" "05-find_complements.awk" "$LOG";
@@ -353,20 +353,20 @@ function fake_complements {
 	local FAKE_SCRIPT_PATH="$1"; local GENO_SCRIPT_PATH="$2";
 	local FIND_COMPL_SCRIPT_PATH="$3"; local GENOME="$4";
 	local ANNOTATION="$5"; local INPUT_LIST="$6";
-	local OUT_LIST="$7"; local LOG="$8";
+	local OUT_LIST="$7"; local COMMAND="$8";
 	
 	#######################################################
 	# Step 1: Fake complement coordinates
 	#######################################################
 	TMP_FAKE_OUT_LIST=$(mktemp);
 	# Execute command while printing it into log
-	printf "___________________________________________________________\n" >> "$LOG"
-	printf "FAKE COMPLEMENTS:\n" >> "$LOG";
+	printf "___________________________________________________________\n" >> "$COMMAND"
+	printf "FAKE COMPLEMENTS:\n" >> "$COMMAND";
 	(set -x;
 		awk -f "$FAKE_SCRIPT_PATH" "$INPUT_LIST" \
 		> "$TMP_FAKE_OUT_LIST" 2>"$TMP_TOOL_STDERR";
-	) 2>> "$LOG";
-	printf "\n" >> "$LOG";
+	) 2>> "$COMMAND";
+	printf "\n" >> "$COMMAND";
 
 	# Exit if stderr_file not empty
 	check_tool_stderr "$TMP_TOOL_STDERR" "06-fake_complements.awk" "$LOG";
@@ -378,13 +378,13 @@ function fake_complements {
 	TMP_GENO_OUT_LIST=$(mktemp);
 	get_genomic_attributes "$GENO_SCRIPT_PATH" \
 		"$GENOME" "$ANNOTATION" \
-		"$TMP_FAKE_OUT_LIST" "$TMP_GENO_OUT_LIST" "$LOG";
+		"$TMP_FAKE_OUT_LIST" "$TMP_GENO_OUT_LIST" "$COMMAND";
 
 	#######################################################
 	# Step 3: Get info on the couples formed by the fake complements
 	#######################################################
 	find_complements "$FIND_COMPL_SCRIPT_PATH" \
-	"$TMP_GENO_OUT_LIST" "$OUT_LIST" "$LOG" "FakeCouple-";
+	"$TMP_GENO_OUT_LIST" "$OUT_LIST" "$COMMAND" "FakeCouple-";
 
 	rm "$TMP_FAKE_OUT_LIST" "$TMP_GENO_OUT_LIST";
 }
@@ -398,16 +398,16 @@ function compute_cutoff {
 	# Args
 	local SCRIPT_PATH="$1"; local INPUT_LIST="$2";
 	local CUTOFF="$3"; local OUTDIR="$4"; 
-	local OUTFILE="$5"; local LOG="$6";
+	local OUTFILE="$5"; local LOG="$6"; local COMMAND="$7";
 
-	printf "___________________________________________________________\n" >> "$LOG"
-	printf "COMPUTE CUTOFF:\n" >> "$LOG";
+	printf "___________________________________________________________\n" >> "$COMMAND"
+	printf "COMPUTE CUTOFF:\n" >> "$COMMAND";
 
 	(set -x;
 		Rscript "$SCRIPT_PATH" --table "$INPUT_LIST" \
 		--cutoff "$CUTOFF" --fig_dir "$OUTDIR" --out_file "$OUTFILE" \
 		| tee -a "$LOG" 2>"$TMP_TOOL_STDERR";
-	) 2>> "$LOG";
+	) 2>> "$COMMAND";
 
 	# Exit if stderr_file not empty
 	check_tool_stderr "$TMP_TOOL_STDERR" "07-compute_cutoff.R" "$LOG";
@@ -421,15 +421,15 @@ function filter {
 
 	# Args
 	local SCRIPT_PATH="$1"; local INPUT_LIST="$2";
-	local OUT_LIST="$3"; local CUTOFF="$4"; local LOG="$5";
+	local OUT_LIST="$3"; local CUTOFF="$4"; local COMMAND="$5";
 
-	printf "___________________________________________________________\n" >> "$LOG"
-	printf "FILTER:\n" >> "$LOG";
+	printf "___________________________________________________________\n" >> "$COMMAND"
+	printf "FILTER:\n" >> "$COMMAND";
 
 	(set -x;
 		awk -v cutoff=$CUTOFF -f "$SCRIPT_PATH" \
 		"$INPUT_LIST" > "$OUT_LIST" 2>"$TMP_TOOL_STDERR";
-	) 2>> "$LOG";
+	) 2>> "$COMMAND";
 
 	# Exit if stderr_file not empty
 	check_tool_stderr "$TMP_TOOL_STDERR" "08-filter.awk" "$LOG";
@@ -514,6 +514,8 @@ check_gff "$ANNOTATION";
 
 printf "Parameters Check was successful!\n\n";
 
+COMMAND="$OUTPUT_DIR"/"commands.log"
+
 ###########################################################
 ###### II.4 Print pipeline parameters #####################
 ###########################################################
@@ -549,7 +551,7 @@ export RNIE=`dirname "$RNIE_PATH"`;
 printf " * Genome (Specific) Mode\n" | tee -a "$LOG";
 run_rnie "$RNIE_PATH" "genome" \
 	"$GENOME" "$BIT_SCORE_THRESH" \
-	"$RNIE_GENOME_DIR"/"$PREFIX" "$LOG";
+	"$RNIE_GENOME_DIR"/"$PREFIX" "$COMMAND";
 RNIE_GENOME_OUT_GFF="$RNIE_GENOME_DIR"/"$PREFIX""-genomeMode-rnie.gff";
 
 N_TERM=$(get_nb_term "$RNIE_GENOME_OUT_GFF" 0);
@@ -559,7 +561,7 @@ printf "   ** ""$N_TERM"" ITs predicted!\n" | tee -a "$LOG";
 printf " * Gene (Sensitive) Mode\n" | tee -a "$LOG";
 run_rnie "$RNIE_PATH" "gene" \
 	"$GENOME" "$BIT_SCORE_THRESH" \
-	"$RNIE_GENE_DIR"/"$PREFIX" "$LOG";
+	"$RNIE_GENE_DIR"/"$PREFIX" "$COMMAND";
 RNIE_GENE_OUT_GFF="$RNIE_GENE_DIR"/"$PREFIX""-geneMode-rnie.gff";
 
 N_TERM=$(get_nb_term "$RNIE_GENE_OUT_GFF" 0);
@@ -576,7 +578,7 @@ CONC_OUT="$STEPS_DIR"/"Step01-Concatenated_list.csv";
 
 concatenate "$CONC_SCRIPT_PATH" \
 	"$RNIE_GENOME_OUT_GFF" "$RNIE_GENE_OUT_GFF" \
-	"$CONC_OUT" "$LOG";
+	"$CONC_OUT" "$COMMAND";
 printf "   ** "$(get_nb_term "$CONC_OUT")" ITs retained!\n" | tee -a "$LOG";
 
 ###########################################################
@@ -589,7 +591,7 @@ GENOMIC_OUT="$STEPS_DIR"/"Step02-Genomic_attributes_list.csv";
 
 get_genomic_attributes "$GENO_SCRIPT_PATH" \
 	"$GENOME" "$ANNOTATION" \
-	"$CONC_OUT" "$GENOMIC_OUT" "$LOG";
+	"$CONC_OUT" "$GENOMIC_OUT" "$COMMAND";
 
 ###########################################################
 # VI. Deduplicate
@@ -602,7 +604,7 @@ DEDUP_SCRIPT_PATH="$SCRIPT_PATH"/"Subscripts"/"03-deduplicate.awk";
 DEDUP_OUT="$STEPS_DIR"/"Step03-Deduplicated_list.csv";
 
 deduplicate "$DEDUP_SCRIPT_PATH" $NT_DEV \
-	"$GENOMIC_OUT" "$DEDUP_OUT" "$LOG";
+	"$GENOMIC_OUT" "$DEDUP_OUT" "$COMMAND";
 
 printf "   ** "$(get_nb_term "$DEDUP_OUT")" ITs retained!\n" | tee -a "$LOG";
 
@@ -617,7 +619,7 @@ DISCARD_INTRA_OUT="$STEPS_DIR"/"Step04-Without_intra_cds_list.csv";
 LIST_INTRA="$STEPS_DIR"/"Step04-Only_intra_cds_list.csv";
 
 discard_intra_cds "$DISCARD_INTRA_SCRIPT_PATH" \
-	"$DEDUP_OUT" "$DISCARD_INTRA_OUT" "$LIST_INTRA" "$LOG";
+	"$DEDUP_OUT" "$DISCARD_INTRA_OUT" "$LIST_INTRA" "$COMMAND";
 
 printf "   ** "$(get_nb_term "$DISCARD_INTRA_OUT")" ITs retained!\n" | tee -a "$LOG";
 
@@ -631,7 +633,7 @@ FIND_COMPL_SCRIPT_PATH="$SCRIPT_PATH"/"Subscripts"/"05-find_complements.awk";
 FIND_COMPL_OUT="$STEPS_DIR"/"Step05-With_complements_list.csv";
 
 find_complements "$FIND_COMPL_SCRIPT_PATH" \
-	"$DISCARD_INTRA_OUT" "$FIND_COMPL_OUT" "$LOG";
+	"$DISCARD_INTRA_OUT" "$FIND_COMPL_OUT" "$COMMAND";
 
 stats_complements "$FIND_COMPL_OUT" "$LOG";
 
@@ -647,7 +649,7 @@ FAKE_OUT="$STEPS_DIR"/"Step06-With_fake_complements_list.csv";
 fake_complements "$FAKE_SCRIPT_PATH" \
 	"$GENO_SCRIPT_PATH" "$FIND_COMPL_SCRIPT_PATH" \
 	"$GENOME" "$ANNOTATION" \
-	"$FIND_COMPL_OUT" "$FAKE_OUT" "$LOG";
+	"$FIND_COMPL_OUT" "$FAKE_OUT" "$COMMAND";
 
 ###########################################################
 # X. Find cut off distance to discard unlikely complements
@@ -659,7 +661,7 @@ CUTOFF_SCRIPT_PATH="$SCRIPT_PATH"/"Subscripts"/"07-compute_cutoff.R";
 CUTOFF_OUT="$STEPS_DIR"/"Step07-Cutoff.txt"
 
 compute_cutoff "$CUTOFF_SCRIPT_PATH" "$FAKE_OUT" \
-	"$CUTOFF" "$FIG_DIR" "$CUTOFF_OUT" "$LOG";
+	"$CUTOFF" "$FIG_DIR" "$CUTOFF_OUT" "LOG" "$COMMAND";
 
 read -r CUTOFF_DISTANCE < "$CUTOFF_OUT";
 
@@ -674,13 +676,15 @@ TMP_FILTER_OUT=$(mktemp);
 FILTER_OUT="$STEPS_DIR"/"Step08-Filtered_list.csv";
 
 filter "$FILTER_SCRIPT_PATH" "$DISCARD_INTRA_OUT" \
-	"$TMP_FILTER_OUT" "$CUTOFF_DISTANCE" "$LOG";
+	"$TMP_FILTER_OUT" "$CUTOFF_DISTANCE" "$COMMAND";
 
 printf "   ** "$(get_nb_term "$TMP_FILTER_OUT")" ITs retained!\n" | tee -a "$LOG";
 
 printf "\n .... ) Reinitializing stats on reverse complementary ITs\n"
 
 find_complements "$FIND_COMPL_SCRIPT_PATH" \
-	"$TMP_FILTER_OUT" "$FILTER_OUT" "$LOG";
+	"$TMP_FILTER_OUT" "$FILTER_OUT" "$COMMAND";
 
 stats_complements "$FILTER_OUT" "$LOG";
+
+rm "$TMP_FILTER_OUT";
