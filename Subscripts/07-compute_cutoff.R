@@ -113,7 +113,7 @@ compute_cutoff <- function(likely_distances, unlikely_distances)
 get_cutoff <- function(tab, idxs, cutoff_method)
 {
   # Initialization
-  distance = as.numeric(tab$`termStart-UpGeneEnd`);
+  distance = as.numeric(tab$`Dist. upSTOPcodon-ITfunctionalStart`);
   outcome = vector(mode = "logical", length = 8); outcome <- TRUE;
   likely_idxs <- unlikely_idxs <- vector(mode = 'logical', length = nrow(tab));
   
@@ -230,7 +230,7 @@ args <- get_args(); if(is.null(args$table)) { args <- load_test_args(); }
 out_file <<- args$out_file;
 
 tab <- fread(args$table, sep = '\t', header = TRUE); 
-tab <- tab[`termStart-UpGeneEnd` > 0]; 
+tab <- tab[`Dist. upSTOPcodon-ITfunctionalStart` > 0]; 
 
 idxs <- get_index(tab);
 
@@ -246,7 +246,7 @@ filename <- file.path(args$fig_dir, "1-Boxplot_distance_from_upgene_by_complemen
 svg(filename, width = 16, height = 10);
 
 bp_tab <- data.table(class = tab$class, 
-                     distance = tab$`termStart-UpGeneEnd`, 
+                     distance = tab$`Dist. upSTOPcodon-ITfunctionalStart`, 
                      group = tab$`Compl. Genomic Class`);
 ymax <- max(bp_tab$`distance`);
 cutoff_line <- data.frame(x = c(0,5), y = cutoff_out$cutoff, Cutoff = factor(paste('\n', cutoff_out$cutoff, 'nt\n')));

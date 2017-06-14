@@ -186,8 +186,8 @@ file_idx == 3 && FNR == 1 {
 
 	if(NF == 5) {
 		header = $0 "\tIT Seq\t" \
-			"UpGene Name\tUpGene Start\tUpGene Stop\ttermStart-UpGeneEnd\t" \
-			"DwGene Name\tDwGene Start\tDwGene Stop\tDwGeneStart-termEnd";
+			"UpGene Name\tUpGene Start\tUpGene End\tDist. upSTOPcodon-ITfunctionalStart\t" \
+			"DwGene Name\tDwGene Start\tDwGene End\tDist. ITfunctionalEnd-dwSTARTcodon";
 	} else {
 		header = $0;
 	}
