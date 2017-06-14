@@ -514,7 +514,7 @@ check_gff "$ANNOTATION";
 
 printf "Parameters Check was successful!\n\n";
 
-COMMAND="$OUTPUT_DIR"/"commands.log"
+COMMAND="$OUTPUT_DIR"/"commands.log"; > "$COMMAND";
 
 ###########################################################
 ###### II.4 Print pipeline parameters #####################
@@ -661,7 +661,7 @@ CUTOFF_SCRIPT_PATH="$SCRIPT_PATH"/"Subscripts"/"07-compute_cutoff.R";
 CUTOFF_OUT="$STEPS_DIR"/"Step07-Cutoff.txt"
 
 compute_cutoff "$CUTOFF_SCRIPT_PATH" "$FAKE_OUT" \
-	"$CUTOFF" "$FIG_DIR" "$CUTOFF_OUT" "LOG" "$COMMAND";
+	"$CUTOFF" "$FIG_DIR" "$CUTOFF_OUT" "$LOG" "$COMMAND";
 
 read -r CUTOFF_DISTANCE < "$CUTOFF_OUT";
 
