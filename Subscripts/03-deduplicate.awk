@@ -1,7 +1,7 @@
 #!/usr/bin/awk
 
 function abs(x) {
-	return v < 0 ? -x : x
+	return x < 0 ? -x : x
 }
 
 BEGIN {
