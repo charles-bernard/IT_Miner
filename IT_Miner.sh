@@ -103,6 +103,7 @@ function check_file {
 	# Check if file exists
 	local FILE="$1";
 	if [ ! -f "$FILE" ]; then
+		echo "$FILE"
 		error_exit \
 		"The file \"$FILE\" does not exist!";
 	fi
@@ -406,7 +407,7 @@ function compute_cutoff {
 	(set -x;
 		Rscript "$SCRIPT_PATH" --table "$INPUT_LIST" \
 		--cutoff "$CUTOFF" --fig_dir "$OUTDIR" --out_file "$OUTFILE" \
-		| tee -a "$LOG" 2>"$TMP_TOOL_STDERR";
+		2> "$TMP_TOOL_STDERR" | tee -a "$LOG" ;
 	) 2>> "$COMMAND";
 
 	# Exit if stderr_file not empty
@@ -444,7 +445,7 @@ TEMP=`getopt \
 	-o \
 		o:g:a:c:l:: \
 	--long \
-		output-dir:,rnie-path:,genome:,annotation:,cutoff:log:: \
+		output-dir:,rnie-path:,genome:,annotation:,cutoff:,log:: \
 	-n 'report' -- "$@"`;
 eval set -- "$TEMP";
 
@@ -506,7 +507,7 @@ FIG_DIR="$OUTPUT_DIR"/"Figures"; mkdir -p "$FIG_DIR";
 check_cutoff "$CUTOFF";
 check_log "$LOG"; > "$LOG";
 
-INPUT_FILES=("$RNIE_PATH" "$GENOME" "$ANNOTATION" "$LOG");
+INPUT_FILES=("$RNIE_PATH" "$GENOME" "$ANNOTATION");
 for FILE in ${INPUT_FILES[@]}; do check_file "$FILE"; done
 
 check_fasta "$GENOME";

@@ -24,11 +24,11 @@ load_test_args <- function()
   # args$table <- '/home/charles/clones/IT_Miner/Out/Bacillus_subtilis/ASM904v1/Output_of_each_step/Step06-With_fake_complements_list.csv';
   # args$fig_dir <- '/home/charles/clones/IT_Miner/Out/Bacillus_subtilis/ASM904v1/Figures';
   
-  # args$table <- '/home/charles/clones/IT_Miner/Out/Escherichia_coli/U00096.2/Output_of_each_step/Step06-With_fake_complements_list.csv';
-  # args$fig_dir <- '/home/charles/clones/IT_Miner/Out/Escherichia_coli/U00096.2/Figures';
+  args$table <- '/home/charles/clones/IT_Miner_2/Out/Escherichia_coli/U00096.2/Output_of_each_step/Step06-Without_fake_intra_cds_list.csv';
+  args$fig_dir <- '/home/charles/clones/IT_Miner_2/Out/Escherichia_coli/U00096.2/Figures';
   
-  args$table <- '/home/charles/clones/IT_Miner/Out/Salmonella_enterica/Output_of_each_step/Step06-With_fake_complements_list.csv';
-  args$fig_dir <- '/home/charles/clones/IT_Miner/Out/Salmonella_enterica/Figures';
+  # args$table <- '/home/charles/clones/IT_Miner/Out/Salmonella_enterica/Output_of_each_step/Step06-With_fake_complements_list.csv';
+  # args$fig_dir <- '/home/charles/clones/IT_Miner/Out/Salmonella_enterica/Figures';
   
   args$cutoff <- 'conservative';
   args$out_file <- '/home/charles/cutoff.txt'
@@ -68,6 +68,24 @@ get_index <- function(tab)
 }
 
 
+log_tab <- function(tab) 
+{
+  tab$`Dist. upSTOPcodon-ITfunctionalStart` <- as.numeric(tab$`Dist. upSTOPcodon-ITfunctionalStart`);
+  distance <- tab$`Dist. upSTOPcodon-ITfunctionalStart`;
+  
+  pos_idxs <- distance > 0; neg_idxs <- distance < 0;
+  tab[pos_idxs]$`Dist. upSTOPcodon-ITfunctionalStart` <- log10(distance[pos_idxs]);
+  tab[neg_idxs]$`Dist. upSTOPcodon-ITfunctionalStart` <- -log10(abs(distance[neg_idxs]));
+  
+  # Get rid of fake complements which are before the stop codon 
+  # Most of them are indeed way too far to be realistic
+  fake <- tab$`RNIE Mode` == 'Fake'; rm_idxs <- fake == neg_idxs & fake == TRUE;
+  tab <- tab[!rm_idxs];
+  
+  return(tab);
+}
+
+
 compare_distrib <- function(x, y, alternative = 'inequal', allowed_fluctuation = 0.25)
 {
   # NB: To compare distributions, the KS test is not chosen because too sensitive
@@ -75,10 +93,10 @@ compare_distrib <- function(x, y, alternative = 'inequal', allowed_fluctuation =
   # between first quartile, median and third quartile... Kernel tests are too 
   # heavy in term of implementation for what we really want here. 
   
-  key_perc_x <- log10(quantile(x, seq(from = 0.25, to = 0.75, by = 0.25)));
-  key_perc_y <- log10(quantile(y, seq(from = 0.25, to = 0.75, by = 0.25)));
+  key_perc_x <- quantile(x, seq(from = 0.25, to = 0.75, by = 0.25));
+  key_perc_y <- quantile(y, seq(from = 0.25, to = 0.75, by = 0.25));
   diff <- key_perc_x - key_perc_y;
-  
+
   if(alternative == 'inequal') {
     if(any(abs(diff) > allowed_fluctuation)) {
       return(TRUE);
@@ -104,7 +122,7 @@ compute_cutoff <- function(likely_distances, unlikely_distances)
   
   diff <- abs(asc_perc - des_perc);
   cutoff_idx <- which.min(diff);
-  cutoff <- mean(c(asc_perc[cutoff_idx], des_perc[cutoff_idx]));
+  cutoff <- mean(c(10^asc_perc[cutoff_idx], 10^des_perc[cutoff_idx]));
   
   return(round(cutoff));
 }
@@ -230,7 +248,7 @@ args <- get_args(); if(is.null(args$table)) { args <- load_test_args(); }
 out_file <<- args$out_file;
 
 tab <- fread(args$table, sep = '\t', header = TRUE); 
-tab <- tab[`Dist. upSTOPcodon-ITfunctionalStart` > 0]; 
+tab <- log_tab(tab); 
 
 idxs <- get_index(tab);
 
@@ -249,7 +267,7 @@ bp_tab <- data.table(class = tab$class,
                      distance = tab$`Dist. upSTOPcodon-ITfunctionalStart`, 
                      group = tab$`Compl. Genomic Class`);
 ymax <- max(bp_tab$`distance`);
-cutoff_line <- data.frame(x = c(0,5), y = cutoff_out$cutoff, Cutoff = factor(paste('\n', cutoff_out$cutoff, 'nt\n')));
+cutoff_line <- data.frame(x = c(0,5), y = log10(as.numeric(cutoff_out$cutoff)), Cutoff = factor(paste('\n', cutoff_out$cutoff, 'nt\n')));
 
 ggplot(bp_tab, aes(x = class, y = distance)) +
   ggtitle('Distance of IT from upstream gene') +
@@ -263,16 +281,16 @@ ggplot(bp_tab, aes(x = class, y = distance)) +
                               'FAKE:\nFake reverse complement\n to single IT',
                               'LEAST:\nIT closer from\nits upstream gene\nthan its complement is',
                               'MOST:\nIT farther from\nits upstream gene\nthan its complement is')) +
-  scale_y_log10(breaks = trans_breaks('log10', function(x) 10^x), labels = trans_format('log10', math_format(10^.x))) +
+  scale_y_continuous(breaks = seq(from = -1, to = 4, by = 1), labels = paste("10^", seq(from = -1, to = 4, by = 1), sep="")) +
   annotation_logticks(sides = 'l') +
   scale_colour_discrete(name = "Genomic Context\n",
                         labels = c('\nCo-directionality\n--->_||_--->\n',
                                    '\nConvergence\n--->_||_<---\n',
                                    '\nDivergence\n<---_||_--->\n')) +
-  annotate('text', x = 1, y = as.numeric(ymax * 1.4), label = paste('N=', nrow(tab[idxs$pred_single]))) +
-  annotate('text', x = 2, y = ymax * 1.4, label = paste('N=', nrow(tab[idxs$fake]), '\n', nrow(tab[idxs$pred_single])-nrow(tab[idxs$fake]), 'discarded (because intraCDS)')) +
-  annotate('text', x = 3, y = ymax * 1.4, label = paste('N=', nrow(tab[idxs$least]))) +
-  annotate('text', x = 4, y = ymax * 1.4, label = paste('N=', nrow(tab[idxs$most]))) +
+  annotate('text', x = 1, y = ymax * 1.1, label = paste('N=', nrow(tab[idxs$pred_single]))) +
+  annotate('text', x = 2, y = ymax * 1.1, label = paste('N=', nrow(tab[idxs$fake]), '\n', nrow(tab[idxs$pred_single])-nrow(tab[idxs$fake]), 'discarded (because intraCDS)')) +
+  annotate('text', x = 3, y = ymax * 1.1, label = paste('N=', nrow(tab[idxs$least]))) +
+  annotate('text', x = 4, y = ymax * 1.1, label = paste('N=', nrow(tab[idxs$most]))) +
   geom_vline(xintercept = 2.5, size = 1, linetype = 'dashed') +
   geom_line(aes(x, y, linetype = Cutoff), cutoff_line, size = 2, colour = 'red') +
   theme(legend.title = element_text(size = rel(1.5)), legend.text = element_text(size = rel(1.2))) +

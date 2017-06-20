@@ -18,7 +18,7 @@ NR > 1 {
 	upDist = $10;
 	dwDist = $14;
 
-	if((upDist == "" || upDist > 0) && (dwDist == "" || dwDist > 0)) {
+	if((upDist == "" || upDist > -12) && (dwDist == "" || dwDist > -12)) {
 		printf("\n%s", $0);
 	} else {
 		printf("\n%s", $0) > INTRA_FILE;

@@ -11,13 +11,15 @@ function free_dictionary(id,  s,  k,  strand) {
 	}
 }
 
+
 function remove_grp(end_idx, n,  i) {
 	for(i = end_idx - n + 1; i <= end_idx; i++) {
 		delete id_grp[i];
 	}
 }
 
-function get_overlap_perc(ref_start, ref_end, compl_start, compl_end) {
+
+function get_overlap(ref_start, ref_end, compl_start, compl_end) {
 	# The overlap start is defined as max('ref_start', 'compl_start')
 	if(ref_start >= compl_start) {
 		overlap_start = ref_start;
@@ -36,8 +38,46 @@ function get_overlap_perc(ref_start, ref_end, compl_start, compl_end) {
 	overlap_len = overlap_end - overlap_start + 1;
 	overlap_perc = overlap_len / ref_len * 100;
 
-	return overlap_perc;
+	return overlap_start "\t" overlap_end "\t" overlap_perc;
 }
+
+
+function get_palindromic_perc(ref_seq, compl_seq,  i,  j) {
+	ref_len = length(ref_seq);
+	compl_len = length(compl_seq);
+
+	if(ref_len >= compl_len) {
+		long_len = ref_len;
+		short_len = compl_len;
+		long_seq = ref_seq;
+		short_seq = compl_seq; 
+	} else {
+		long_len = compl_len;
+		short_len = ref_len;
+		long_seq = compl_seq;
+		short_seq = ref_seq;
+	}
+
+	# find best alignment between the two seq and score the match
+	best_n_match = 0;
+	for(i = 1; i <= long_len - short_len + 1; i++) {
+		cur_n_match = 0;
+		for(j = i; j < i + short_len; j++) {
+			cur_long_nt = substr(long_seq, j, 1);
+			cur_short_nt = substr(short_seq, j - i + 1, 1);
+			if(cur_long_nt == cur_short_nt) {
+				cur_n_match++;
+			}
+		} 
+		if(cur_n_match > best_n_match) {
+			best_n_match = cur_n_match;
+		}
+	}
+
+	palindromic_perc = best_n_match / short_len * 100;
+	return palindromic_perc;
+}
+
 
 function get_best_complement(grp_id, idx) {
 	ref_prefix = prefix[idx];
@@ -47,6 +87,7 @@ function get_best_complement(grp_id, idx) {
 	ref_start = ref_fields[1];
 	ref_end = ref_fields[2];
 	ref_strand = ref_fields[3];
+	ref_seq = ref_fields[6];
 
 	# These variables are needed for further comparisons
 	best_compl_idx = "";
@@ -63,18 +104,24 @@ function get_best_complement(grp_id, idx) {
 		compl_start = compl_fields[1];
 		compl_end = compl_fields[2];
 		compl_bit = compl_fields[5];
+		compl_seq = compl_fields[6];
 
 		# best complement is the one which offers the best overlap
-		overlap = get_overlap_perc(ref_start, ref_end, compl_start, compl_end);
+		overlap_info = get_overlap(ref_start, ref_end, compl_start, compl_end);
+		split(overlap_info, overlap_fields, "\t");
+		overlap = overlap_fields[3];
 		if(overlap > best_overlap) {
 			best_compl_idx = compl_idx;
 			best_compl_start = compl_start;
 			best_compl_end = compl_end;
+			best_compl_seq = compl_seq;
 			best_compl_bit = compl_bit;
 			best_overlap = overlap;
 		}
 		k++;
 	}
+
+	palindromic_perc = get_palindromic_perc(ref_seq, best_compl_seq);
 
 	# Write down some basic info on the reverse complement
 	compl_info = "Start=" best_compl_start ";End=" best_compl_end \
@@ -83,7 +130,7 @@ function get_best_complement(grp_id, idx) {
 	# N.B: Keep in mind that the notion of best reverse compl is 
 	# not necessarily reciprocal btw two complements
 
-	return best_compl_idx "\t" compl_info;
+	return best_compl_idx "\t" compl_info "\t" palindromic_perc;
 }
 
 function get_suffix(ref_i, compl_i) {
@@ -184,7 +231,7 @@ BEGIN {
 NR == 1 {
 	# If input file has no line that has been searched before, the new header is stored 
 	if(NF == 14) {
-		header = $0 "\tID complementary couple\tCompl. Dist. Class\tCompl. Genomic Class\tInfo on the rev. compl.";
+		header = $0 "\tID complementary couple\tCompl. Dist. Class\tCompl. Genomic Class\tInfo on the rev. compl.\tPalindromic Percentage of Overlap";
 	} else {
 		header = $0;
 	}
@@ -297,12 +344,13 @@ END {
 			split(best_compl_output, fields, "\t");
 			compl_i = fields[1];
 			compl_info = fields[2];
+			palindromic_perc = fields[3];
 
 
 			suffix = get_suffix(i, compl_i);
-			line = prefix[i] "\t" id_prefix id_grp[i] "\t" suffix "\t" compl_info;
+			line = prefix[i] "\t" id_prefix id_grp[i] "\t" suffix "\t" compl_info "\t" palindromic_perc;
 		} else {
-			line = prefix[i] "\t\t\t\t\t";
+			line = prefix[i] "\t\t\t\t\t\t";
 		}
 
 		printf("\n%s", line);
