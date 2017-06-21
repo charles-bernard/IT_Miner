@@ -1,7 +1,7 @@
 #!/usr/bin/awk
 
-# This script generate a list containging all records from the reference list,
-# and the match records from the predicted list
+# This script generates a list containing all records from the reference list,
+# and the matched records from the predicted list
 
 # Usage example:
 # awk -f left_join_predicted_list_on_reference_list.awk ref.csv pred.csv > left_join.csv
@@ -10,26 +10,26 @@
 function abs(v) {return v < 0 ? -v : v}
 
 
-function compare_locations(ref_start, ref_end, rnie_start, rnie_end, strand,\
+function compare_locations(ref_start, ref_end, pred_start, pred_end, strand,\
   overlap_perc,  distance,  ref_len) {
 
 	# Make the "-" strand position negative, in order to make the function
 	# treat the two strands as a single case 
 	if(strand == "-") {
 		old_ref_start = ref_start;
-		old_rnie_start = rnie_start;
+		old_pred_start = pred_start;
 		ref_start = ref_end * (-1);
 		ref_end = old_ref_start * (-1);
-		rnie_start = rnie_end * (-1);
-		rnie_end = old_rnie_start * (-1);
+		pred_start = pred_end * (-1);
+		pred_end = old_pred_start * (-1);
 	}
 
-	diff_start = rnie_start - ref_start;
-	diff_end = rnie_end - ref_end;
+	diff_start = pred_start - ref_start;
+	diff_end = pred_end - ref_end;
 	
 
 	if(diff_start >= 0) {
-		overlap_start = rnie_start;
+		overlap_start = pred_start;
 	} else {
 		overlap_start = ref_start;
 	}
@@ -37,15 +37,15 @@ function compare_locations(ref_start, ref_end, rnie_start, rnie_end, strand,\
 	if(diff_end >= 0) {
 		overlap_end = ref_end;
 	} else {
-		overlap_end = rnie_end;
+		overlap_end = pred_end;
 	}
 
 	ref_len = ref_end - ref_start + 1;
 	overlap_len = overlap_end - overlap_start + 1;
 
-	if(rnie_start <= ref_end && rnie_end >= ref_start) {
+	if(pred_start <= ref_end && pred_end >= ref_start) {
 		overlap_perc = overlap_len / ref_len * 100;
-	} else if ( rnie_start <= ref_end && rnie_end < ref_start ) {
+	} else if ( pred_start <= ref_end && pred_end < ref_start ) {
 		overlap_len = 0;
 		overlap_perc = 0;
 	} else {
