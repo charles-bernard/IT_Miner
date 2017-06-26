@@ -82,9 +82,9 @@ function check_outdir {
 function check_cutoff {
 	CUTOFF="$1";
 	if [ ! "$CUTOFF" ]; then
-		CUTOFF="conservative";
+		CUTOFF="inclusive";
 		printf "You did not mention a cutoff method.\n";
-		printf "\tA conservative method will be used by default.\n";
+		printf "\tAn inclusive method will be used by default.\n";
 	fi
 }
 
@@ -287,7 +287,7 @@ function find_complements {
 	printf "\n" >> "$COMMAND";
 
 	# Exit if stderr_file not empty
-	check_tool_stderr "$TMP_TOOL_STDERR" "05-find_complements.awk" "$LOG";
+	check_tool_stderr "$TMP_TOOL_STDERR" "05-identify_complements.awk" "$LOG";
 }
 
 function stats_complements {
@@ -434,6 +434,29 @@ function filter {
 
 	# Exit if stderr_file not empty
 	check_tool_stderr "$TMP_TOOL_STDERR" "08-filter.awk" "$LOG";
+}
+
+###########################################################
+###### I.13 Resolve overlaps ##############################
+###########################################################
+function resolve_overlaps {
+	# Discard intra cds ITs
+
+	# Args
+	local SCRIPT_PATH="$1"; local INPUT_LIST="$2"; 
+	local OUT_LIST="$3"; local COMMAND="$4";
+
+	# Execute command while printing it into log
+	printf "___________________________________________________________\n" >> "$COMMAND"
+	printf "RESOLVE OVERLAPS COMMAND:\n" >> "$COMMAND";
+	(set -x;
+		awk -v dev=5 -f "$SCRIPT_PATH" \
+		"$INPUT_LIST" > "$OUT_LIST" 2>"$TMP_TOOL_STDERR";
+	) 2>> "$COMMAND";
+	printf "\n" >> "$COMMAND";
+
+	# Exit if stderr_file not empty
+	check_tool_stderr "$TMP_TOOL_STDERR" "09-resolve_overlaps.awk" "$LOG";
 }
 
 ###########################################################
@@ -630,7 +653,7 @@ printf "   ** "$(get_nb_term "$DISCARD_INTRA_OUT")" ITs retained!\n" | tee -a "$
 printf "###########################################################\n" | tee -a "$LOG"
 printf "STEP 5) Find reverse complementary ITs\n" | tee -a "$LOG";
 
-FIND_COMPL_SCRIPT_PATH="$SCRIPT_PATH"/"Subscripts"/"05-find_complements.awk";
+FIND_COMPL_SCRIPT_PATH="$SCRIPT_PATH"/"Subscripts"/"05-identify_complements.awk";
 FIND_COMPL_OUT="$STEPS_DIR"/"Step05-With_complements_list.csv";
 
 find_complements "$FIND_COMPL_SCRIPT_PATH" \
@@ -687,5 +710,18 @@ find_complements "$FIND_COMPL_SCRIPT_PATH" \
 	"$TMP_FILTER_OUT" "$FILTER_OUT" "$COMMAND";
 
 stats_complements "$FILTER_OUT" "$LOG";
-
 rm "$TMP_FILTER_OUT";
+
+###########################################################
+# XII. Resolve Overlapping ITs (partial duplicates)
+###########################################################
+printf "###########################################################\n" | tee -a "$LOG"
+printf "STEP 9) Resolve overlapping ITs\n" | tee -a "$LOG"; 
+
+RESOLVE_OVERLAPS_SCRIPT_PATH="$SCRIPT_PATH"/"Subscripts"/"09-resolve_overlaps.awk";
+RESOLVE_OVERLAPS_OUT="$STEPS_DIR"/"Step09-Resolved_overlaps_list.txt"
+
+resolve_overlaps "$RESOLVE_OVERLAPS_SCRIPT_PATH" "$FILTER_OUT" \
+	"$RESOLVE_OVERLAPS_OUT" "$CUTOFF_OUT" "$LOG" "$COMMAND";
+
+printf "   ** "$(get_nb_term "$RESOLVE_OVERLAPS_OUT")" ITs retained!\n" | tee -a "$LOG";
