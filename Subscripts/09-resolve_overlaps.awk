@@ -1,7 +1,7 @@
 #!/usr/bin/awk
 
 function abs(x) {
-	return x < 0 ? -x : x
+	return x < 0 ? -x : x;
 }
 
 
@@ -22,7 +22,7 @@ function compare(g, a, b) {
 		return b;
 	}
 
-	if(abs(start[g][a] - start[g][b] <= dev)) {
+	if(abs(start[g][a] - start[g][b]) <= dev) {
 		if(bit[g][a] > bit[g][b]) {
 			return a;
 		} else if(bit[g][a] < bit[g][b]) {
@@ -30,21 +30,27 @@ function compare(g, a, b) {
 		}
 	}
 
-	if(abs(dist[g][a] - median) < abs(dist[g][b] - median)) {
+	if(abs(upgene_dist[g][a] - median) < abs(upgene_dist[g][b] - median)) {
 		return a;
-	} else if(abs(dist[g][a] - median) > abs(dist[g][b] - median)) {
+	} else if(abs(upgene_dist[g][a] - median) > abs(upgene_dist[g][b] - median)) {
 		return b;
 	}
 
-	if(dist[g][a] <= dist[g][b]) {
+	if(dist[g][a] < dist[g][b]) {
 		return a;
 	} else {
+		return b;
+	}
+
+	if(bit[g][a] >= bit[g][b]) {
+		return a;
+	} else if(bit[g][a] < bit[g][b]) {
 		return b;
 	}
 }
 
 
-function resolve_overlap(median, gene, n,\
+function resolve_overlap(median, g, n,\
 	  i,  j,  k) {
 	nb_overlap[1] = sum_overlap_len[1] = 0;
 
@@ -54,10 +60,13 @@ function resolve_overlap(median, gene, n,\
 			# N.B: comp_start always > ref_start since the input file is sorted
 			comp_start = start[g][j];
 
-			# Break the nested loop if the current IT doesn't overlap with 
+			# Initialize overlap variables to O if current IT doesn't overlap with 
 			# the ref IT. Get the length of the overlap otherwise
-			if(abs(comp_start > ref_end)) {
-				break; 
+			if(int(comp_start) > int(ref_end)) {
+
+				sum_overlap_len[j] = 0;
+				nb_overlap[j] = 0;
+
 			} else {
 				cur_overlap_len = ref_end - comp_start + 1;
 
@@ -93,16 +102,14 @@ function resolve_overlap(median, gene, n,\
 			comp_len = sum_overlap_len[comp_idx];
 
 			while(cur_best_len && cur_best_len == comp_len) {
-
 				# if IT to compare has not been discarded and is neighbor of the cur best
 				if(!is_discarded[comp_idx] && are_neighbors[cur_best][comp_idx]) {
-					cur_best = compare(cur_best, comp_idx);
+					cur_best = compare(g, cur_best, comp_idx);
 				}
 
 				k++;
 				comp_idx = new_order[k];
 				comp_len = sum_overlap_len[b];
-
 			}
 
 			# Update the best IT among all compared
@@ -113,7 +120,7 @@ function resolve_overlap(median, gene, n,\
 				ngb = 1;
 				ngb_idx = list_neighbor[cur_best][ngb];
 				while(ngb_idx) {
-					is_discarded[ngb_idx];
+					is_discarded[ngb_idx] = 1;
 					ngb++;
 					ngb_idx = list_neighbor[cur_best][ngb];
 				}
@@ -138,9 +145,6 @@ BEGIN {
 
 	# counter for terminator
 	t = 0;
-
-	# counter for unique gene
-	ng = 0;
 
 	# array to count gene occurence
 	og[""] = 0; 
@@ -177,7 +181,6 @@ NR > 1 {
 			unknown_ng++;
 		} 
 		og[g] = 1;
-		ng++;
 	}
 	o = og[g];
 
@@ -195,6 +198,8 @@ NR > 1 {
 		relevant_upgene_dist[d] = upgene_dist[g][o];
 		d++;
 	}
+
+	t++;
 }
 
 END {
@@ -203,7 +208,7 @@ END {
 	# compute median distance from upstream gene
 	median = compute_median(relevant_upgene_dist, d);
 
-	for(i = 0; i < ng; i++) {
+	for(i = 0; i < t; i++) {
 
 		# Retrieve the gene and nb of time it occured in total. 
 		g = gene[i];
@@ -214,8 +219,14 @@ END {
 			retained_line[r] = line[g][tot_o];
 			r++;
 		} else if(!already_examined[g]) {
-			# retained_line and r are updated within the function.
+			# 'retained_line' and 'r' are updated within the function.
 			resolve_overlap(median, g, tot_o);
+			already_examined[g] = 1;
 		}
+	}
+
+	asorti(retained_line, sorted_order, "@val_num_asc");
+	for(i = 0; i < r; i++) {
+		printf("\n%s", retained_line[sorted_order[i]]);
 	}
 }
