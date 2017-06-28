@@ -153,7 +153,7 @@ file_idx == 1 && FNR > 1 {
 }
 
 file_idx == 2 && FNR == 1 {
-	pref_NF = NF;
+	pred_NF = NF;
 	pred_header = $0;
 }
 
