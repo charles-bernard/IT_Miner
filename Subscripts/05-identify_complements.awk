@@ -350,7 +350,7 @@ END {
 			suffix = get_suffix(i, compl_i);
 			line = prefix[i] "\t" id_prefix id_grp[i] "\t" suffix "\t" compl_info "\t" palindromic_perc;
 		} else {
-			line = prefix[i] "\t\t\t\t\t\t";
+			line = prefix[i] "\t\t\t\t\t";
 		}
 
 		printf("\n%s", line);

@@ -460,6 +460,45 @@ function resolve_overlaps {
 }
 
 ###########################################################
+###### I.14 Compute Free Energy ###########################
+###########################################################
+function compute_free_energy {
+	# Compute free energy of ITs based on primary seq
+
+	# Args
+	local SCRIPT_PATH="$1"; local INPUT_LIST="$2"; 
+	local OUT_LIST="$3"; local COMMAND="$4";
+
+	RNAFOLD_IN="$(mktemp)";
+	RNAFOLD_OUT="$(mktemp)";
+
+	awk 'BEGIN { FS = "\t"; } NR > 1 { print $6; }' "$INPUT_LIST" > "$RNAFOLD_IN";
+
+	printf "___________________________________________________________\n" >> "$COMMAND"
+	printf "COMPUTE FREE ENERGY COMMAND:\n" >> "$COMMAND";
+	(set -x;
+		RNAfold -i "$RNAFOLD_IN" --noPS > "$RNAFOLD_OUT" \
+	2>"$TMP_TOOL_STDERR";) 2>> "$COMMAND";
+
+	# Exit if stderr_file not empty
+	check_tool_stderr "$TMP_TOOL_STDERR" "RNAfold" "$LOG";
+	
+	# Execute command while printing it into log
+	printf "___________________________________________________________\n" >> "$COMMAND"
+	printf "JOIN RNIEfold OUT TO LIST OF ITs:\n" >> "$COMMAND";
+	(set -x;
+		awk -f "$SCRIPT_PATH" \
+		"$RNAFOLD_OUT" "$INPUT_LIST" > "$OUT_LIST" 2>"$TMP_TOOL_STDERR";
+	) 2>> "$COMMAND";
+	printf "\n" >> "$COMMAND";
+
+	# Exit if stderr_file not empty
+	check_tool_stderr "$TMP_TOOL_STDERR" "10-join_RNAfold_out.awk" "$LOG";
+
+	rm "$RNAFOLD_IN" "$RNAFOLD_OUT";
+}
+
+###########################################################
 # II. PARAMETERS FOR THE PIPELINE
 ###########################################################
 ###### II.1 Read Options ##################################
@@ -719,9 +758,21 @@ printf "###########################################################\n" | tee -a 
 printf "STEP 9) Resolve overlapping ITs\n" | tee -a "$LOG"; 
 
 RESOLVE_OVERLAPS_SCRIPT_PATH="$SCRIPT_PATH"/"Subscripts"/"09-resolve_overlaps.awk";
-RESOLVE_OVERLAPS_OUT="$STEPS_DIR"/"Step09-Resolved_overlaps_list.txt"
+RESOLVE_OVERLAPS_OUT="$STEPS_DIR"/"Step09-Resolved_overlaps_list.csv"
 
 resolve_overlaps "$RESOLVE_OVERLAPS_SCRIPT_PATH" "$FILTER_OUT" \
-	"$RESOLVE_OVERLAPS_OUT" "$CUTOFF_OUT" "$LOG" "$COMMAND";
+	"$RESOLVE_OVERLAPS_OUT" "$COMMAND";
 
 printf "   ** "$(get_nb_term "$RESOLVE_OVERLAPS_OUT")" ITs retained!\n" | tee -a "$LOG";
+
+###########################################################
+# XIII. Compute Free Energy and Secondary Structure of RNA
+###########################################################
+printf "###########################################################\n" | tee -a "$LOG"
+printf "STEP 10) Compute free energy of ITs\n" | tee -a "$LOG"; 
+
+JOIN_RNAFOLD_SCRIPT_PATH="$SCRIPT_PATH"/"Subscripts"/"10-join_RNAfold_out.awk";
+FREE_ENERGY_OUT="$STEPS_DIR"/"Step10-With_free_energy_list.csv";
+
+compute_free_energy "$JOIN_RNAFOLD_SCRIPT_PATH" \
+	"$RESOLVE_OVERLAPS_OUT" "$FREE_ENERGY_OUT" "$COMMAND";

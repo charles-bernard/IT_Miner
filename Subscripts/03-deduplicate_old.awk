@@ -27,7 +27,6 @@ NR == 1 {
 NR > 1 {
 	start = $1;
 	strand = $3;
-	mode = $4;
 	bit = $5;
 	gene = $7;
 
@@ -35,17 +34,11 @@ NR > 1 {
 	if(strand == old_strand && gene == old_gene \
 		&& abs(start-old_start) <= dev) {
 
-		if(mode == "Genome" && mode != best_mode) {
+		# If the current IT has the best bit score,
+		# its line is stored
+		if(bit > best_bit) {
 			best_bit = bit;
-			best_mode = mode;
 			best_line = $0;
-		} else if(best_mode == "Gene") {
-			# If the current IT has the best bit score,
-			# its line is stored
-			if(bit > best_bit) {
-				best_bit = bit;
-				best_line = $0;
-			}
 		}
 
 	} else {
@@ -56,7 +49,6 @@ NR > 1 {
 		t++;
 
 		best_bit = bit;
-		best_mode = mode;
 		best_line = $0;
 	}
 

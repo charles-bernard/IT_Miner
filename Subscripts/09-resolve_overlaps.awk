@@ -211,7 +211,7 @@ END {
 	for(i = 0; i < t; i++) {
 
 		# Retrieve the gene and nb of time it occured in total. 
-		g = gene[i];
+		g = gene[i];q
 		tot_o = og[g];
 
 		# if total occurence is 1, then print the line
@@ -226,7 +226,7 @@ END {
 	}
 
 	asorti(retained_line, sorted_order, "@val_num_asc");
-	for(i = 0; i < r; i++) {
+	for(i = 1; i <= r; i++) {
 		printf("\n%s", retained_line[sorted_order[i]]);
 	}
 }
