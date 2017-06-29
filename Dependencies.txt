@@ -1,0 +1,10 @@
+Linux Package:
+	- RNAfold
+	- getopt
+
+R packages:
+	- optparse
+	- data.table
+	- stats
+	- scales
+	- ggplots2
