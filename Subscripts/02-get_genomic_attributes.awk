@@ -1,22 +1,20 @@
 #!/usr/bin/awk
 
 function get_gene_name(attribute) {
-	# The Gene tag is the match of the Regex against the 'attribute' string
-	match(attribute, /;Name=[a-zA-Z0-9.+:_-]+;/, gene_tag);
-
-	if(gene_tag[0]) {
-		# Get indexes of the char corresponding to gene name in the attribute string
-		string_start = gene_tag[0, "start"] + length(";Name=");
-		string_len = gene_tag[0, "length"] - length(";Name=" ";");
-	} else {
+	# The Gene tag is the match of the Regex 
+	# against the 'attribute' string
+	match(attribute, /; *(gene_)?[nN]ame[= ]+"*[a-zA-Z0-9.+:_-]+[ "]*;/, gene_tag);
+	if(!gene_tag[0]) {
 		# If gene has no name, get its ID
-		match(attribute, /;gene_id=[a-zA-Z0-9.+:_-]+;/, gene_tag);
-		string_start = gene_tag[0, "start"] + length(";gene_id=");
-		string_len = gene_tag[0, "length"] - length(";gene_id=" ";");
+		match(attribute, /; *(gene_)?[iI]d[= ]+[a-zA-Z0-9.+:_-]+[ "]*;/, gene_tag);
 	}
-
-	# Get substring 'gene_name' of string 'attribute' thanks to these indexes
-	gene_name = substr(attribute, string_start, string_len);
+	gsub(/^; *(gene_)?[nNiI](ame|d)[= ]+"*/, "", gene_tag[0]);
+	gsub(/[ "]*;$/, "", gene_tag[0]);
+	gene_name = gene_tag[0];
+	if(!gene_name) {
+		gene_name = "unknown n°" ug;
+		ug++;
+	}
 	return gene_name;
 }
 

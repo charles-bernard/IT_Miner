@@ -2,17 +2,14 @@
 
 BEGIN {
 	FS = "\t";
-
 	# file counter
-	file_idx = 0;
-
+	fie_idx = 0;
 	# terminator counter
 	t = 0; 
 }
 
 FNR == 1 {
 	file_idx++;
-
 	if(file_idx == 1) {
 		# First Input File corresponds to RNIE Genome output
 		mode = "Genome";

@@ -135,9 +135,9 @@ function check_fasta {
 function check_gff {
 	# Check if input annotation is a gff file
 	local ANNOTATION="$1";
-	if [[ ! "$ANNOTATION" =~ ^.*\.gff(3)?$ ]]; then
+	if [[ ! "$ANNOTATION" =~ ^.*\.g[tf]f(3)?$ ]]; then
 		error_exit \
-		"The annotation file has no \".gff\" extension!" 2;
+		"The annotation file has no \".gff\" nor \".gtf\" extension!" 2;
 	fi
 }
 
@@ -738,6 +738,8 @@ FILTER_SCRIPT_PATH="$SCRIPT_PATH"/"Subscripts"/"08-filter.awk";
 TMP_FILTER_OUT=$(mktemp);
 FILTER_OUT="$STEPS_DIR"/"Step08-Filtered_list.csv";
 
+# filter "$FILTER_SCRIPT_PATH" "$DISCARD_INTRA_OUT" \
+# 	"$FILTER_OUT" "$CUTOFF_DISTANCE" "$COMMAND";
 filter "$FILTER_SCRIPT_PATH" "$DISCARD_INTRA_OUT" \
 	"$TMP_FILTER_OUT" "$CUTOFF_DISTANCE" "$COMMAND";
 
