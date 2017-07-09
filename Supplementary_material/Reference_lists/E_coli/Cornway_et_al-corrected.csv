@@ -1,0 +1,1775 @@
+Strand	Start	End	Upstream Gene	TransTerm HP Prediction
++	5044	5073	thrC	Intrinsic
++	5471	5500	yaaX	Factor Dependent
+-	5583	5612	yaaA	Intrinsic
++	9190	9219	talB	Intrinsic
+-	9914	9943	yaaH	Intrinsic
++	10312	10341	mog	Factor Dependent
++	15499	15528	insL1	Factor Dependent
+-	16572	16601	mokC	Intrinsic
++	16987	17016	sokC	Factor Dependent
++	18686	18715	nhaA	Intrinsic
++	19783	19812	nhaR	Factor Dependent
+-	20760	20789	rpsT	Intrinsic
++	25747	25776	lspA	Intrinsic
++	27245	27274	ispH	Intrinsic
++	29264	29293	dapB	Factor Dependent
++	29472	29501	dapB	Factor Dependent
+-	33707	33736	caiE	Factor Dependent
++	34074	34103	carB	Intrinsic
++	34818	34847	caiF	Intrinsic
+-	50115	50144	apaH	Factor Dependent
++	50340	50369	folA	Intrinsic
+-	50338	50367	apaH	Intrinsic
++	50569	50598	folA	Factor Dependent
+-	53282	53311	pdxA	Factor Dependent
+-	59625	59654	rluA	Intrinsic
++	59916	59945	yabP	Factor Dependent
++	72104	72133	yabI	Factor Dependent
+-	72148	72177	thiQ	Factor Dependent
++	77580	77609	sgrT	Intrinsic
+-	78718	78747	leuD	Factor Dependent
+-	78819	78848	leuD	Intrinsic
++	78952	78981	setA	Factor Dependent
+-	83581	83610	leuL	Intrinsic
++	87859	87888	ilvH	Intrinsic
++	89317	89346	cra	Factor Dependent
++	107526	107555	lpxC	Intrinsic
++	111003	111032	secA	Intrinsic
+-	111592	111621	yacG	Intrinsic
++	111860	111889	mutT	Factor Dependent
++	114490	114519	guaC	Intrinsic
+-	117719	117748	nadC	Factor Dependent
+-	119926	119955	aroP	Factor Dependent
++	120139	120168	ampE	Factor Dependent
+-	120145	120174	aroP	Factor Dependent
++	120417	120446	ampE	Factor Dependent
++	122928	122957	pdhR	Factor Dependent
++	127584	127613	aceF	Intrinsic
++	129352	129381	lpd	Intrinsic
++	134258	134287	acnB	Intrinsic
++	134754	134783	yacL	Intrinsic
+-	134761	134790	speD	Factor Dependent
++	138644	138673	cueO	Intrinsic
+-	138649	138678	gcd	Intrinsic
+-	138722	138751	gcd	Factor Dependent
++	138740	138769	cueO	Intrinsic
+-	138780	138809	gcd	Intrinsic
+-	141852	141881	can	Factor Dependent
++	141970	141999	hpt	Intrinsic
+-	141980	142009	can	Intrinsic
++	145035	145064	yadI	Factor Dependent
+-	146082	146111	panD	Factor Dependent
+-	147730	147759	panC	Factor Dependent
+-	147921	147950	panC	Intrinsic
+-	157231	157260	folK	Intrinsic
+-	160082	160111	gluQ	Factor Dependent
++	167270	167299	mrcB	Factor Dependent
++	169729	169758	fhuA	Intrinsic
+-	173357	173386	hemL	Factor Dependent
+-	173558	173587	hemL	Factor Dependent
++	173641	173670	fhuB	Factor Dependent
++	176971	177000	erpA	Intrinsic
+-	176970	176999	yadS	Intrinsic
+-	178447	178476	mtn	Factor Dependent
+-	180482	180511	yaeH	Factor Dependent
++	182322	182351	degP	Intrinsic
+-	183591	183620	yaeH	Factor Dependent
+-	183662	183691	yaeH	Factor Dependent
++	183882	183911	cdaR	Factor Dependent
+-	184231	184260	yaeI	Factor Dependent
+-	185072	185101	dapD	Intrinsic
++	186923	186952	cdaR	Factor Dependent
+-	188695	188724	map	Intrinsic
++	191705	191734	tsf	Intrinsic
++	193411	193440	frr	Intrinsic
++	203352	203381	lpxB	Factor Dependent
++	209590	209619	accA	Intrinsic
++	212267	212296	yaeR	Intrinsic
+-	213503	213532	rof	Factor Dependent
++	213844	213873	tilS	Factor Dependent
++	216241	216270	nlpE	Factor Dependent
+-	217019	217048	proS	Intrinsic
+-	220060	220089	metQ	Intrinsic
++	223413	223442	gmhB	Factor Dependent
++	225592	225621	alaV	Intrinsic
++	229018	229047	aspU	Intrinsic
+-	229933	229962	yafC	Factor Dependent
++	230247	230276	dkgB	Factor Dependent
++	232477	232506	yafE	Factor Dependent
+-	232543	232572	mltD	Intrinsic
++	234741	234770	yafE	Factor Dependent
+-	235263	235292	rnhA	Factor Dependent
++	235635	235664	yafS	Factor Dependent
++	237041	237070	aspV	Intrinsic
+-	239248	239277	yafV	Factor Dependent
+-	240826	240855	fadE	Factor Dependent
++	240830	240859	ivy	Factor Dependent
+-	244956	244985	yafK	Factor Dependent
++	245347	245376	yafJ	Factor Dependent
++	253196	253225	yafP	Factor Dependent
+-	254226	254255	pepD	Intrinsic
++	256436	256465	gpt	Intrinsic
+-	258021	258050	phoE	Factor Dependent
++	258243	258272	crl	Intrinsic
++	258460	258489	crl	Factor Dependent
+-	261511	261540	ykfN	Factor Dependent
++	262772	262801	thrW	Factor Dependent
++	277130	277159	mmuM	Factor Dependent
+-	279609	279638	yagB	Factor Dependent
+-	287489	287518	yagI	Factor Dependent
+-	294225	294254	yagN	Factor Dependent
++	296668	296697	ptwF	Factor Dependent
++	302852	302881	yagU	Intrinsic
++	303276	303305	yagU	Factor Dependent
+-	311341	311370	ykgO	Factor Dependent
+-	311505	311534	ykgO	Factor Dependent
+-	312257	312286	ykgR	Factor Dependent
++	312462	312491	ykgL	Factor Dependent
++	312984	313013	ykgL	Factor Dependent
++	316770	316799	ykgQ	Intrinsic
+-	317857	317886	ykgC	Factor Dependent
++	320394	320423	ykgD	Factor Dependent
++	323778	323807	ykgG	Intrinsic
+-	324746	324775	betA	Factor Dependent
++	330728	330757	betT	Intrinsic
++	333054	333083	yahA	Factor Dependent
++	343193	343222	yahK	Factor Dependent
++	344797	344826	yahM	Factor Dependent
+-	345832	345861	prpR	Factor Dependent
++	346067	346096	yahO	Factor Dependent
++	346201	346230	yahO	Factor Dependent
++	356751	356780	codA	Factor Dependent
+-	360299	360328	lacA	Factor Dependent
++	362428	362457	cynX	Intrinsic
+-	365683	365712	lacI	Factor Dependent
++	376605	376634	yaiL	Factor Dependent
+-	376725	376754	frmB	Factor Dependent
+-	379243	379272	yaiO	Factor Dependent
+-	387900	387929	hemB	Factor Dependent
+-	392137	392166	ampH	Factor Dependent
++	393603	393632	yaiT	Factor Dependent
+-	394303	394332	ampH	Factor Dependent
+-	397955	397984	yaiY	Factor Dependent
++	398352	398381	yaiW	Factor Dependent
+-	399022	399051	ddlA	Intrinsic
++	399560	399589	yaiZ	Factor Dependent
++	400943	400972	iraP	Factor Dependent
++	402897	402926	psiF	Factor Dependent
+-	403887	403916	proC	Factor Dependent
++	406417	406446	yaiA	Factor Dependent
++	407706	407735	yaiE	Factor Dependent
++	407742	407771	yaiE	Factor Dependent
+-	407896	407925	rdgC	Factor Dependent
++	408269	408298	ykiA	Factor Dependent
++	410300	410329	mak	Intrinsic
+-	410476	410505	araJ	Factor Dependent
++	418474	418503	phoR	Factor Dependent
++	421608	421637	proY	Intrinsic
+-	423216	423245	acpH	Factor Dependent
++	423648	423677	malZ	Factor Dependent
++	426968	426997	secD	Factor Dependent
++	429731	429760	secF	Intrinsic
+-	430172	430201	tsx	Factor Dependent
++	430312	430341	yajD	Intrinsic
+-	430325	430354	tsx	Intrinsic
+-	431517	431546	yajI	Factor Dependent
++	434790	434819	nusB	Intrinsic
+-	435903	435932	yajO	Factor Dependent
++	436332	436361	pgpA	Factor Dependent
++	437938	437967	pgpA	Factor Dependent
++	442225	442254	thiI	Intrinsic
+-	442232	442261	yajL	Intrinsic
++	442400	442429	thiI	Factor Dependent
+-	444466	444495	yajR	Factor Dependent
++	444822	444851	yajQ	Factor Dependent
+-	446005	446034	cyoE	Intrinsic
+-	451261	451290	ampG	Factor Dependent
++	454078	454107	bolA	Intrinsic
++	455701	455730	tig	Intrinsic
++	457959	457988	clpX	Intrinsic
++	460507	460536	lon	Intrinsic
++	463046	463075	ppiD	Intrinsic
++	464028	464057	fadM	Factor Dependent
+-	464043	464072	queC	Factor Dependent
++	464240	464269	fadM	Factor Dependent
+-	473498	473527	tesB	Intrinsic
++	475175	475204	ybaY	Intrinsic
++	475777	475806	ffs	Factor Dependent
+-	476104	476133	ylaB	Factor Dependent
++	476242	476271	ybaA	Factor Dependent
+-	477971	478000	ylaC	Factor Dependent
+-	480437	480466	acrB	Intrinsic
++	485695	485724	acrR	Factor Dependent
+-	489119	489148	ybaM	Intrinsic
+-	489189	489218	ybaM	Factor Dependent
++	489392	489421	mscK	Factor Dependent
++	491192	491221	apt	Factor Dependent
++	496215	496244	htpG	Intrinsic
++	497137	497166	adk	Intrinsic
++	498446	498475	hemH	Factor Dependent
+-	500723	500752	ybaL	Factor Dependent
++	500971	501000	gsk	Factor Dependent
+-	505817	505846	ybaK	Factor Dependent
++	505978	506007	ushA	Factor Dependent
++	506497	506526	chiX	Factor Dependent
++	507803	507832	ybaQ	Factor Dependent
+-	507968	507997	copA	Factor Dependent
+-	513437	513466	ybbJ	Factor Dependent
++	513769	513798	cueR	Factor Dependent
++	516586	516615	ybbM	Intrinsic
+-	516595	516624	ybbN	Intrinsic
++	522163	522192	ybbP	Factor Dependent
+-	530360	530389	selU	Factor Dependent
++	536700	536729	glxR	Factor Dependent
++	539731	539760	allB	Intrinsic
++	539895	539924	ybbY	Factor Dependent
+-	542434	542463	ylbA	Intrinsic
+-	550600	550629	purK	Factor Dependent
+-	553089	553118	lpxH	Factor Dependent
++	555221	555250	cysS	Intrinsic
+-	555847	555876	ybcJ	Intrinsic
+-	563873	563902	intD	Factor Dependent
+-	574827	574856	nmpC	Factor Dependent
++	576469	576498	quuD	Factor Dependent
+-	576878	576907	borD	Factor Dependent
+-	577565	577594	borD	Factor Dependent
+-	581378	581407	ybcY	Factor Dependent
+-	583689	583718	ompT	Factor Dependent
++	583816	583845	appY	Factor Dependent
+-	592436	592465	cusS	Factor Dependent
+-	602268	602297	ybdG	Factor Dependent
++	602597	602626	pheP	Intrinsic
+-	605323	605352	ybdJ	Factor Dependent
+-	608516	608545	entD	Factor Dependent
+-	631364	631393	ybdH	Factor Dependent
++	631889	631918	ybdD	Factor Dependent
++	634204	634233	ybdL	Factor Dependent
+-	637001	637030	dsbG	Factor Dependent
++	638881	638910	ahpC	Intrinsic
++	640564	640593	ahpF	Intrinsic
+-	640595	640624	uspG	Factor Dependent
++	642706	642735	ybdR	Intrinsic
+-	642731	642760	rnk	Intrinsic
+-	656748	656777	crcB	Intrinsic
++	656752	656781	cspE	Intrinsic
++	658026	658055	ybeM	Factor Dependent
++	658406	658435	tatE	Intrinsic
+-	658426	658455	lipA	Intrinsic
+-	660805	660834	lipB	Factor Dependent
+-	661555	661584	ybeD	Factor Dependent
++	675100	675129	ybeL	Factor Dependent
+-	682641	682670	rihA	Intrinsic
+-	685936	685965	gltI	Factor Dependent
+-	688266	688295	lnt	Factor Dependent
++	695614	695643	ubiF	Intrinsic
+-	695624	695653	glnX	Intrinsic
+-	698661	698690	nagD	Factor Dependent
++	705135	705164	nagE	Factor Dependent
++	707110	707139	glnS	Factor Dependent
+-	709382	709411	fur	Intrinsic
+-	711205	711234	ybfF	Factor Dependent
++	714427	714456	pgm	Intrinsic
+-	720244	720273	kdpE	Intrinsic
++	728579	728608	ybfA	Intrinsic
++	732961	732990	rhsC	Factor Dependent
+-	740270	740299	dtpD	Intrinsic
++	740628	740657	phr	Factor Dependent
++	746172	746201	nei	Factor Dependent
+-	752194	752223	gltA	Factor Dependent
++	757632	757661	sdhB	Factor Dependent
+-	764305	764334	mngR	Factor Dependent
++	764499	764528	sucD	Factor Dependent
++	773837	773866	ybgE	Intrinsic
++	779615	779644	ybgF	Factor Dependent
++	781023	781052	lysQ	Intrinsic
+-	783074	783103	zitB	Factor Dependent
++	783431	783460	pnuC	Factor Dependent
+-	784100	784129	ybgS	Intrinsic
++	785909	785938	aroG	Factor Dependent
+-	785926	785955	gpmA	Factor Dependent
+-	786008	786037	gpmA	Intrinsic
++	786015	786044	aroG	Intrinsic
+-	791360	791389	modF	Factor Dependent
++	794138	794167	acrZ	Intrinsic
+-	796703	796732	ybhA	Factor Dependent
++	796831	796860	modC	Factor Dependent
++	799069	799098	pgl	Factor Dependent
+-	805136	805165	ybhC	Factor Dependent
+-	806617	806646	ybhB	Intrinsic
+-	814868	814897	ybhK	Intrinsic
++	815074	815103	uvrB	Factor Dependent
++	819000	819029	moaE	Factor Dependent
++	819065	819094	moaE	Factor Dependent
++	819840	819869	ybhL	Intrinsic
+-	820635	820664	ybhN	Factor Dependent
++	820725	820754	ybhM	Factor Dependent
++	821061	821090	ybhM	Factor Dependent
+-	824174	824203	ybhR	Factor Dependent
++	824482	824511	ybhQ	Factor Dependent
++	831501	831530	rhlE	Factor Dependent
+-	831592	831621	ybiA	Intrinsic
++	835436	835465	ybiB	Intrinsic
+-	836670	836699	ybiJ	Intrinsic
++	836813	836842	ybiC	Intrinsic
+-	840971	841000	mcbA	Intrinsic
++	842572	842601	rlmF	Factor Dependent
+-	844776	844805	glnQ	Factor Dependent
+-	847548	847577	dps	Factor Dependent
++	850195	850224	ompX	Intrinsic
+-	851912	851941	mntS	Factor Dependent
++	853990	854019	ybiR	Intrinsic
+-	853992	854021	ybiS	Intrinsic
++	856890	856919	ybiT	Factor Dependent
+-	856933	856962	ybiU	Factor Dependent
+-	863501	863530	moeB	Factor Dependent
++	863620	863649	fsaA	Factor Dependent
++	875893	875922	yliF	Intrinsic
+-	875901	875930	rimO	Intrinsic
++	877852	877881	bssR	Intrinsic
+-	878936	878965	gstB	Factor Dependent
++	879245	879274	yliI	Factor Dependent
++	881154	881183	dacC	Intrinsic
+-	881171	881200	deoR	Intrinsic
++	881339	881368	dacC	Factor Dependent
+-	884123	884152	ybjH	Intrinsic
++	884238	884267	mdfA	Factor Dependent
+-	887173	887202	rybB	Factor Dependent
++	887512	887541	ybjK	Factor Dependent
+-	889387	889416	grxA	Factor Dependent
+-	889675	889704	grxA	Intrinsic
++	889700	889729	ybjM	Intrinsic
++	892657	892686	ybjN	Intrinsic
+-	898559	898588	artJ	Factor Dependent
++	898823	898852	rlmC	Factor Dependent
+-	900033	900062	artM	Factor Dependent
+-	903102	903131	ybjP	Intrinsic
+-	904834	904863	ybjS	Factor Dependent
++	905229	905258	amiD	Factor Dependent
+-	907826	907855	ltaE	Factor Dependent
+-	913192	913221	ybjE	Factor Dependent
++	914252	914281	amiD	Factor Dependent
+-	914539	914568	aqpZ	Intrinsic
+-	917182	917211	ybjX	Factor Dependent
++	917372	917401	ybjD	Factor Dependent
+-	921469	921498	cspD	Factor Dependent
+-	921534	921563	cspD	Intrinsic
++	924798	924827	clpA	Intrinsic
+-	925082	925111	serW	Intrinsic
+-	930245	930274	trxB	Intrinsic
++	939956	939985	serS	Intrinsic
+-	943956	943985	ycaC	Factor Dependent
+-	944093	944122	ycaC	Factor Dependent
++	944112	944141	dmsC	Intrinsic
++	946249	946278	ycaD	Intrinsic
+-	947768	947797	ycaN	Factor Dependent
++	949469	949498	ycaK	Factor Dependent
+-	949530	949559	pflA	Intrinsic
+-	950439	950468	pflB	Intrinsic
+-	954017	954046	ycaO	Intrinsic
++	956773	956802	ycaP	Factor Dependent
++	956877	956906	serC	Factor Dependent
++	959350	959379	aroA	Intrinsic
++	961031	961060	cmk	Factor Dependent
++	963366	963395	ihfB	Intrinsic
++	968599	968628	lpxK	Factor Dependent
++	970843	970872	kdsB	Factor Dependent
+-	971719	971748	ycbC	Factor Dependent
++	971948	971977	ycbJ	Factor Dependent
++	979981	980010	mukB	Factor Dependent
++	983567	983596	ycbL	Factor Dependent
+-	983592	983621	aspC	Factor Dependent
+-	983688	983717	aspC	Intrinsic
++	983703	983732	ycbL	Intrinsic
+-	985057	985086	ompF	Intrinsic
+-	986769	986798	asnS	Intrinsic
++	986986	987015	ycbL	Factor Dependent
++	992454	992483	pepN	Intrinsic
++	992602	992631	pepN	Factor Dependent
+-	999872	999901	ycbX	Factor Dependent
+-	1005447	1005476	ycbX	Factor Dependent
++	1005879	1005908	zapC	Factor Dependent
++	1014700	1014729	ymbA	Intrinsic
+-	1014950	1014979	fabA	Factor Dependent
++	1015115	1015144	rmf	Intrinsic
+-	1015152	1015181	fabA	Factor Dependent
++	1015278	1015307	rmf	Factor Dependent
+-	1018178	1018207	ompA	Intrinsic
++	1018190	1018219	matP	Intrinsic
+-	1019490	1019519	sulA	Factor Dependent
++	1020142	1020171	matP	Factor Dependent
+-	1020838	1020867	yccS	Factor Dependent
++	1021117	1021146	sxy	Factor Dependent
+-	1025655	1025684	mgsA	Factor Dependent
+-	1026248	1026277	yccT	Factor Dependent
++	1026272	1026301	helD	Factor Dependent
+-	1027574	1027603	hspQ	Intrinsic
++	1027997	1028026	yccU	Factor Dependent
+-	1029460	1029489	tusE	Factor Dependent
++	1029860	1029889	yccX	Factor Dependent
+-	1029925	1029954	yccA	Intrinsic
+-	1030819	1030848	serT	Factor Dependent
+-	1049591	1049620	cspH	Factor Dependent
++	1051069	1051098	cspG	Factor Dependent
++	1051449	1051478	gnsA	Factor Dependent
+-	1056359	1056388	torR	Factor Dependent
+-	1061388	1061417	cbpM	Factor Dependent
+-	1061715	1061744	cbpM	Factor Dependent
+-	1065864	1065893	yccJ	Factor Dependent
++	1066049	1066078	agp	Intrinsic
++	1066196	1066225	agp	Factor Dependent
++	1067628	1067657	ymdF	Factor Dependent
+-	1074099	1074128	putA	Intrinsic
++	1074248	1074277	rutR	Factor Dependent
++	1080430	1080459	putP	Factor Dependent
++	1083805	1083834	efeB	Factor Dependent
++	1085453	1085482	phoH	Factor Dependent
++	1093539	1093568	ycdT	Factor Dependent
+-	1096821	1096850	serX	Factor Dependent
++	1099993	1100022	ycdZ	Intrinsic
+-	1100046	1100075	csgG	Intrinsic
+-	1106920	1106949	opgC	Factor Dependent
++	1107304	1107333	clsC	Factor Dependent
++	1112743	1112772	opgH	Intrinsic
+-	1112746	1112775	msyB	Intrinsic
++	1117091	1117120	yceA	Intrinsic
+-	1118660	1118689	solA	Factor Dependent
+-	1119861	1119890	bssS	Intrinsic
+-	1120424	1120453	dinI	Intrinsic
+-	1120726	1120755	pyrC	Factor Dependent
+-	1121919	1121948	yceB	Intrinsic
+-	1122600	1122629	grxB	Intrinsic
++	1128596	1128625	murJ	Intrinsic
+-	1140354	1140383	rne	Intrinsic
+-	1145163	1145192	yceF	Intrinsic
++	1145375	1145404	rluC	Factor Dependent
++	1146743	1146772	rpmF	Factor Dependent
+-	1148130	1148159	fhuE	Factor Dependent
++	1152425	1152454	fabF	Intrinsic
+-	1156264	1156293	fhuE	Factor Dependent
++	1158549	1158578	ptsG	Intrinsic
++	1164976	1165005	ycfP	Factor Dependent
++	1166838	1166867	ycfJ	Factor Dependent
+-	1167198	1167227	ycfQ	Factor Dependent
+-	1168599	1168628	ycfS	Intrinsic
++	1179740	1179769	cobB	Factor Dependent
+-	1180954	1180983	potD	Intrinsic
+-	1186138	1186167	ycfD	Factor Dependent
+-	1186304	1186333	ycfD	Intrinsic
++	1186451	1186480	pepT	Factor Dependent
+-	1189736	1189765	purB	Factor Dependent
++	1195613	1195642	icd	Intrinsic
++	1195934	1195963	icd	Factor Dependent
+-	1196023	1196052	ymfD	Intrinsic
++	1198868	1198897	lit	Factor Dependent
+-	1200629	1200658	ymfJ	Factor Dependent
++	1201171	1201200	ymfI	Intrinsic
+-	1201470	1201499	cohE	Factor Dependent
+-	1202958	1202987	tfaE	Factor Dependent
++	1210381	1210410	mcrA	Factor Dependent
+-	1211848	1211877	ycgX	Factor Dependent
+-	1213451	1213480	bluF	Factor Dependent
++	1216319	1216348	ymgC	Intrinsic
+-	1217642	1217671	ymgD	Factor Dependent
+-	1221494	1221523	ymgD	Intrinsic
++	1222704	1222733	ymgJ	Factor Dependent
+-	1223442	1223471	minE	Intrinsic
+-	1226071	1226100	pliG	Factor Dependent
+-	1226248	1226277	pliG	Intrinsic
++	1227963	1227992	ycgM	Factor Dependent
++	1228605	1228634	ycgN	Factor Dependent
+-	1228648	1228677	hlyE	Factor Dependent
+-	1231679	1231708	dsbB	Intrinsic
++	1231788	1231817	umuC	Factor Dependent
+-	1232369	1232398	nhaB	Intrinsic
++	1234872	1234901	fadR	Factor Dependent
+-	1234889	1234918	ycgB	Intrinsic
+-	1239286	1239315	cvrA	Intrinsic
++	1239618	1239647	dadX	Factor Dependent
++	1243084	1243113	emtA	Factor Dependent
++	1244214	1244243	ymgE	Intrinsic
++	1244803	1244832	ycgY	Factor Dependent
+-	1244870	1244899	treA	Intrinsic
+-	1246893	1246922	dhaM	Factor Dependent
++	1252306	1252335	dhaR	Factor Dependent
+-	1255866	1255895	ychF	Intrinsic
++	1258301	1258330	ychH	Intrinsic
++	1258569	1258598	ychH	Factor Dependent
+-	1260104	1260133	prs	Intrinsic
++	1268252	1268281	kdsA	Factor Dependent
++	1268697	1268726	rdlA	Factor Dependent
+-	1269927	1269956	chaA	Intrinsic
+-	1272257	1272286	ychN	Factor Dependent
++	1272507	1272536	chaC	Factor Dependent
+-	1274255	1274284	narL	Factor Dependent
++	1274577	1274606	ychO	Factor Dependent
+-	1286375	1286404	rttR	Factor Dependent
++	1290512	1290541	rssB	Factor Dependent
++	1291598	1291627	galU	Intrinsic
+-	1291673	1291702	hns	Intrinsic
++	1293703	1293732	tdk	Intrinsic
+-	1294545	1294574	adhE	Intrinsic
++	1304790	1304819	oppF	Intrinsic
+-	1304804	1304833	yciU	Intrinsic
++	1307002	1307031	yciY	Intrinsic
+-	1307023	1307052	kch	Factor Dependent
++	1309833	1309862	tonB	Intrinsic
+-	1309850	1309879	yciA	Intrinsic
+-	1312688	1312717	yciE	Intrinsic
++	1312758	1312787	ompW	Factor Dependent
+-	1314244	1314273	trpA	Factor Dependent
+-	1314402	1314431	trpA	Factor Dependent
++	1322853	1322882	yciQ	Factor Dependent
+-	1325498	1325527	btuR	Factor Dependent
++	1325921	1325950	rluB	Factor Dependent
+-	1328412	1328441	yciN	Intrinsic
++	1328667	1328696	sohB	Factor Dependent
++	1331688	1331717	topA	Intrinsic
+-	1332492	1332521	ribA	Factor Dependent
++	1333050	1333079	cysB	Factor Dependent
++	1333703	1333732	yciX	Intrinsic
++	1336533	1336562	acnA	Intrinsic
+-	1336552	1336581	ribA	Intrinsic
++	1337033	1337062	acnA	Factor Dependent
++	1339835	1339864	yciM	Factor Dependent
+-	1341006	1341035	osmB	Intrinsic
++	1341140	1341169	yciH	Factor Dependent
+-	1341583	1341612	yciT	Factor Dependent
+-	1342706	1342735	gmr	Factor Dependent
++	1342727	1342756	yciH	Factor Dependent
++	1343238	1343267	yciH	Factor Dependent
+-	1344965	1344994	rnb	Intrinsic
+-	1348231	1348260	fabI	Intrinsic
++	1348333	1348362	ymiB	Factor Dependent
+-	1349218	1349247	ycjD	Factor Dependent
+-	1355793	1355822	puuP	Intrinsic
++	1360487	1360516	puuR	Factor Dependent
+-	1364731	1364760	pspF	Factor Dependent
++	1365017	1365046	puuE	Factor Dependent
++	1368041	1368070	pspE	Intrinsic
+-	1380940	1380969	ycjW	Factor Dependent
+-	1386012	1386041	tpx	Factor Dependent
+-	1386300	1386329	tpx	Intrinsic
+-	1387724	1387753	mpaA	Factor Dependent
++	1388164	1388193	ycjG	Factor Dependent
+-	1392870	1392899	ynaI	Factor Dependent
++	1393147	1393176	mppA	Factor Dependent
+-	1395644	1395673	uspE	Intrinsic
++	1395867	1395896	ynaJ	Factor Dependent
+-	1396745	1396774	fnr	Intrinsic
+-	1403509	1403538	mcaS	Factor Dependent
+-	1404283	1404312	ydaM	Factor Dependent
++	1404784	1404813	smrA	Factor Dependent
++	1407219	1407248	fnrS	Factor Dependent
+-	1409008	1409037	ttcA	Intrinsic
+-	1417748	1417777	racR	Factor Dependent
+-	1421574	1421603	insH1	Factor Dependent
+-	1424769	1424798	insH1	Factor Dependent
+-	1432840	1432869	ttcC	Factor Dependent
+-	1433162	1433191	uspF	Intrinsic
++	1433525	1433554	tfaR	Factor Dependent
+-	1435262	1435291	ydbK	Factor Dependent
+-	1439238	1439267	hslJ	Factor Dependent
++	1439748	1439777	ydbJ	Factor Dependent
+-	1439848	1439877	ldhA	Intrinsic
+-	1444246	1444275	feaR	Factor Dependent
++	1444356	1444385	ydbL	Intrinsic
++	1447053	1447082	feaB	Intrinsic
++	1463108	1463137	paaY	Intrinsic
++	1473113	1473142	ydbC	Intrinsic
++	1473260	1473289	ydbD	Factor Dependent
+-	1480225	1480254	azoR	Factor Dependent
++	1485021	1485050	hrpA	Factor Dependent
++	1486055	1486084	ydcF	Factor Dependent
+-	1487705	1487734	gapC	Factor Dependent
++	1488402	1488431	aldA	Factor Dependent
+-	1489867	1489896	hokB	Factor Dependent
++	1490183	1490212	sokB	Factor Dependent
+-	1491943	1491972	ydcI	Factor Dependent
++	1495058	1495087	opgD	Factor Dependent
++	1496909	1496938	ydcH	Intrinsic
+-	1497098	1497127	ydcK	Factor Dependent
+-	1497379	1497408	ydcK	Factor Dependent
++	1497579	1497608	rimL	Factor Dependent
++	1500229	1500258	tehB	Factor Dependent
++	1501364	1501393	ydcL	Factor Dependent
+-	1506701	1506730	yncJ	Factor Dependent
++	1506971	1507000	ydcP	Factor Dependent
++	1509435	1509464	ydcR	Factor Dependent
+-	1514835	1514864	yncL	Factor Dependent
++	1515062	1515091	patD	Factor Dependent
+-	1515075	1515104	yncL	Factor Dependent
+-	1515754	1515783	ydcZ	Factor Dependent
++	1516067	1516096	ydcY	Factor Dependent
++	1519060	1519089	mcbR	Factor Dependent
++	1522475	1522504	yncE	Intrinsic
+-	1522484	1522513	ansP	Intrinsic
++	1524935	1524964	yncG	Factor Dependent
+-	1530985	1531014	yddH	Factor Dependent
++	1531442	1531471	pptA	Factor Dependent
+-	1532915	1532944	yddE	Intrinsic
++	1533094	1533123	nhoA	Factor Dependent
+-	1533930	1533959	narV	Factor Dependent
+-	1544283	1544312	yddG	Intrinsic
+-	1550349	1550378	yddM	Factor Dependent
+-	1551955	1551984	maeA	Intrinsic
+-	1553777	1553806	sra	Intrinsic
+-	1555113	1555142	ddpF	Factor Dependent
++	1555349	1555378	osmC	Factor Dependent
+-	1558837	1558866	ddpB	Factor Dependent
+-	1561311	1561340	dosP	Intrinsic
+-	1565490	1565519	yddW	Intrinsic
+-	1566931	1566960	gadC	Intrinsic
+-	1588762	1588791	hipA	Factor Dependent
+-	1596533	1596562	lsrK	Factor Dependent
++	1606603	1606632	tam	Factor Dependent
+-	1608915	1608944	yneF	Factor Dependent
+-	1616251	1616280	marC	Intrinsic
+-	1617723	1617752	eamA	Factor Dependent
++	1618249	1618278	marB	Intrinsic
++	1620802	1620831	yneM	Intrinsic
+-	1620832	1620861	mgrR	Factor Dependent
+-	1622023	1622052	ydeI	Factor Dependent
+-	1623033	1623062	dcp	Factor Dependent
++	1623460	1623489	ydeJ	Factor Dependent
++	1627215	1627244	ydfH	Factor Dependent
+-	1635580	1635609	ydfJ	Intrinsic
+-	1639304	1639333	ydfJ	Factor Dependent
+-	1639736	1639765	ydfJ	Factor Dependent
++	1640375	1640404	cspF	Intrinsic
+-	1642422	1642451	ydfJ	Factor Dependent
+-	1643071	1643100	ydfJ	Factor Dependent
+-	1644558	1644587	ydfJ	Factor Dependent
++	1644751	1644780	flxA	Factor Dependent
++	1646358	1646387	dicA	Factor Dependent
++	1651362	1651391	intQ	Factor Dependent
+-	1653315	1653344	ynfA	Factor Dependent
+-	1654339	1654368	ynfC	Factor Dependent
++	1654838	1654867	speG	Factor Dependent
++	1655890	1655919	ynfD	Factor Dependent
+-	1656961	1656990	ynfK	Factor Dependent
++	1663280	1663309	dmsD	Factor Dependent
+-	1663580	1663609	ynfK	Factor Dependent
+-	1664486	1664515	ynfK	Factor Dependent
+-	1668991	1669020	mdtI	Intrinsic
+-	1669611	1669640	mdtI	Factor Dependent
+-	1670814	1670843	mdtI	Intrinsic
++	1670974	1671003	ydgD	Factor Dependent
+-	1672828	1672857	pntB	Factor Dependent
+-	1672978	1673007	pntB	Intrinsic
++	1677411	1677440	ydgH	Intrinsic
+-	1679635	1679664	ydgC	Factor Dependent
++	1679958	1679987	folM	Factor Dependent
+-	1683173	1683202	fumC	Factor Dependent
++	1683419	1683448	tus	Factor Dependent
++	1689389	1689418	ydgA	Intrinsic
++	1689507	1689536	ydgA	Factor Dependent
+-	1694455	1694484	uidR	Factor Dependent
+-	1695245	1695274	hdhA	Factor Dependent
++	1701253	1701282	add	Intrinsic
+-	1701269	1701298	ydgJ	Intrinsic
+-	1702575	1702604	pdxY	Factor Dependent
++	1710284	1710313	nth	Factor Dependent
+-	1710731	1710760	pdxY	Factor Dependent
+-	1713017	1713046	pdxY	Factor Dependent
++	1713412	1713441	gstA	Factor Dependent
+-	1713938	1713967	tyrS	Intrinsic
+-	1718197	1718226	slyA	Factor Dependent
++	1718383	1718412	slyB	Intrinsic
+-	1718381	1718410	slyA	Intrinsic
++	1718513	1718542	slyB	Factor Dependent
+-	1718920	1718949	sodC	Factor Dependent
+-	1721793	1721822	sodC	Factor Dependent
++	1727017	1727046	rnt	Factor Dependent
+-	1731542	1731571	grxD	Factor Dependent
+-	1731743	1731772	grxD	Intrinsic
++	1733270	1733299	ydhO	Intrinsic
++	1734115	1734144	sodB	Intrinsic
+-	1735390	1735419	ynhF	Factor Dependent
+-	1735431	1735460	ynhF	Factor Dependent
++	1737122	1737151	purR	Factor Dependent
++	1739167	1739196	ydhC	Factor Dependent
+-	1740440	1740469	ribC	Factor Dependent
++	1740608	1740637	cfa	Intrinsic
+-	1742425	1742454	ydhQ	Factor Dependent
++	1742853	1742882	mdtK	Intrinsic
+-	1742856	1742885	ydhQ	Intrinsic
++	1745050	1745079	ydhR	Intrinsic
++	1746918	1746947	ydhS	Factor Dependent
+-	1752835	1752864	ydhZ	Factor Dependent
+-	1752931	1752960	ydhZ	Intrinsic
+-	1754234	1754263	ynhG	Factor Dependent
++	1755164	1755193	pykF	Intrinsic
+-	1755686	1755715	ynhG	Intrinsic
++	1755710	1755739	lpp	Intrinsic
+-	1762718	1762747	rydB	Intrinsic
+-	1762830	1762859	ydiH	Factor Dependent
+-	1763161	1763190	ydiI	Intrinsic
++	1768211	1768240	ydiK	Intrinsic
++	1773469	1773498	aroD	Factor Dependent
+-	1776393	1776422	ydiP	Intrinsic
+-	1782578	1782607	ppsA	Factor Dependent
++	1786330	1786359	ppsR	Factor Dependent
++	1787512	1787541	aroH	Intrinsic
+-	1787530	1787559	ydiU	Factor Dependent
+-	1789383	1789412	ydiV	Factor Dependent
+-	1790247	1790276	nlpC	Intrinsic
+-	1793234	1793263	ihfA	Intrinsic
+-	1797210	1797239	pheM	Factor Dependent
+-	1797374	1797403	rplT	Intrinsic
+-	1803327	1803356	ydiY	Intrinsic
++	1805336	1805365	pfkB	Factor Dependent
+-	1806338	1806367	yniB	Factor Dependent
++	1806857	1806886	yniA	Factor Dependent
++	1808063	1808092	yniC	Intrinsic
++	1810812	1810841	ydjN	Factor Dependent
++	1814198	1814227	katE	Factor Dependent
+-	1814317	1814346	chbG	Factor Dependent
+-	1819011	1819040	chbC	Factor Dependent
+-	1819882	1819911	osmE	Intrinsic
++	1821336	1821365	nadE	Intrinsic
++	1822495	1822524	cho	Factor Dependent
+-	1823088	1823117	spy	Intrinsic
+-	1823811	1823840	astE	Factor Dependent
+-	1831289	1831318	ynjF	Factor Dependent
++	1831389	1831418	xthA	Factor Dependent
+-	1838757	1838786	ynjF	Factor Dependent
++	1838784	1838813	ynjE	Factor Dependent
++	1841812	1841841	gdhA	Factor Dependent
++	1842101	1842130	gdhA	Factor Dependent
+-	1842958	1842987	topB	Intrinsic
++	1848732	1848761	sppA	Intrinsic
++	1850670	1850699	pncA	Factor Dependent
+-	1852036	1852065	ydjF	Factor Dependent
+-	1859586	1859615	yeaC	Factor Dependent
+-	1859699	1859728	yeaC	Factor Dependent
++	1861805	1861834	gapA	Intrinsic
++	1862762	1862791	yeaD	Intrinsic
+-	1863699	1863728	mipA	Intrinsic
++	1868429	1868458	yeaI	Factor Dependent
+-	1872794	1872823	yeaM	Factor Dependent
++	1872867	1872896	yeaL	Factor Dependent
++	1875304	1875333	yeaO	Factor Dependent
+-	1876903	1876932	yeaQ	Factor Dependent
++	1876992	1877021	yoaJ	Intrinsic
+-	1876997	1877026	yeaQ	Intrinsic
+-	1878154	1878183	leuE	Factor Dependent
+-	1884859	1884888	rnd	Intrinsic
+-	1886037	1886066	fadD	Intrinsic
+-	1887925	1887954	yeaY	Intrinsic
++	1891851	1891880	yoaB	Factor Dependent
++	1892479	1892508	yoaC	Intrinsic
+-	1892501	1892530	yoaH	Intrinsic
++	1892778	1892807	yoaC	Factor Dependent
++	1896328	1896357	sdaA	Intrinsic
+-	1897999	1898028	yoaE	Factor Dependent
++	1898338	1898367	yoaD	Factor Dependent
++	1903289	1903318	yobD	Factor Dependent
+-	1904194	1904223	rlmA	Factor Dependent
++	1904293	1904322	mntP	Factor Dependent
+-	1905063	1905092	cspC	Factor Dependent
+-	1905191	1905220	cspC	Intrinsic
+-	1906098	1906127	yebO	Factor Dependent
+-	1906964	1906993	kdgR	Factor Dependent
++	1907431	1907460	yobH	Factor Dependent
+-	1909682	1909711	htpX	Intrinsic
++	1918130	1918159	yebT	Factor Dependent
++	1919687	1919716	rsmF	Factor Dependent
+-	1919907	1919936	pphA	Factor Dependent
++	1920545	1920574	yebW	Factor Dependent
++	1921328	1921357	ryeA	Factor Dependent
+-	1921328	1921357	yebY	Factor Dependent
++	1921566	1921595	ryeA	Factor Dependent
+-	1924745	1924774	ptrB	Factor Dependent
++	1925005	1925034	exoX	Factor Dependent
+-	1927043	1927072	yebE	Factor Dependent
+-	1927791	1927820	yebF	Factor Dependent
+-	1930111	1930140	eda	Intrinsic
++	1930147	1930176	purT	Factor Dependent
+-	1932748	1932777	zwf	Intrinsic
+-	1937135	1937164	waaN	Intrinsic
++	1937208	1937237	pykA	Intrinsic
+-	1938292	1938321	yebA	Intrinsic
+-	1942254	1942283	ruvB	Factor Dependent
++	1942481	1942510	znuB	Factor Dependent
+-	1944762	1944791	ruvC	Factor Dependent
++	1952464	1952493	cmoB	Factor Dependent
+-	1956449	1956478	cutC	Factor Dependent
+-	1956463	1956492	cutC	Intrinsic
++	1959848	1959877	argS	Intrinsic
+-	1959900	1959929	flhE	Factor Dependent
+-	1975242	1975271	flhC	Intrinsic
+-	1977982	1978011	otsA	Factor Dependent
++	1978361	1978390	uspC	Factor Dependent
+-	1980509	1980538	araH	Intrinsic
++	1985465	1985494	ftnB	Intrinsic
+-	1985509	1985538	yecJ	Intrinsic
+-	1985874	1985903	azuC	Intrinsic
++	1987237	1987266	ftnA	Intrinsic
+-	1987274	1987303	yecH	Factor Dependent
+-	1988839	1988868	yecA	Factor Dependent
++	1989150	1989179	tyrP	Factor Dependent
++	1994065	1994094	yecF	Intrinsic
+-	1994083	1994112	sdiA	Intrinsic
++	1995244	1995273	yecF	Factor Dependent
+-	1997578	1997607	fliY	Intrinsic
+-	2005568	2005597	yedD	Factor Dependent
++	2005664	2005693	amyA	Intrinsic
+-	2005674	2005703	yedD	Intrinsic
++	2005719	2005748	amyA	Factor Dependent
++	2007736	2007765	yedF	Intrinsic
++	2009112	2009141	yedL	Factor Dependent
+-	2022380	2022409	dsrB	Factor Dependent
+-	2023270	2023299	dsrA	Factor Dependent
+-	2024274	2024303	yedQ	Factor Dependent
++	2024491	2024520	yedP	Factor Dependent
+-	2026179	2026208	yodC	Intrinsic
+-	2028418	2028447	vsr	Factor Dependent
++	2033320	2033349	yedS	Factor Dependent
+-	2034803	2034832	yedV	Factor Dependent
++	2034816	2034845	hchA	Factor Dependent
+-	2038458	2038487	serU	Factor Dependent
++	2039207	2039236	yedZ	Factor Dependent
++	2040163	2040192	zinT	Intrinsic
+-	2041128	2041157	serU	Factor Dependent
++	2041192	2041221	yodB	Factor Dependent
++	2042724	2042753	asnT	Intrinsic
++	2054652	2054681	amn	Factor Dependent
++	2055598	2055627	yeeN	Intrinsic
+-	2055973	2056002	asnW	Intrinsic
+-	2057817	2057846	cbl	Factor Dependent
+-	2057972	2058001	cbl	Factor Dependent
++	2058170	2058199	asnU	Factor Dependent
+-	2058995	2059024	nac	Factor Dependent
+-	2060366	2060395	erfK	Intrinsic
+-	2061375	2061404	cobT	Factor Dependent
+-	2065256	2065285	insH1	Factor Dependent
++	2066142	2066171	asnV	Factor Dependent
++	2074730	2074759	yeeS	Factor Dependent
++	2076993	2077022	yoeF	Intrinsic
+-	2077005	2077034	yeeX	Intrinsic
+-	2082050	2082079	yeeD	Factor Dependent
++	2082205	2082234	sbcB	Factor Dependent
+-	2082217	2082246	yeeD	Factor Dependent
+-	2083691	2083720	plaP	Intrinsic
+-	2085261	2085290	yeeY	Factor Dependent
++	2088131	2088160	hisL	Intrinsic
+-	2095287	2095316	wzzB	Intrinsic
++	2095313	2095342	hisI	Intrinsic
+-	2097816	2097845	gnd	Intrinsic
+-	2100810	2100839	wbbL	Factor Dependent
+-	2111365	2111394	wcaN	Intrinsic
++	2137723	2137752	yegH	Factor Dependent
+-	2137732	2137761	asmA	Factor Dependent
++	2144772	2144801	yegE	Factor Dependent
++	2147102	2147131	yegD	Factor Dependent
++	2151472	2151501	sibA	Factor Dependent
++	2151796	2151825	sibB	Factor Dependent
++	2163051	2163080	baeR	Factor Dependent
++	2163624	2163653	yegP	Factor Dependent
++	2165267	2165296	cyaR	Factor Dependent
+-	2165284	2165313	ogrK	Intrinsic
++	2167682	2167711	yegS	Factor Dependent
+-	2169300	2169329	gatR	Factor Dependent
+-	2175339	2175368	fbaB	Intrinsic
+-	2181447	2181476	yegX	Factor Dependent
++	2184829	2184858	rcnA	Factor Dependent
++	2185409	2185438	rcnB	Factor Dependent
+-	2190481	2190510	yehE	Intrinsic
+-	2190899	2190928	mrp	Factor Dependent
+-	2191030	2191059	mrp	Intrinsic
++	2194363	2194392	metG	Intrinsic
+-	2209650	2209679	yehS	Factor Dependent
+-	2213329	2213358	yehW	Factor Dependent
++	2213645	2213674	mlrA	Factor Dependent
++	2213901	2213930	yohO	Factor Dependent
+-	2216524	2216553	yehY	Factor Dependent
+-	2217534	2217563	bglX	Factor Dependent
+-	2221631	2221660	pbpG	Factor Dependent
++	2221916	2221945	dld	Intrinsic
+-	2223028	2223057	yohC	Intrinsic
+-	2224316	2224345	yohF	Factor Dependent
++	2224569	2224598	yohD	Factor Dependent
++	2227189	2227218	yohP	Intrinsic
+-	2227352	2227381	dusC	Factor Dependent
++	2230766	2230795	cdd	Factor Dependent
++	2231874	2231903	yeiS	Factor Dependent
++	2234618	2234647	preA	Intrinsic
+-	2234681	2234710	mglC	Factor Dependent
+-	2239733	2239762	yeiB	Factor Dependent
+-	2242664	2242693	cirA	Factor Dependent
++	2242782	2242811	yeiG	Intrinsic
+-	2245040	2245069	lysP	Intrinsic
+-	2246723	2246752	yeiE	Factor Dependent
++	2250812	2250841	yeiI	Factor Dependent
+-	2257549	2257578	fruA	Intrinsic
++	2264070	2264099	yeiP	Intrinsic
++	2265719	2265748	yeiQ	Factor Dependent
++	2267594	2267623	lpxT	Factor Dependent
++	2268618	2268647	spr	Intrinsic
++	2270287	2270316	rtn	Factor Dependent
+-	2275614	2275643	yejG	Factor Dependent
++	2275858	2275887	yejF	Factor Dependent
+-	2276560	2276589	bcr	Intrinsic
++	2276831	2276860	yejF	Factor Dependent
++	2280835	2280864	rplY	Intrinsic
+-	2280849	2280878	yejK	Intrinsic
++	2284313	2284342	proL	Intrinsic
+-	2289288	2289317	ccmH	Factor Dependent
++	2289354	2289383	narP	Intrinsic
++	2290438	2290467	narP	Factor Dependent
++	2302419	2302448	eco	Factor Dependent
+-	2303106	2303135	mqo	Intrinsic
+-	2304875	2304904	yojI	Factor Dependent
+-	2306709	2306738	alkB	Factor Dependent
+-	2309632	2309661	ompC	Intrinsic
++	2311178	2311207	micF	Factor Dependent
+-	2314613	2314642	rcsC	Factor Dependent
++	2314862	2314891	rcsB	Intrinsic
+-	2325331	2325360	yfaP	Intrinsic
+-	2334734	2334763	gyrA	Intrinsic
++	2338348	2338377	ubiG	Intrinsic
+-	2346810	2346839	inaA	Intrinsic
++	2346920	2346949	yfaE	Factor Dependent
+-	2347935	2347964	glpQ	Intrinsic
++	2354793	2354822	glpC	Factor Dependent
++	2356218	2356247	ypaA	Factor Dependent
+-	2360406	2360435	yfaY	Factor Dependent
+-	2361683	2361712	yfaZ	Factor Dependent
+-	2371136	2371165	pmrD	Factor Dependent
++	2371357	2371386	arnF	Factor Dependent
+-	2371618	2371647	menE	Factor Dependent
+-	2378706	2378735	elaB	Intrinsic
++	2380540	2380569	rbn	Factor Dependent
++	2383585	2383614	elaD	Factor Dependent
+-	2387768	2387797	nuoN	Factor Dependent
+-	2388016	2388045	nuoN	Intrinsic
+-	2403640	2403669	lrhA	Intrinsic
++	2403828	2403857	yfbP	Factor Dependent
+-	2407412	2407441	yfbS	Factor Dependent
++	2407690	2407719	yfbR	Factor Dependent
+-	2409420	2409449	yfbT	Intrinsic
++	2414957	2414986	pta	Intrinsic
+-	2416644	2416673	yfcD	Factor Dependent
++	2419293	2419322	yfcG	Factor Dependent
+-	2420629	2420658	yfcI	Factor Dependent
++	2420783	2420812	yfcH	Factor Dependent
+-	2425965	2425994	ubiX	Factor Dependent
++	2437228	2437257	flk	Factor Dependent
+-	2438303	2438332	fabB	Intrinsic
+-	2441848	2441877	yfcL	Factor Dependent
++	2442040	2442069	mnmC	Factor Dependent
+-	2447217	2447246	yfcO	Intrinsic
+-	2447225	2447254	yfcO	Factor Dependent
++	2447468	2447497	smrB	Factor Dependent
+-	2454208	2454237	sixA	Factor Dependent
+-	2454315	2454344	sixA	Intrinsic
+-	2458632	2458661	yfcZ	Intrinsic
++	2460689	2460718	fadL	Intrinsic
+-	2462224	2462253	mlaA	Intrinsic
++	2464397	2464426	argW	Factor Dependent
+-	2468437	2468466	yfdK	Factor Dependent
++	2468487	2468516	gtrS	Intrinsic
++	2469117	2469146	tfaS	Factor Dependent
++	2474631	2474660	pawZ	Factor Dependent
++	2482591	2482620	evgS	Factor Dependent
+-	2485527	2485556	yfdE	Factor Dependent
++	2486156	2486185	evgS	Factor Dependent
+-	2492803	2492832	yfdY	Factor Dependent
++	2494596	2494625	lpxP	Factor Dependent
++	2495011	2495040	ypdK	Factor Dependent
+-	2495024	2495053	alaC	Intrinsic
++	2500012	2500041	ypdC	Factor Dependent
+-	2506447	2506476	glk	Intrinsic
++	2508949	2508978	yfeO	Factor Dependent
++	2509367	2509396	ypeC	Intrinsic
+-	2509365	2509394	mntH	Intrinsic
++	2512469	2512498	insL1	Factor Dependent
+-	2513587	2513616	yfeA	Factor Dependent
+-	2516030	2516059	alaX	Factor Dependent
++	2517223	2517252	yfeD	Intrinsic
+-	2517236	2517265	gltX	Intrinsic
++	2519501	2519530	lysV	Intrinsic
+-	2519520	2519549	xapR	Intrinsic
++	2523908	2523937	yfeN	Intrinsic
+-	2525877	2525906	ypeB	Factor Dependent
++	2526163	2526192	yfeH	Factor Dependent
++	2530246	2530275	cysZ	Factor Dependent
++	2531417	2531446	cysK	Intrinsic
++	2534387	2534416	crr	Intrinsic
+-	2534390	2534419	pdxK	Intrinsic
+-	2535947	2535976	cysM	Factor Dependent
++	2536539	2536568	yfeS	Factor Dependent
+-	2541704	2541733	ucpA	Factor Dependent
+-	2547492	2547521	yfeX	Factor Dependent
++	2547604	2547633	yfeW	Intrinsic
+-	2551994	2552023	eutR	Factor Dependent
++	2552138	2552167	hemF	Factor Dependent
++	2555919	2555948	hemF	Factor Dependent
++	2563359	2563388	yffS	Factor Dependent
+-	2573845	2573874	maeB	Factor Dependent
++	2579680	2579709	tktB	Intrinsic
++	2588728	2588757	acrD	Intrinsic
+-	2588727	2588756	ypfM	Intrinsic
++	2590999	2591028	ypfN	Intrinsic
+-	2591049	2591078	ypfH	Intrinsic
++	2591200	2591229	ypfN	Factor Dependent
+-	2593719	2593748	tmcA	Factor Dependent
++	2599002	2599031	bcp	Factor Dependent
+-	2612716	2612745	yfgO	Factor Dependent
+-	2616047	2616076	hda	Factor Dependent
++	2616054	2616083	yfgD	Factor Dependent
++	2624827	2624856	ppx	Factor Dependent
++	2627669	2627698	yfgG	Factor Dependent
++	2628306	2628335	yfgH	Factor Dependent
+-	2628920	2628949	guaA	Intrinsic
++	2628931	2628960	yfgI	Intrinsic
+-	2633467	2633496	yfgJ	Factor Dependent
++	2633847	2633876	xseA	Factor Dependent
+-	2635454	2635483	bamB	Intrinsic
+-	2645307	2645336	pbpC	Factor Dependent
++	2651368	2651397	sseA	Factor Dependent
+-	2651388	2651417	sseB	Factor Dependent
++	2651689	2651718	sseA	Intrinsic
+-	2651714	2651743	sseB	Intrinsic
+-	2652096	2652125	sseB	Factor Dependent
++	2652112	2652141	ryfA	Factor Dependent
+-	2657530	2657559	iscA	Intrinsic
++	2660017	2660046	ryfA	Factor Dependent
+-	2660521	2660550	trmJ	Factor Dependent
++	2662279	2662308	suhB	Factor Dependent
+-	2664583	2664612	hcaT	Factor Dependent
++	2664918	2664947	csiE	Factor Dependent
++	2671797	2671826	yphA	Intrinsic
+-	2682083	2682112	glyA	Intrinsic
+-	2684869	2684898	glnB	Factor Dependent
++	2685046	2685075	hmp	Factor Dependent
+-	2689182	2689211	glmY	Intrinsic
+-	2689566	2689595	purL	Factor Dependent
+-	2695270	2695299	tadA	Factor Dependent
++	2698084	2698113	yfhL	Factor Dependent
+-	2698120	2698149	shoB	Factor Dependent
++	2698566	2698595	ohsC	Factor Dependent
+-	2698599	2698628	acpS	Intrinsic
+-	2702318	2702347	lepB	Intrinsic
+-	2705267	2705296	rseC	Factor Dependent
++	2705307	2705336	ohsC	Factor Dependent
+-	2709799	2709828	yfiC	Factor Dependent
++	2710110	2710139	nadB	Factor Dependent
++	2712311	2712340	srmB	Factor Dependent
++	2714032	2714061	eamB	Intrinsic
+-	2714035	2714064	grcA	Intrinsic
+-	2715359	2715388	yfiF	Factor Dependent
++	2715786	2715815	ung	Factor Dependent
++	2717186	2717215	trxC	Intrinsic
+-	2721904	2721933	kgtP	Factor Dependent
++	2722105	2722134	pssA	Intrinsic
++	2724044	2724073	yfiM	Intrinsic
+-	2724050	2724079	rrfG	Intrinsic
+-	2729595	2729624	clpB	Intrinsic
+-	2732160	2732189	clpB	Factor Dependent
++	2734926	2734955	bamD	Intrinsic
++	2735688	2735717	pheL	Factor Dependent
+-	2736552	2736581	tyrA	Factor Dependent
++	2736929	2736958	pheA	Intrinsic
+-	2736949	2736978	tyrA	Intrinsic
++	2739819	2739848	yfiL	Factor Dependent
++	2742098	2742127	yfiB	Factor Dependent
+-	2742161	2742190	rplS	Intrinsic
+-	2748115	2748144	grpE	Factor Dependent
++	2751992	2752021	bamE	Intrinsic
+-	2751999	2752028	ratB	Intrinsic
++	2754032	2754061	ssrA	Intrinsic
+-	2755470	2755499	yfjH	Factor Dependent
++	2755626	2755655	intA	Factor Dependent
+-	2759206	2759235	yfjK	Factor Dependent
+-	2765143	2765172	yfjU	Factor Dependent
++	2765420	2765449	rnlB	Factor Dependent
+-	2769223	2769252	yfjU	Factor Dependent
++	2773040	2773069	yfjW	Intrinsic
+-	2773213	2773242	ypjA	Factor Dependent
+-	2776143	2776172	ypjA	Intrinsic
+-	2786674	2786703	ygaU	Factor Dependent
+-	2794071	2794100	ygaU	Factor Dependent
+-	2794259	2794288	ygaU	Factor Dependent
++	2794486	2794515	csiR	Factor Dependent
+-	2796010	2796039	stpA	Factor Dependent
++	2796139	2796168	ygaP	Factor Dependent
+-	2797524	2797553	ygaC	Factor Dependent
++	2798532	2798561	ygaM	Intrinsic
+-	2800420	2800449	luxS	Factor Dependent
++	2802475	2802504	nrdF	Factor Dependent
++	2806165	2806194	proX	Factor Dependent
+-	2811972	2812001	luxS	Factor Dependent
++	2812174	2812203	emrB	Intrinsic
+-	2812186	2812215	luxS	Intrinsic
++	2812879	2812908	micA	Factor Dependent
+-	2816806	2816835	csrA	Factor Dependent
+-	2816930	2816959	csrA	Factor Dependent
+-	2820114	2820143	recX	Factor Dependent
+-	2820698	2820727	recA	Intrinsic
+-	2822489	2822518	mltB	Intrinsic
++	2826534	2826563	srlD	Factor Dependent
+-	2828657	2828686	norR	Factor Dependent
++	2828878	2828907	gutQ	Factor Dependent
+-	2836250	2836279	ascG	Intrinsic
++	2854493	2854522	fhlA	Factor Dependent
++	2857675	2857704	mutS	Intrinsic
+-	2858453	2858482	ygbI	Factor Dependent
++	2864449	2864478	ygbN	Factor Dependent
+-	2864503	2864532	rpoS	Intrinsic
+-	2865439	2865468	rpoS	Factor Dependent
+-	2885563	2885592	cysH	Intrinsic
++	2890752	2890781	ygcN	Factor Dependent
+-	2902732	2902761	queE	Factor Dependent
+-	2904605	2904634	eno	Intrinsic
++	2915916	2915945	barA	Factor Dependent
+-	2920474	2920503	yqcA	Factor Dependent
+-	2922177	2922206	csrB	Intrinsic
++	2925775	2925804	ygdH	Factor Dependent
++	2928927	2928956	sdaB	Factor Dependent
++	2929804	2929833	ygdG	Factor Dependent
+-	2929841	2929870	fucO	Intrinsic
+-	2938035	2938064	rlmM	Factor Dependent
++	2938135	2938164	fucR	Factor Dependent
+-	2940934	2940963	ygdI	Factor Dependent
+-	2942811	2942840	csdL	Factor Dependent
++	2943015	2943044	csdE	Intrinsic
+-	2943027	2943056	csdL	Intrinsic
++	2945721	2945750	metV	Factor Dependent
+-	2945761	2945790	amiC	Intrinsic
+-	2948517	2948546	recD	Factor Dependent
++	2949103	2949132	argA	Factor Dependent
+-	2962351	2962380	thyA	Intrinsic
++	2969175	2969204	ygdQ	Factor Dependent
++	2969556	2969585	ygdR	Factor Dependent
++	2970655	2970684	tas	Intrinsic
+-	2970708	2970737	lplT	Intrinsic
+-	2974134	2974163	omrA	Factor Dependent
+-	2974342	2974371	omrB	Factor Dependent
+-	2975257	2975286	lysA	Factor Dependent
++	2975875	2975904	galR	Factor Dependent
+-	2977863	2977892	ygeA	Factor Dependent
+-	2978761	2978790	araE	Intrinsic
+-	2980501	2980530	kduD	Factor Dependent
+-	2982352	2982381	yqeF	Factor Dependent
+-	2996982	2997011	glyU	Factor Dependent
+-	2997079	2997108	ygeR	Factor Dependent
+-	3001841	3001870	ygeV	Factor Dependent
+-	3010484	3010513	yqeB	Factor Dependent
++	3014132	3014161	ygfK	Factor Dependent
+-	3023339	3023368	ygfS	Factor Dependent
+-	3031649	3031678	lysS	Factor Dependent
++	3031913	3031942	idi	Factor Dependent
+-	3038209	3038238	cptA	Factor Dependent
++	3038512	3038541	fldB	Factor Dependent
+-	3040347	3040376	yqfA	Factor Dependent
++	3040629	3040658	ygfZ	Factor Dependent
+-	3041234	3041263	yqfB	Factor Dependent
+-	3043137	3043166	ygfF	Intrinsic
++	3043142	3043171	bglA	Intrinsic
+-	3049074	3049103	visC	Intrinsic
++	3054175	3054204	ssrS	Factor Dependent
++	3054799	3054828	fau	Factor Dependent
+-	3054971	3055000	serA	Factor Dependent
++	3054976	3055005	sibC	Factor Dependent
++	3055340	3055369	sibC	Factor Dependent
+-	3056537	3056566	rpiA	Factor Dependent
++	3058670	3058699	argP	Factor Dependent
++	3065324	3065353	scpC	Intrinsic
+-	3065325	3065354	yggE	Intrinsic
+-	3066916	3066945	mscS	Intrinsic
+-	3068042	3068071	fbaA	Factor Dependent
+-	3077622	3077651	tktA	Intrinsic
++	3080772	3080801	loiP	Factor Dependent
+-	3080818	3080847	speB	Factor Dependent
++	3085899	3085928	metK	Intrinsic
++	3087701	3087730	galP	Factor Dependent
++	3092049	3092078	yqgF	Intrinsic
++	3096479	3096508	yggW	Intrinsic
+-	3098900	3098929	yggN	Factor Dependent
+-	3101763	3101792	speC	Factor Dependent
++	3103539	3103568	mltC	Factor Dependent
++	3104995	3105024	nupG	Intrinsic
+-	3105016	3105045	speC	Intrinsic
++	3108453	3108482	pheV	Intrinsic
+-	3108548	3108577	yghD	Intrinsic
++	3109795	3109824	pheV	Factor Dependent
+-	3117305	3117334	glcA	Factor Dependent
+-	3117574	3117603	glcA	Intrinsic
++	3119728	3119757	pheV	Factor Dependent
++	3127210	3127239	glcC	Factor Dependent
+-	3134633	3134662	gss	Intrinsic
+-	3137697	3137726	hybG	Factor Dependent
++	3138117	3138146	yghU	Factor Dependent
+-	3144785	3144814	yghX	Factor Dependent
+-	3146970	3146999	yqhA	Intrinsic
++	3147209	3147238	gpr	Factor Dependent
++	3148564	3148593	yghA	Factor Dependent
+-	3148579	3148608	exbD	Factor Dependent
+-	3152193	3152222	yqhC	Factor Dependent
++	3152260	3152289	yghB	Intrinsic
++	3155656	3155685	dkgA	Factor Dependent
+-	3155943	3155972	ygiQ	Factor Dependent
+-	3156904	3156933	ygiQ	Intrinsic
+-	3159285	3159314	ftsP	Factor Dependent
++	3161647	3161676	yqhH	Factor Dependent
+-	3164052	3164081	ygiS	Factor Dependent
+-	3165833	3165862	mqsA	Intrinsic
+-	3166713	3166742	ygiV	Factor Dependent
+-	3167264	3167293	ygiW	Factor Dependent
+-	3171082	3171111	parE	Factor Dependent
++	3171602	3171631	ygiN	Factor Dependent
++	3177615	3177644	tolC	Factor Dependent
++	3179601	3179630	ygiC	Intrinsic
++	3181500	3181529	zupT	Factor Dependent
+-	3181783	3181812	ribB	Intrinsic
++	3183176	3183205	yqiC	Factor Dependent
+-	3189461	3189490	glgS	Factor Dependent
+-	3189744	3189773	glgS	Intrinsic
+-	3192629	3192658	sibD	Factor Dependent
+-	3193104	3193133	sibE	Factor Dependent
++	3201155	3201184	cca	Factor Dependent
+-	3201265	3201294	bacA	Factor Dependent
++	3203549	3203578	plsY	Factor Dependent
+-	3207406	3207435	tsaD	Factor Dependent
++	3209044	3209073	rpsU	Intrinsic
+-	3212723	3212752	mug	Factor Dependent
++	3213005	3213034	rpoD	Factor Dependent
++	3218892	3218921	patA	Intrinsic
+-	3218914	3218943	ygjH	Intrinsic
++	3219080	3219109	patA	Factor Dependent
++	3220476	3220505	ebgR	Intrinsic
+-	3231587	3231616	higA	Factor Dependent
++	3232081	3232110	fadH	Factor Dependent
++	3236464	3236493	ygjR	Intrinsic
++	3237619	3237648	alx	Factor Dependent
+-	3239016	3239045	ygjV	Factor Dependent
++	3239232	3239261	sstT	Intrinsic
+-	3239849	3239878	uxaA	Factor Dependent
++	3245520	3245549	exuR	Factor Dependent
++	3246826	3246855	mzrA	Factor Dependent
++	3248418	3248447	yqjK	Intrinsic
++	3250020	3250049	yqjG	Intrinsic
++	3251036	3251065	yhaI	Factor Dependent
+-	3251215	3251244	yhaJ	Factor Dependent
+-	3268108	3268137	rnpB	Factor Dependent
++	3274889	3274918	garD	Intrinsic
+-	3275601	3275630	agaR	Factor Dependent
++	3275860	3275889	yhaV	Factor Dependent
+-	3287020	3287049	rsmI	Factor Dependent
+-	3290040	3290069	rsmI	Factor Dependent
+-	3294887	3294916	yraQ	Factor Dependent
++	3295034	3295063	yraP	Factor Dependent
+-	3296197	3296226	yraR	Factor Dependent
+-	3297403	3297432	yhbP	Factor Dependent
++	3297608	3297637	yhbO	Factor Dependent
+-	3298167	3298196	yhbS	Factor Dependent
+-	3302275	3302304	mtr	Factor Dependent
++	3302753	3302782	yhbW	Factor Dependent
+-	3303920	3303949	deaD	Intrinsic
+-	3307011	3307040	pnp	Intrinsic
+-	3309405	3309434	rpsO	Intrinsic
++	3311204	3311233	psrO	Intrinsic
+-	3311321	3311350	infB	Factor Dependent
+-	3316100	3316129	metY	Factor Dependent
+-	3317931	3317960	yhbX	Intrinsic
++	3318171	3318200	argG	Factor Dependent
+-	3320055	3320084	leuU	Intrinsic
+-	3322960	3322989	ftsH	Intrinsic
++	3326187	3326216	yhbY	Intrinsic
++	3328385	3328414	dacB	Factor Dependent
+-	3328485	3328514	obgE	Factor Dependent
+-	3330824	3330853	rpmA	Intrinsic
++	3332706	3332735	ispB	Intrinsic
+-	3332922	3332951	murA	Factor Dependent
++	3346249	3346278	npr	Factor Dependent
+-	3346887	3346916	mtgA	Factor Dependent
++	3347422	3347451	yrbL	Factor Dependent
++	3348706	3348735	arcZ	Factor Dependent
++	3360035	3360064	gltF	Factor Dependent
+-	3365363	3365392	yhcH	Factor Dependent
++	3365799	3365828	yhcF	Factor Dependent
+-	3366873	3366902	yhcH	Factor Dependent
+-	3374278	3374307	sspB	Intrinsic
+-	3375768	3375797	rpsI	Intrinsic
+-	3376869	3376898	yhcM	Factor Dependent
++	3378636	3378665	yhcB	Factor Dependent
++	3380254	3380283	degS	Factor Dependent
++	3381299	3381328	degS	Intrinsic
+-	3381313	3381342	mdh	Intrinsic
++	3383187	3383216	argR	Factor Dependent
+-	3383337	3383366	yhcO	Factor Dependent
+-	3383830	3383859	yhcO	Intrinsic
++	3388507	3388536	aaeR	Factor Dependent
+-	3388530	3388559	tldD	Factor Dependent
+-	3390351	3390380	yhdP	Intrinsic
++	3402887	3402916	yrdE	Factor Dependent
++	3405306	3405335	accC	Intrinsic
++	3408043	3408072	prmA	Factor Dependent
++	3409630	3409659	fis	Intrinsic
++	3411014	3411043	yhdU	Factor Dependent
++	3418321	3418350	yhdX	Factor Dependent
++	3421231	3421260	yhdZ	Factor Dependent
+-	3421408	3421437	rrfF	Factor Dependent
+-	3427647	3427676	yrdB	Factor Dependent
++	3428089	3428118	yrdA	Factor Dependent
++	3435975	3436004	trkA	Factor Dependent
+-	3436493	3436522	arfA	Intrinsic
++	3436507	3436536	mscL	Intrinsic
+-	3437601	3437630	rplQ	Intrinsic
+-	3446286	3446315	rpsQ	Intrinsic
+-	3463766	3463795	bfr	Factor Dependent
+-	3464225	3464254	bfr	Intrinsic
++	3465335	3465364	gspO	Factor Dependent
+-	3468103	3468132	tufA	Intrinsic
+-	3474596	3474625	fkpA	Intrinsic
++	3475868	3475897	slyX	Intrinsic
+-	3475876	3475905	slyD	Intrinsic
++	3482667	3482696	prkB	Factor Dependent
+-	3483007	3483036	yhfA	Factor Dependent
++	3483456	3483485	prkB	Factor Dependent
++	3484786	3484815	crp	Intrinsic
+-	3486347	3486376	argD	Factor Dependent
++	3487027	3487056	yhfK	Factor Dependent
+-	3488202	3488231	pabA	Factor Dependent
+-	3489715	3489744	ppiA	Intrinsic
++	3491751	3491780	tsgA	Factor Dependent
++	3497318	3497347	cysG	Factor Dependent
++	3497623	3497652	yhfL	Factor Dependent
++	3502811	3502840	frlR	Intrinsic
+-	3509042	3509071	yhfY	Factor Dependent
+-	3510483	3510512	trpS	Intrinsic
++	3523395	3523424	mrcA	Factor Dependent
+-	3523510	3523539	nudE	Factor Dependent
++	3528862	3528891	hslO	Factor Dependent
++	3532499	3532528	pck	Intrinsic
+-	3532516	3532545	envZ	Intrinsic
++	3537811	3537840	yhgF	Intrinsic
++	3541013	3541042	feoC	Intrinsic
+-	3542070	3542099	bioH	Factor Dependent
++	3544327	3544356	nfuA	Factor Dependent
++	3545945	3545974	gntT	Factor Dependent
+-	3545952	3545981	malQ	Factor Dependent
+-	3553832	3553861	rtcA	Factor Dependent
++	3553960	3553989	malT	Factor Dependent
+-	3557776	3557805	glpR	Factor Dependent
+-	3561662	3561691	yzgL	Factor Dependent
++	3561736	3561765	glpD	Factor Dependent
+-	3562121	3562150	glgP	Intrinsic
+-	3569261	3569290	glgX	Factor Dependent
+-	3573695	3573724	gntU	Intrinsic
++	3573919	3573948	yhgN	Factor Dependent
+-	3576934	3576963	yhhW	Factor Dependent
++	3577008	3577037	yhgN	Factor Dependent
+-	3578930	3578959	ryhB	Factor Dependent
+-	3583064	3583093	ggt	Intrinsic
+-	3585229	3585258	ugpQ	Factor Dependent
++	3585461	3585490	yhhA	Factor Dependent
++	3585577	3585606	yhhA	Factor Dependent
+-	3588991	3589020	ugpB	Factor Dependent
+-	3590591	3590620	livF	Factor Dependent
+-	3596221	3596250	livJ	Factor Dependent
+-	3596420	3596449	livJ	Factor Dependent
+-	3597902	3597931	rpoH	Intrinsic
+-	3599013	3599042	ftsX	Factor Dependent
+-	3603205	3603234	yhhM	Factor Dependent
++	3603418	3603447	yhhL	Factor Dependent
++	3604401	3604430	yhhN	Intrinsic
+-	3606739	3606768	tusA	Factor Dependent
++	3606949	3606978	zntA	Factor Dependent
+-	3608304	3608333	yhhS	Factor Dependent
++	3608571	3608600	dcrB	Intrinsic
++	3611576	3611605	acpT	Factor Dependent
+-	3616905	3616934	yhhJ	Factor Dependent
++	3617031	3617060	nikR	Factor Dependent
+-	3623671	3623700	yhhJ	Factor Dependent
+-	3634022	3634051	yhiN	Intrinsic
+-	3636847	3636876	uspB	Factor Dependent
++	3637226	3637255	pitA	Factor Dependent
++	3638582	3638611	uspA	Intrinsic
++	3640361	3640390	dtpB	Intrinsic
+-	3640376	3640405	rsmJ	Intrinsic
+-	3645675	3645704	dinQ	Intrinsic
++	3646347	3646376	gor	Factor Dependent
++	3652554	3652583	slp	Factor Dependent
++	3652709	3652738	dctR	Factor Dependent
+-	3653932	3653961	hdeB	Factor Dependent
++	3655608	3655637	hdeD	Intrinsic
++	3657081	3657110	gadE	Intrinsic
+-	3661377	3661406	gadW	Factor Dependent
+-	3661781	3661810	gadW	Factor Dependent
++	3662979	3663008	gadY	Factor Dependent
++	3664137	3664166	gadY	Intrinsic
+-	3664164	3664193	gadA	Intrinsic
++	3669481	3669510	treF	Factor Dependent
++	3672585	3672614	yhjD	Factor Dependent
+-	3674144	3674173	yhjG	Intrinsic
++	3674417	3674446	yhjE	Factor Dependent
++	3678420	3678449	kdgK	Factor Dependent
+-	3678424	3678453	yhjJ	Factor Dependent
+-	3680158	3680187	dctA	Intrinsic
+-	3681576	3681605	yhjK	Factor Dependent
+-	3683469	3683498	yhjK	Factor Dependent
+-	3697955	3697984	ldrD	Factor Dependent
++	3698118	3698147	bcsG	Factor Dependent
++	3698198	3698227	rdlD	Factor Dependent
+-	3699812	3699841	dppF	Factor Dependent
+-	3703996	3704025	dppA	Factor Dependent
++	3706306	3706335	yhjV	Factor Dependent
+-	3706644	3706673	proK	Factor Dependent
+-	3706789	3706818	eptB	Factor Dependent
+-	3709972	3710001	yhjX	Factor Dependent
+-	3711993	3712022	bisC	Factor Dependent
++	3712170	3712199	yiaC	Factor Dependent
++	3715243	3715272	yiaD	Intrinsic
+-	3716329	3716358	yiaF	Intrinsic
++	3716533	3716562	ghrB	Factor Dependent
++	3717810	3717839	yiaG	Intrinsic
++	3718307	3718336	cspA	Intrinsic
+-	3720324	3720353	glyS	Intrinsic
+-	3723371	3723400	ysaB	Factor Dependent
+-	3725018	3725047	yiaA	Factor Dependent
+-	3730474	3730503	bax	Factor Dependent
+-	3734104	3734133	bax	Factor Dependent
++	3734721	3734750	xylR	Factor Dependent
+-	3739182	3739211	ysaA	Factor Dependent
++	3739350	3739379	avtA	Factor Dependent
++	3751119	3751148	yiaU	Factor Dependent
+-	3752558	3752587	aldB	Factor Dependent
+-	3752891	3752920	aldB	Factor Dependent
+-	3755984	3756013	selB	Factor Dependent
+-	3763892	3763921	yibH	Factor Dependent
+-	3767863	3767892	yibH	Factor Dependent
+-	3773894	3773923	yibT	Factor Dependent
+-	3774014	3774043	yibT	Factor Dependent
++	3774269	3774298	mtlR	Factor Dependent
++	3775148	3775177	yibL	Intrinsic
++	3779144	3779173	lldD	Factor Dependent
+-	3779645	3779674	cysE	Factor Dependent
++	3779952	3779981	trmL	Factor Dependent
++	3787290	3787319	yibQ	Factor Dependent
+-	3788175	3788204	tdh	Factor Dependent
+-	3790783	3790812	yibB	Intrinsic
+-	3794854	3794883	waaU	Factor Dependent
++	3796252	3796281	waaL	Intrinsic
+-	3808246	3808275	mutM	Factor Dependent
++	3808527	3808556	coaD	Factor Dependent
+-	3809237	3809266	rpmG	Intrinsic
+-	3813109	3813138	pyrE	Intrinsic
++	3813121	3813150	slmA	Intrinsic
++	3815603	3815632	yicC	Factor Dependent
+-	3819789	3819818	gltS	Factor Dependent
+-	3825225	3825254	gltS	Factor Dependent
++	3825376	3825405	recG	Factor Dependent
++	3828343	3828372	xanP	Factor Dependent
++	3830205	3830234	yicH	Intrinsic
++	3834372	3834401	selC	Factor Dependent
+-	3836396	3836425	nlpA	Factor Dependent
++	3837258	3837287	yicL	Factor Dependent
++	3843735	3843764	ade	Factor Dependent
+-	3845379	3845408	uhpC	Factor Dependent
+-	3848787	3848816	ilvN	Intrinsic
+-	3851198	3851227	istR	Factor Dependent
++	3851676	3851705	tisB	Intrinsic
+-	3853023	3853052	yidF	Factor Dependent
++	3854825	3854854	yidI	Factor Dependent
++	3859230	3859259	yidL	Factor Dependent
+-	3862609	3862638	yidE	Factor Dependent
+-	3864471	3864500	ibpB	Factor Dependent
+-	3866041	3866070	yidR	Factor Dependent
++	3866465	3866494	yidQ	Factor Dependent
+-	3873748	3873777	yidA	Factor Dependent
+-	3874917	3874946	yidA	Factor Dependent
+-	3875654	3875683	gyrB	Factor Dependent
++	3884769	3884798	yidC	Intrinsic
++	3886233	3886262	mnmE	Intrinsic
++	3889505	3889534	tnaB	Intrinsic
+-	3891491	3891520	purP	Factor Dependent
+-	3893258	3893287	purP	Intrinsic
++	3902848	3902877	cbrC	Factor Dependent
+-	3904843	3904872	phoU	Intrinsic
+-	3909756	3909785	glmS	Factor Dependent
+-	3913536	3913565	atpC	Intrinsic
+-	3920925	3920954	rsmG	Factor Dependent
++	3921172	3921201	cbrC	Factor Dependent
++	3921725	3921754	cbrC	Factor Dependent
+-	3921734	3921763	mnmG	Factor Dependent
+-	3926239	3926268	viaA	Factor Dependent
++	3926279	3926308	asnA	Factor Dependent
++	3931185	3931214	kup	Factor Dependent
+-	3937123	3937152	hsrA	Factor Dependent
++	3937466	3937495	rbsR	Factor Dependent
++	3945062	3945091	trpT	Intrinsic
+-	3945093	3945122	hdfR	Factor Dependent
++	3946453	3946482	yifE	Intrinsic
++	3951437	3951466	ilvE	Intrinsic
+-	3954837	3954866	ilvY	Factor Dependent
++	3955039	3955068	ilvA	Factor Dependent
+-	3957518	3957547	ppiC	Intrinsic
++	3957873	3957902	ilvC	Factor Dependent
+-	3960735	3960764	gpp	Factor Dependent
++	3960759	3960788	rep	Factor Dependent
++	3965709	3965738	rho	Intrinsic
++	3978711	3978740	wecG	Factor Dependent
++	3980820	3980849	proM	Factor Dependent
+-	3984623	3984652	hemY	Factor Dependent
++	3984636	3984665	glmZ	Factor Dependent
+-	3991427	3991456	cyaY	Factor Dependent
++	3991953	3991982	cyaA	Factor Dependent
++	3998228	3998257	uvrD	Factor Dependent
++	4000598	4000627	corA	Factor Dependent
+-	4001068	4001097	yigG	Factor Dependent
++	4006418	4006447	rhtC	Intrinsic
+-	4006435	4006464	rhtB	Intrinsic
+-	4009824	4009853	metR	Factor Dependent
++	4010131	4010160	yigM	Factor Dependent
+-	4013337	4013366	ysgA	Intrinsic
++	4013704	4013733	metE	Factor Dependent
++	4015217	4015246	udp	Intrinsic
+-	4022111	4022140	rfaH	Factor Dependent
++	4022743	4022772	tatD	Factor Dependent
++	4025377	4025406	fre	Factor Dependent
+-	4025548	4025577	fadA	Intrinsic
++	4033247	4033276	hemG	Factor Dependent
++	4038676	4038705	rrfA	Intrinsic
+-	4038849	4038878	mobB	Intrinsic
++	4042078	4042107	dsbA	Intrinsic
+-	4043477	4043506	yihG	Factor Dependent
+-	4048004	4048033	yihA	Intrinsic
++	4048144	4048173	spf	Factor Dependent
++	4049264	4049293	csrC	Factor Dependent
+-	4051251	4051280	yshB	Factor Dependent
++	4051549	4051578	hemN	Intrinsic
+-	4051590	4051619	yshB	Intrinsic
+-	4054435	4054464	glnA	Intrinsic
++	4058264	4058293	typA	Intrinsic
+-	4068582	4068611	yihS	Factor Dependent
++	4068747	4068776	yihN	Factor Dependent
++	4076709	4076738	yiiD	Factor Dependent
++	4077985	4078014	yiiF	Factor Dependent
++	4078079	4078108	yiiF	Factor Dependent
+-	4078193	4078222	fdhE	Factor Dependent
++	4084869	4084898	fdhD	Intrinsic
++	4091201	4091230	yiiG	Factor Dependent
++	4092283	4092312	yiiG	Factor Dependent
++	4099510	4099539	sodA	Intrinsic
++	4100716	4100745	kdgT	Intrinsic
+-	4101349	4101378	cpxA	Factor Dependent
++	4101532	4101561	yiiM	Intrinsic
++	4104393	4104422	cpxP	Intrinsic
++	4106656	4106685	pfkA	Factor Dependent
++	4107874	4107903	sbp	Intrinsic
+-	4108724	4108753	tpiA	Intrinsic
++	4108787	4108816	cdh	Factor Dependent
++	4110801	4110830	yiiR	Intrinsic
+-	4111538	4111567	fpr	Factor Dependent
++	4111933	4111962	uspD	Factor Dependent
+-	4112553	4112582	glpX	Intrinsic
++	4115334	4115363	uspD	Factor Dependent
++	4116828	4116857	zapB	Intrinsic
+-	4116843	4116872	rraA	Intrinsic
++	4117034	4117063	zapB	Factor Dependent
+-	4118389	4118418	hslU	Intrinsic
++	4120589	4120618	zapB	Factor Dependent
+-	4125256	4125285	yiiX	Intrinsic
++	4125263	4125292	rpmE	Intrinsic
++	4130441	4130470	metL	Intrinsic
+-	4131432	4131461	yijF	Factor Dependent
++	4134041	4134070	katG	Intrinsic
++	4135048	4135077	yijE	Factor Dependent
+-	4146495	4146524	eptC	Factor Dependent
+-	4151551	4151580	argE	Intrinsic
++	4156300	4156329	argH	Factor Dependent
+-	4157145	4157174	sthA	Factor Dependent
++	4157527	4157556	oxyR	Factor Dependent
+-	4159692	4159721	trmA	Factor Dependent
++	4160395	4160424	yijD	Factor Dependent
++	4164381	4164410	murI	Intrinsic
++	4169796	4169825	rrfB	Factor Dependent
+-	4171834	4171863	coaA	Factor Dependent
+-	4172005	4172034	coaA	Factor Dependent
++	4172221	4172250	birA	Factor Dependent
++	4175175	4175204	tufB	Intrinsic
++	4176360	4176389	nusG	Intrinsic
++	4187622	4187651	rpoC	Intrinsic
+-	4188178	4188207	sroH	Factor Dependent
+-	4188360	4188389	sroH	Factor Dependent
+-	4188376	4188405	sroH	Factor Dependent
++	4198615	4198644	yjaH	Factor Dependent
++	4199385	4199414	yjaH	Factor Dependent
+-	4202507	4202536	purD	Factor Dependent
++	4211195	4211224	rrfE	Factor Dependent
+-	4211199	4211228	yjaB	Factor Dependent
++	4211607	4211636	yjaA	Factor Dependent
++	4213285	4213314	metA	Intrinsic
++	4216456	4216485	aceA	Factor Dependent
++	4216974	4217003	aceK	Factor Dependent
++	4219065	4219094	aceK	Factor Dependent
+-	4220631	4220660	iclR	Factor Dependent
++	4225556	4225585	metH	Intrinsic
+-	4227451	4227480	pepE	Intrinsic
++	4227599	4227628	yjbB	Factor Dependent
+-	4229218	4229247	yjbD	Factor Dependent
++	4229304	4229333	rluF	Factor Dependent
++	4233578	4233607	pgi	Intrinsic
++	4239245	4239274	psiE	Factor Dependent
+-	4240547	4240576	malG	Intrinsic
+-	4248028	4248057	plsB	Factor Dependent
++	4248512	4248541	malM	Intrinsic
++	4251912	4251941	ubiA	Intrinsic
+-	4251912	4251941	plsB	Intrinsic
++	4255750	4255779	lexA	Intrinsic
+-	4257309	4257338	zur	Factor Dependent
++	4257497	4257526	yjbJ	Factor Dependent
++	4257606	4257635	yjbJ	Factor Dependent
++	4260759	4260788	dusA	Intrinsic
++	4261232	4261261	pspG	Intrinsic
+-	4261238	4261267	qorA	Intrinsic
++	4266356	4266385	tyrB	Intrinsic
++	4269033	4269062	yjbR	Intrinsic
+-	4269082	4269111	uvrA	Factor Dependent
++	4272745	4272774	ssb	Intrinsic
+-	4275140	4275169	soxS	Factor Dependent
++	4275433	4275462	yjcC	Factor Dependent
++	4275939	4275968	soxR	Intrinsic
+-	4275957	4275986	ryjA	Factor Dependent
++	4277860	4277889	yjcD	Intrinsic
++	4279675	4279704	yjcE	Intrinsic
+-	4281127	4281156	actP	Factor Dependent
+-	4283359	4283388	acs	Intrinsic
++	4285743	4285772	yjcE	Factor Dependent
++	4293814	4293843	gltP	Factor Dependent
+-	4294411	4294440	yjcO	Intrinsic
+-	4310094	4310123	rpiR	Factor Dependent
++	4312264	4312293	yjdP	Factor Dependent
+-	4323278	4323307	yjdN	Factor Dependent
+-	4324367	4324396	yjdM	Intrinsic
+-	4330104	4330133	basS	Factor Dependent
++	4330349	4330378	pmrR	Factor Dependent
+-	4335106	4335135	adiY	Factor Dependent
+-	4338563	4338592	melR	Factor Dependent
++	4342844	4342873	melB	Intrinsic
++	4347874	4347903	melB	Factor Dependent
++	4351169	4351198	yjdO	Intrinsic
+-	4351191	4351220	lysU	Intrinsic
+-	4360549	4360578	pheU	Factor Dependent
+-	4363469	4363498	dcuA	Intrinsic
+-	4364876	4364905	aspA	Intrinsic
++	4365409	4365438	yjdO	Factor Dependent
+-	4367030	4367059	yjeH	Factor Dependent
++	4367184	4367213	fxsA	Intrinsic
++	4370721	4370750	groL	Intrinsic
++	4371711	4371740	yjeI	Factor Dependent
+-	4372559	4372588	epmB	Factor Dependent
++	4374280	4374309	efp	Intrinsic
++	4374745	4374774	ecnB	Intrinsic
+-	4374918	4374947	blc	Factor Dependent
++	4375322	4375351	sugE	Factor Dependent
+-	4376992	4377021	frdD	Intrinsic
++	4381677	4381706	epmA	Factor Dependent
+-	4384050	4384079	mscM	Factor Dependent
++	4390766	4390795	glyY	Factor Dependent
+-	4390846	4390875	queG	Factor Dependent
++	4394394	4394423	amiB	Factor Dependent
++	4402351	4402380	hflC	Intrinsic
++	4404078	4404107	purA	Intrinsic
++	4408036	4408065	rlmB	Intrinsic
+-	4413785	4413814	yjfN	Factor Dependent
+-	4413978	4414007	yjfN	Factor Dependent
++	4414047	4414076	aidB	Factor Dependent
+-	4415254	4415283	ulaR	Factor Dependent
++	4415761	4415790	yjfP	Factor Dependent
+-	4422485	4422514	yjfY	Intrinsic
+-	4423798	4423827	yjfZ	Factor Dependent
++	4424594	4424623	rplI	Intrinsic
+-	4425855	4425884	ytfB	Factor Dependent
+-	4427420	4427449	ytfE	Factor Dependent
++	4427605	4427634	fklB	Factor Dependent
++	4429696	4429725	cycA	Factor Dependent
+-	4430097	4430126	ytfF	Factor Dependent
++	4432418	4432447	ytfH	Factor Dependent
+-	4432591	4432620	cpdB	Intrinsic
++	4432756	4432785	ytfH	Factor Dependent
++	4435521	4435550	cysQ	Intrinsic
+-	4436490	4436519	ytfJ	Factor Dependent
++	4436660	4436689	ytfI	Factor Dependent
+-	4436679	4436708	ytfJ	Factor Dependent
++	4437851	4437880	ytfK	Intrinsic
+-	4437857	4437886	ytfL	Intrinsic
++	4446266	4446295	ytfP	Intrinsic
+-	4447074	4447103	ppa	Factor Dependent
++	4447592	4447621	chpB	Factor Dependent
+-	4452603	4452632	fbp	Intrinsic
++	4453313	4453342	yjfF	Factor Dependent
+-	4455054	4455083	yjgA	Factor Dependent
++	4455200	4455229	mpl	Intrinsic
+-	4457777	4457806	nrdG	Factor Dependent
++	4457969	4457998	cybC	Factor Dependent
+-	4461054	4461083	treC	Intrinsic
+-	4464300	4464329	treR	Factor Dependent
+-	4468363	4468392	ridA	Factor Dependent
++	4468512	4468541	mgtA	Intrinsic
+-	4468975	4469004	pyrI	Intrinsic
+-	4470496	4470525	pyrL	Factor Dependent
++	4472784	4472813	bdcR	Factor Dependent
+-	4475029	4475058	argI	Factor Dependent
++	4475485	4475514	yjgL	Factor Dependent
+-	4476872	4476901	yjgM	Factor Dependent
++	4477037	4477066	rraB	Intrinsic
+-	4478950	4478979	valS	Intrinsic
+-	4486225	4486254	yjgR	Factor Dependent
++	4486442	4486471	lptG	Intrinsic
+-	4486441	4486470	yjgR	Intrinsic
+-	4493069	4493098	yjgB	Factor Dependent
++	4493511	4493540	idnK	Factor Dependent
++	4494505	4494534	leuX	Factor Dependent
++	4496222	4496251	intB	Factor Dependent
+-	4498051	4498080	yjgX	Factor Dependent
++	4500195	4500224	yjgZ	Factor Dependent
++	4504424	4504453	yjhC	Factor Dependent
+-	4517104	4517133	yjhU	Factor Dependent
+-	4523931	4523960	sgcR	Factor Dependent
++	4524465	4524494	insB1	Factor Dependent
++	4526261	4526290	ryjB	Factor Dependent
+-	4529853	4529882	yjhY	Factor Dependent
+-	4534437	4534466	nanS	Factor Dependent
+-	4535673	4535702	nanM	Factor Dependent
++	4539618	4539647	fimB	Factor Dependent
++	4540600	4540629	fimE	Factor Dependent
++	4541719	4541748	fimA	Factor Dependent
++	4547797	4547826	fimH	Factor Dependent
++	4552418	4552447	uxuB	Intrinsic
++	4553570	4553599	uxuR	Factor Dependent
++	4555638	4555667	iraD	Factor Dependent
+-	4556067	4556096	yjiE	Factor Dependent
+-	4568132	4568161	yjiR	Factor Dependent
+-	4574880	4574909	mcrC	Intrinsic
++	4575060	4575089	yjiV	Factor Dependent
++	4577964	4577993	symR	Factor Dependent
++	4578042	4578071	symR	Intrinsic
+-	4578081	4578110	hsdS	Factor Dependent
++	4585905	4585934	mrr	Intrinsic
+-	4592912	4592941	yjjM	Factor Dependent
+-	4595139	4595168	opgB	Intrinsic
+-	4597635	4597664	yjjA	Factor Dependent
+-	4602657	4602686	fhuF	Factor Dependent
+-	4603805	4603834	leuV	Factor Dependent
+-	4604654	4604683	rsmC	Factor Dependent
++	4607458	4607487	prfC	Factor Dependent
++	4609057	4609086	prfC	Factor Dependent
++	4610345	4610374	ytjA	Intrinsic
++	4612367	4612396	yjjV	Factor Dependent
++	4619660	4619689	deoD	Factor Dependent
++	4621085	4621114	yjjJ	Intrinsic
+-	4621092	4621121	lplA	Intrinsic
+-	4626467	4626496	yjjK	Factor Dependent
++	4626740	4626769	nadR	Factor Dependent
+-	4626849	4626878	yjjK	Factor Dependent
++	4631113	4631142	trpR	Factor Dependent
+-	4631168	4631197	yjjX	Factor Dependent
+-	4632292	4632321	rob	Factor Dependent
++	4632595	4632624	ytjC	Factor Dependent
++	4637544	4637573	creD	Intrinsic
+-	4637560	4637589	arcA	Intrinsic
++	4639647	4639676	yjtD	Factor Dependent

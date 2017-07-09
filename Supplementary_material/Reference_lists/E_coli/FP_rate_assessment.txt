@@ -1,0 +1,37 @@
+++++++++++++++++++++++++++++++++++++++++++++++
+| Assessment of IT_Miner False Positive Rate |
+++++++++++++++++++++++++++++++++++++++++++++++
+
+The list serving as reference for this analysis 
+is the corrected Cornway et al. list of 1774
+terminators in E. coli K-12
+
+Any predicted IT in E. coli K-12 which does 
+not match one of the terminators of this list
+is considered as false positive.
+______________________________________________
+AFTER prediction, deduplication, intracds removal:
+
+Match   : 448 (152 in gene mode, 296 in genome mode)
+No-Match: 567 (282 in gene mode, 285 in genome mode)
+
+FP pourcentage: 56%
+______________________________________________
+AFTER conservative cut-off and resolve overlaps:
+
+Match   : 406 (140 in gene mode, 266 in genome mode)
+No-Match: 238 (114 in gene mode, 124 in genome mode)
+
+FP pourcentage: 37%
+
+
+
+Supplementary Analysis
+_______________________________________________
+NB of match with "fake" reverse complement of
+single IT.
+
+Match   : 50
+No-Match: 373
+
+FP pourcentage: 88%
