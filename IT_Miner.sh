@@ -155,14 +155,14 @@ function run_rnie {
 	# Execute command while printing it into log
 	printf "___________________________________________________________\n" >> "$COMMAND"
 	printf "RNIE COMMAND:\n" >> "$COMMAND";
-	(set -x;
+	# (set -x;
 		# perl "$RNIE_PATH" \
 		# --fastafile "$GENOME" \
 		# --"$MODE" \
 		# --thresh "$BIT_SCORE_THRESH" \
 		# --prefix "$PREFIX" \
 		# 2>"$TMP_TOOL_STDERR"
-	) 2>> "$COMMAND";
+	# ) 2>> "$COMMAND";
 	printf "\n" >> "$COMMAND";
 
 	# Exit if stderr_file not empty
@@ -499,6 +499,32 @@ function compute_free_energy {
 }
 
 ###########################################################
+##### I.14 To GFF #########################################
+###########################################################
+function to_gff {
+	# convert IT_Miner output to gff
+
+	# Args
+	local SCRIPT_PATH="$1"; local INPUT_LIST="$2";
+	local OUT_GFF="$3"; local COMMAND="$4";
+	local GENOME="$5";
+
+	BASENAME_GENOME=$(basename "$GENOME");
+	ORGANISM=${BASENAME_GENOME%.*};
+
+	printf "___________________________________________________________\n" >> "$COMMAND"
+	printf "CONVERT IT_Miner OUTPUT TO GFF:\n" >> "$COMMAND";
+	(set -x;
+		awk -v organism="$ORGANISM" -f "$SCRIPT_PATH" \
+		"$INPUT_LIST" > "$OUT_GFF" 2>"$TMP_TOOL_STDERR";
+	) 2>> "$COMMAND";
+	printf "\n" >> "$COMMAND";
+
+	# Exit if stderr_file not empty
+	check_tool_stderr "$TMP_TOOL_STDERR" "11-to_gff.awk" "$LOG";
+}
+
+###########################################################
 # II. PARAMETERS FOR THE PIPELINE
 ###########################################################
 ###### II.1 Read Options ##################################
@@ -644,6 +670,7 @@ concatenate "$CONC_SCRIPT_PATH" \
 	"$CONC_OUT" "$COMMAND";
 printf "   ** "$(get_nb_term "$CONC_OUT")" ITs retained!\n" | tee -a "$LOG";
 
+
 ###########################################################
 # V. Get Genomic Attributes
 ###########################################################
@@ -655,6 +682,7 @@ GENOMIC_OUT="$STEPS_DIR"/"Step02-Genomic_attributes_list.csv";
 get_genomic_attributes "$GENO_SCRIPT_PATH" \
 	"$GENOME" "$ANNOTATION" \
 	"$CONC_OUT" "$GENOMIC_OUT" "$COMMAND";
+
 
 ###########################################################
 # VI. Deduplicate
@@ -778,3 +806,15 @@ FREE_ENERGY_OUT="$STEPS_DIR"/"Step10-With_free_energy_list.csv";
 
 compute_free_energy "$JOIN_RNAFOLD_SCRIPT_PATH" \
 	"$RESOLVE_OVERLAPS_OUT" "$FREE_ENERGY_OUT" "$COMMAND";
+
+###########################################################
+# XIV. Convert to GFF
+###########################################################	
+printf "###########################################################\n" | tee -a "$LOG"
+printf "STEP 11) Convert IT_Miner output to GFF\n" | tee -a "$LOG"; 
+
+TOGFF_SCRIPT_PATH="$SCRIPT_PATH"/"Subscripts"/"11-to_gff.awk";
+OUT_GFF="$OUTPUT_DIR"/"list_ITs.gff";
+
+to_gff "$TOGFF_SCRIPT_PATH" "$FREE_ENERGY_OUT" \
+	"$OUT_GFF" "$COMMAND" "$GENOME";
