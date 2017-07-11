@@ -15,11 +15,11 @@ BEGIN {
 		"\t<feature>" \
 		"\t<start>" \
 		"\t<end>" \
-		"\t<strand>" \
 		"\t<RNIE_bit_score>" \
+		"\t<strand>" \
 		"\t<.>" \
 		"\t<comment>"
-	#print header; 
+	print header; 
 }
 
 NR > 1 {
