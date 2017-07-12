@@ -77,7 +77,7 @@ to create symlinks of these binaries in the path of RNIE.
     ln -s "$INFERNAL_DIR"/easel/miniapps/esl-sfetch "$RNIE_DIR"
 
 
-### Usage ###
+## Usage
 
 To run IT_Miner, you can open terminal and enter
 
@@ -91,7 +91,7 @@ with the following arguments:
 to apply for filering. Can be either 'conservative', 'inclusive', or 'average' btw the two.
 * _**-l/--log**_ weither you want to specify a path for the log file
 
-### Command Line Example ####
+## Command Line Example
 
     # Escherichia coli 
     bash "<my_IT_Miner_path>"/IT_Miner.sh \
