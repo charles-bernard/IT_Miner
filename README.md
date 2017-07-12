@@ -25,13 +25,13 @@ IT Miner needs two input files:
 
 ## Installation
 
-### Clone ###
+### Clone
 
     IT_MINER_DIR=<your_path>
     cd "$IT_MINE_DIR"
     git clone https://github.com/charles-bernard/IT_Miner.git
 
-### Dependencies ###
+### Dependencies
 
 IT Miner depends on RNIE, which itself depends on Infernal 1.02
 
@@ -67,7 +67,7 @@ By default RNIE_DIR="$IT_MINER_DIR"/Subscripts/RNIE
     cp -r "$RNIE_DIR" "$IT_MINER_DIR"/Subscripts 
     RNIE_DIR="$IT_MINER_DIR"/Subscripts/RNIE
 
-### Requirements ###
+### Requirements
 
 RNIE needs some binaries from Infernal to run. One has
 to create symlinks of these binaries in the path of RNIE.
