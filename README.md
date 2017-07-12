@@ -23,6 +23,7 @@ IT Miner needs two input files:
  - a genome sequence in fasta.
  - an annotation of the genome in either gff, gff3 or gtf format.
 
+
 ## Installation
 
 ### Clone
@@ -75,7 +76,6 @@ to create symlinks of these binaries in the path of RNIE.
     ln -s "$INFERNAL_DIR"/src/cmsearch "$RNIE_DIR"
     ln -s "$INFERNAL_DIR"/src/cmalign "$RNIE_DIR"
     ln -s "$INFERNAL_DIR"/easel/miniapps/esl-sfetch "$RNIE_DIR"
-
 
 ## Usage
 
