@@ -5,11 +5,11 @@ A Pipeline to predict Intrinsic Terminators within a bacterial Genome with low f
 ## Table of contents
 - [**Output**](#output)
 - [**Inputs**](#input)
-- [**Installation](#installation)
+- [**Installation**](#installation)
 	- [Clone](#clone)
 	- [Depedencies](#cependencies)
 	- [Requirements](#requirements)
-- [**Usage](#usage)
+- [**Usage**](#usage)
 - [**Command Line Example**](#command-line-example)
 
 
@@ -69,7 +69,7 @@ By default RNIE_DIR="$IT_MINER_DIR"/Subscripts/RNIE
 
 ### Requirements ###
 
-RNIE needs some binaries of Infernal to run. One therefore has
+RNIE needs some binaries from Infernal to run. One has
 to create symlinks of these binaries in the path of RNIE.
 
     ln -s "$INFERNAL_DIR"/src/cmsearch "$RNIE_DIR"
@@ -86,16 +86,16 @@ To run IT_Miner, you can open terminal and enter
 with the following arguments:
 * _**-o/--output-dir**_ Output Directory
 * _**-g/--genome**_ Path to genome sequence in fasta
-* _**-a/--annotation**_Path to genome annotation in gff/gff3/gtf
+* _**-a/--annotation**_ Path to genome annotation in gff/gff3/gtf
 * _**-c/--cutoff**_ specifies the type of cutoff distance from upstream gene
 to apply for filering. Can be either 'conservative', 'inclusive', or 'average' btw the two.
 * _**-l/--log**_ weither you want to specify a path for the log file
 
 ### Command Line Example ####
 
-# Escherichia coli 
-bash "<my_IT_Miner_path>"/IT_Miner.sh \
- --output-dir "/home/charles/clones/IT_Miner/Out/Escherichia_coli/U00096.2" \
- --genome "/home/charles/Documents/Genomes/Escherichia_coli_K12/release2_U00096.2.fasta" \
- --annotation "/home/charles/Documents/Genomes/Escherichia_coli_K12/release2_U00096.2.gff3" \
- --cutoff conservative
+    # Escherichia coli 
+    bash "<my_IT_Miner_path>"/IT_Miner.sh \
+     --output-dir "/home/charles/clones/IT_Miner/Out/Escherichia_coli/U00096.2" \
+     --genome "/home/charles/Documents/Genomes/Escherichia_coli_K12/release2_U00096.2.fasta" \
+     --annotation "/home/charles/Documents/Genomes/Escherichia_coli_K12/release2_U00096.2.gff3" \
+     --cutoff conservative
