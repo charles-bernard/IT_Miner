@@ -7,33 +7,27 @@ A Pipeline to predict Intrinsic Terminators within a bacterial Genome with low f
 - [**Inputs**](#input)
 - [**Installation**](#installation)
 	- [Clone](#clone)
-	- [Depedencies](#cependencies)
+	- [Depedencies](#dependencies)
 	- [Requirements](#requirements)
 - [**Usage**](#usage)
 - [**Command Line Example**](#command-line-example)
 
 
 ## Output
-
 IT Miner produces a gff file containing the coordinates of all predicted Intrinsic Terminators in the genome of interest.
 
 ## Inputs
-
 IT Miner needs two input files:
  - a genome sequence in fasta.
  - an annotation of the genome in either gff, gff3 or gtf format.
 
-
 ## Installation
-
 ### Clone
-
     IT_MINER_DIR=<your_path>
     cd "$IT_MINE_DIR"
     git clone https://github.com/charles-bernard/IT_Miner.git
 
 ### Dependencies
-
 IT Miner depends on RNIE, which itself depends on Infernal 1.02
 
 Installing Infernal 1.02 (Bash)
@@ -69,7 +63,6 @@ By default RNIE_DIR="$IT_MINER_DIR"/Subscripts/RNIE
     RNIE_DIR="$IT_MINER_DIR"/Subscripts/RNIE
 
 ### Requirements
-
 RNIE needs some binaries from Infernal to run. One has
 to create symlinks of these binaries in the path of RNIE.
 
@@ -78,7 +71,6 @@ to create symlinks of these binaries in the path of RNIE.
     ln -s "$INFERNAL_DIR"/easel/miniapps/esl-sfetch "$RNIE_DIR"
 
 ## Usage
-
 To run IT_Miner, you can open terminal and enter
 
     bash IT_Miner.sh
@@ -92,7 +84,6 @@ to apply for filering. Can be either 'conservative', 'inclusive', or 'average' b
 * _**-l/--log**_ weither you want to specify a path for the log file
 
 ## Command Line Example
-
     # Escherichia coli 
     bash "<my_IT_Miner_path>"/IT_Miner.sh \
      --output-dir "/home/charles/clones/IT_Miner/Out/Escherichia_coli/U00096.2" \
