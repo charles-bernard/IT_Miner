@@ -1,23 +1,23 @@
 # IT Miner
 
-A Pipeline to predict Intrinsic Terminators within a bacterial Genome with low false positive rate.
+A Pipeline to predict Intrinsic Terminators within a bacterial genome with low false positive rate.
 
 ## Table of contents
 - [**Output**](#output)
 - [**Inputs**](#input)
 - [**Installation**](#installation)
 	- [Clone](#clone)
-	- [Depedencies](#dependencies)
+	- [Dependencies](#dependencies)
 	- [Requirements](#requirements)
 - [**Usage**](#usage)
 - [**Command Line Example**](#command-line-example)
 
 
 ## Output
-IT Miner produces a gff file containing the coordinates of all predicted Intrinsic Terminators in the genome of interest.
+IT Miner produces a gff file containing the coordinates of all predicted intrinsic terminators in the genome of interest.
 
 ## Inputs
-IT Miner needs two input files:
+IT Miner requires two input files:
  - a genome sequence in fasta.
  - an annotation of the genome in either gff, gff3 or gtf format.
 
@@ -56,11 +56,8 @@ in the repository of IT Miner.
 
 By default RNIE_DIR="$IT_MINER_DIR"/Subscripts/RNIE
 
-    RNIE_DIR=<your_path>
-    cd "$RNIE_DIR"
     git clone https://github.com/ppgardne/RNIE
-    cd ..
-    cp -r "$RNIE_DIR" "$IT_MINER_DIR"/Subscripts 
+    cp -r RNIE "$IT_MINER_DIR"/Subscripts 
     RNIE_DIR="$IT_MINER_DIR"/Subscripts/RNIE
 
 ### Requirements
@@ -73,7 +70,7 @@ to create symlinks of these binaries in the path of RNIE.
 
 ## Usage
 
-To run IT_Miner, you can open terminal and enter
+To run IT_Miner, you can open terminal and type:
 
     bash IT_Miner.sh
 
