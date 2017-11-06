@@ -21,6 +21,9 @@ IT Miner requires two input files:
  - a genome sequence in fasta.
  - an annotation of the genome in either gff, gff3 or gtf format.
 
+## Installation and Usage
+If you want to install and use this program, please take a look at the [wiki](https://github.com/charles-bernard/IT_Miner/wiki) of the repository.
+
 ## Installation
 
 ### Clone
