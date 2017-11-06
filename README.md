@@ -1,6 +1,6 @@
 # IT Miner
 
-A Pipeline to predict Intrinsic Terminators within a bacterial genome with low false positive rate.
+A Pipeline to predict the Intrinsic Terminators of your bacterial genome with a low false positive rate.
 
 ## Table of contents
 - [**Output**](#output)
