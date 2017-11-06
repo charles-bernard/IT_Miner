@@ -1,6 +1,7 @@
 # IT Miner
 
-A Pipeline to predict the Intrinsic Terminators of your bacterial genome with a low false positive rate.
+A Pipeline to predict the Intrinsic Terminators of your bacterial genome with a low false positive rate. 
+_IT_Miner_ relies on the **[RNIE](https://github.com/ppgardne/RNIE/tree/master/paper)** algorithm to produce a list of predicted intrinsic terminators and filter this list based on genomic criteria to retain only the highly probable terminators.
 
 ## Table of contents
 - [**Output**](#output)
