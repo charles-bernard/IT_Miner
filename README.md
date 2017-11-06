@@ -2,7 +2,7 @@
 
 A Pipeline to predict the Intrinsic Terminators of your bacterial genome with a low false positive rate. 
 
-_IT_Miner_ _relies on the **[RNIE](https://github.com/ppgardne/RNIE/tree/master/paper)** algorithm to produce a list of predicted intrinsic terminators and filter out this list based on genomic criteria to retain only the highly probable terminators.
+_IT_Miner_ relies on the **[RNIE](https://github.com/ppgardne/RNIE/tree/master/paper)** algorithm to produce a list of predicted intrinsic terminators and filter out this primary output based on several genomic criteria to retain only the highly probable terminators.
 
 ## Table of contents
 - [**Output**](#output)
