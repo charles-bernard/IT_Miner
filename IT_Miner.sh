@@ -155,14 +155,14 @@ function run_rnie {
 	# Execute command while printing it into log
 	printf "___________________________________________________________\n" >> "$COMMAND"
 	printf "RNIE COMMAND:\n" >> "$COMMAND";
-	# (set -x;
-		# perl "$RNIE_PATH" \
-		# --fastafile "$GENOME" \
-		# --"$MODE" \
-		# --thresh "$BIT_SCORE_THRESH" \
-		# --prefix "$PREFIX" \
-		# 2>"$TMP_TOOL_STDERR"
-	# ) 2>> "$COMMAND";
+	(set -x;
+		perl "$RNIE_PATH" \
+		--fastafile "$GENOME" \
+		--"$MODE" \
+		--thresh "$BIT_SCORE_THRESH" \
+		--prefix "$PREFIX" \
+		2>"$TMP_TOOL_STDERR"
+	) 2>> "$COMMAND";
 	printf "\n" >> "$COMMAND";
 
 	# Exit if stderr_file not empty
